@@ -1,5 +1,5 @@
 #include "MenuView.h"
-#include "PlayView.h"
+#include "LvlSelectView.h"
 
 void MenuView::Init(sf::RenderWindow *window){
 	// selected option
@@ -53,7 +53,7 @@ void MenuView::Update(sf::RenderWindow *window){
 
 		if(cur_select == 1){
 			// play screen
-			game_view.setView(new PlayView());
+			game_view.setView(new LvlSelectView());
 		}
 		else if(cur_select == 2){
 			// quit

@@ -16,8 +16,11 @@ void PlayView::Init(sf::RenderWindow *window){
 	tmp2.setCharacterSize(30);
 	tmp3.setCharacterSize(30);
 
-	tmp.setString("This is the play screen");
-	tmp2.setString("Press Return to go to finish");
+	char tmptext[16];
+	sprintf(tmptext, "Playing Level %d", play_lvl);
+
+	tmp.setString(tmptext);
+	tmp2.setString("Press Return to go to finish (win level)");
 	tmp3.setString("Press Escape to quit game");
 
 	sf::FloatRect tmp_bounds = tmp.getLocalBounds();
@@ -36,9 +39,14 @@ void PlayView::Init(sf::RenderWindow *window){
 
 void PlayView::Update(sf::RenderWindow *window){
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Return)){
-		if(!intro_return){
-			game_view.setView(new EndView());
+		if(intro_return){ return; }
+
+		// increase top level if completed level is top level
+		if(play_lvl == top_lvl && top_lvl < MAX_LVL){
+			top_lvl++;
 		}
+
+		game_view.setView(new EndView(play_lvl));
 	}
 	else{
 		intro_return = 0;

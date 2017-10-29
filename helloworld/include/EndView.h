@@ -5,6 +5,7 @@
 
 class EndView : public MiniView{
 	public:
+		EndView(int lvl){ finished_lvl = lvl; }
 		void Init(sf::RenderWindow *window);
 		void Update(sf::RenderWindow *window);
 		void Render(sf::RenderWindow *window);
@@ -14,6 +15,7 @@ class EndView : public MiniView{
 
 		int intro_return;
 		int cur_select;
+		int finished_lvl;
 
 		sf::Text tmp;
 		sf::Text tmp2;

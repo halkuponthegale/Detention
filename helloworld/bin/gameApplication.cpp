@@ -5,6 +5,7 @@
 
 // push game display onto play_state, keep main loop clean
 View game_view;
+int top_lvl;
 
 
 int main(int argc, char** argv)
@@ -15,6 +16,7 @@ int main(int argc, char** argv)
     // set "gameplay" window to main window to draw
     game_view.setWindow(&App);
     game_view.setView(new MenuView());
+    top_lvl = 1;
 
     // start main loop
     while(App.isOpen())

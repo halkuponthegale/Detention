@@ -1,5 +1,6 @@
 #include "EndView.h"
 #include "MenuView.h"
+#include "PlayView.h"
 
 
 void EndView::Init(sf::RenderWindow *window){
@@ -18,9 +19,12 @@ void EndView::Init(sf::RenderWindow *window){
 	tmp2.setCharacterSize(30);
 	tmp3.setCharacterSize(30);
 
-	tmp.setString("This is the end screen");
+	char tmptext[20];
+	sprintf(tmptext, "You completed level %d", finished_lvl);
+	
+	tmp.setString(tmptext);
 	tmp2.setString("Main Menu");
-	tmp3.setString("Stop playing");
+	tmp3.setString("Continue");
 
 	sf::FloatRect tmp_bounds = tmp.getLocalBounds();
 	sf::FloatRect tmp2_bounds = tmp2.getLocalBounds();
@@ -55,8 +59,8 @@ void EndView::Update(sf::RenderWindow *window){
 			game_view.setView(new MenuView());
 		}
 		else if(cur_select == 2){
-			// quit
-			window -> close();
+			// back to lvl select
+			game_view.setView(new PlayView(finished_lvl + 1));
 		}
 	}
 	else{
@@ -84,5 +88,4 @@ void EndView::Render(sf::RenderWindow *window){
 	window -> draw(tmp3);
 
 }
-
 

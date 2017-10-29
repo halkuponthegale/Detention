@@ -5,6 +5,7 @@
 
 class PlayView : public MiniView{
 	public:
+		PlayView(int lvl){ play_lvl = lvl; }
 		void Init(sf::RenderWindow *window);
 		void Update(sf::RenderWindow *window);
 		void Render(sf::RenderWindow *window);
@@ -13,6 +14,7 @@ class PlayView : public MiniView{
 		sf::Font font;
 
 		int intro_return;
+		int play_lvl;
 
 		sf::Text tmp;
 		sf::Text tmp2;

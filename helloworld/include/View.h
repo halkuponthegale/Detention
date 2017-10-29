@@ -45,6 +45,9 @@ class View{
 };
 
 extern View game_view;
+extern int top_lvl;
+#define MAX_LVL 6
+
 
 
 
