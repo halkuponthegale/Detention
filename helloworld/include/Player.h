@@ -18,6 +18,13 @@ public:
 
     // Moves the player down
     void player_down();
+    
+    // Moves the player left
+    void player::player_left();
+
+
+    // Moves the player right
+    void player::player_right();
 
     // Puts player back in original position
     void reset();
