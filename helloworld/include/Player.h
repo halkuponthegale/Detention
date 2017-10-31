@@ -20,11 +20,10 @@ public:
     void player_down();
     
     // Moves the player left
-    void player::player_left();
-
+    void player_left();
 
     // Moves the player right
-    void player::player_right();
+    void player_right();
 
     // Puts player back in original position
     void reset();
