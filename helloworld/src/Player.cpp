@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "Player.h"
 
-sf::RectangleShape player_paddle;
+sf::RectangleShape playerbody;
 
     // Constructor
     // Creates a simple rectanglein place of player sprite
