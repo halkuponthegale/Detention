@@ -1,24 +1,24 @@
 #include <map>
 #include <fstream>
 #include <sstream>
+#include <iostream>
+#include "Object.h"
 class File {
 public:
-	static std::map<std::string, int> readFile(std::string fileName) {
-		std::map<std::string, int> out;
-		std::ifstream infile(fileName.c_str);
-		std::string key;
-		int value;
+	static std::vector<Object> loadLevel(std::string fileName){
+		std::vector<Object> out;
+		std::ifstream in(fileName.c_str());
 		std::string line;
-		while (std::getline(infile, line)) {
-			std::istringstream str(line);
-			str >> key >> value;
-			out.insert(std::pair<std::string, int>(key, value));
+		double x,y;
+		int w,h;
+		bool solid;
+		while(std::getline(in, line))
+		{
+	    std::stringstream   linestream(line);
+	    linestream >> x >> y >> w >> h >> solid;
+			out.push_back(Object(x,y,w,h,solid));
 		}
 		return out;
 	}
-	static void writeFile(std::string fileName, std::pair<std::string, int> data) {
-		std::ofstream of;
-		of.open(fileName.c_str, std::ios_base::app);
-		of << data.first << " " << data.second;
-	}
+
 };
