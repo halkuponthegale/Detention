@@ -4,6 +4,8 @@
 #include "View.h"
 #include "Object.h"
 #include "FileManager.h"
+#include "Player.h"
+
 class PlayView : public MiniView{
 	public:
 		PlayView(int lvl){
@@ -25,6 +27,8 @@ class PlayView : public MiniView{
 		sf::Text tmp3;
 		std::vector<Object> objs;
 		sf::RectangleShape wall;
+
+		player PlayerInstance;
 };
 
 

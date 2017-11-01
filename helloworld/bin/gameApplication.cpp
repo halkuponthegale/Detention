@@ -2,12 +2,10 @@
 
 #include "View.h"
 #include "MenuView.h"
-#include "Player.h"
 
 // push game display onto play_state, keep main loop clean
 View game_view;
 int top_lvl;
-player PlayerInstance;
 
 
 int main(int argc, char** argv)
@@ -32,32 +30,12 @@ int main(int argc, char** argv)
             App.close();
         }
         
-         // If user presses up or down, move the player paddle
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-                    PlayerInstance.player_up();
-            }
-
-            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-                    PlayerInstance.player_down();
-            }
-        
-            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-                   PlayerInstance.player_left();
-            }
-        
-            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-                    PlayerInstance.player_right();
-            }
-
-            else { // If they press something other than up or down, don't do anything
-            }
 
 
         // clear screen and fill with black
         App.clear(sf::Color::Black);
         
         // Draw player
-        App.draw(PlayerInstance.playerbody);
 
         game_view.Update();
         game_view.Render();
