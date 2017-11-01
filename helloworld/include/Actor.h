@@ -17,7 +17,7 @@ public:
     this->x=x;
     this->y=y;
   }
-  double move(double dx, double dy){
+  void move(double dx, double dy){
     x+=dx;
     y+=dy;
   }

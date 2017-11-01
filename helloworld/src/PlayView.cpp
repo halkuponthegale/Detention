@@ -34,10 +34,11 @@ void PlayView::Init(sf::RenderWindow *window){
 	tmp.setPosition(window -> getSize().x / 2, window -> getSize().y / 3);
 	tmp2.setPosition(window -> getSize().x / 2, window -> getSize().y / 2);
 	tmp3.setPosition(window -> getSize().x / 2, window -> getSize().y / 2 + 30);
-	Object w1(0.0,0.0,50,50,true);
-	Object w2(150.0,150.0,25,2,true);
-	objs.push_back(w1);
-	objs.push_back(w2);
+	
+	// Object w1(0.0,0.0,50,50,true);
+	// Object w2(150.0,150.0,25,2,true);
+	// objs.push_back(w1);
+	// objs.push_back(w2);
 
 }
 

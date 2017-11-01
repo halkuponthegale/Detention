@@ -8,7 +8,7 @@ class player {
 public:
 
     //Create a simple rectangle, stand in for the player
-    sf::RectangleShape player_paddle;
+    sf::RectangleShape playerbody;
 
     player(); // Constructor
 

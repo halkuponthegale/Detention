@@ -57,7 +57,7 @@ int main(int argc, char** argv)
         App.clear(sf::Color::Black);
         
         // Draw player
-        App.draw(playerInstance.playerbody);
+        App.draw(PlayerInstance.playerbody);
 
         game_view.Update();
         game_view.Render();
