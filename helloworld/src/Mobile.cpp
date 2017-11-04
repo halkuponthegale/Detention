@@ -19,5 +19,6 @@
      // Blast off: moves the mobile up
      //TODO: Implement clock/delta time
      //TODO: Don't move if energy is empty
+     //TODO: if you walk right "into" a block, you actually adjust height and THEN go right (over it)
    
     //TODO: player.cpp will call "activeate/deactivate". if adjusting is 0, deactivate will stop hover 
