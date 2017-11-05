@@ -35,8 +35,7 @@ int main(int argc, char** argv)
         // clear screen and fill with black
         App.clear(sf::Color::Black);
         
-        // Draw player
-
+        // call Update and Render() on game_view
         game_view.Update();
         game_view.Render();
 

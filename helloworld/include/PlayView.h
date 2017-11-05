@@ -6,10 +6,16 @@
 #include "FileManager.h"
 #include "Player.h"
 
+/*
+	PlayView handles level loading, drawing, and gameplay
+
+*/
+
 class PlayView : public MiniView{
 	public:
 		PlayView(int lvl){
 			play_lvl = lvl;
+			// load level from file
 			objs = File::loadLevel("./level"+std::to_string(play_lvl)+".json");
 		}
 		void Init(sf::RenderWindow *window);

@@ -3,6 +3,13 @@
 
 #include "MiniView.h"
 
+/*
+	View handles what is displayed on the screen, handles transitions between
+	different screens, each represented by a "MiniView". Serves as a wrapper
+	and handler between different screens, as well as calls to Update() and
+	Render() in the MiniView objects
+*/
+
 class View{
 	public:
 		View(){
@@ -10,6 +17,7 @@ class View{
 		}
 
 		void setWindow(sf::RenderWindow *window){
+			// sets window of application
 			this -> window = window;
 		}
 
@@ -25,12 +33,14 @@ class View{
 		}
 
 		void Update(){
+			// call update on respective internal view object
 			if(game_view != NULL){
 				game_view -> Update(window);
 			}
 		}
 
 		void Render(){
+			// render view
 			if(game_view != NULL){
 				game_view -> Render(window);
 			}

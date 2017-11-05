@@ -40,6 +40,7 @@ void MenuView::Init(sf::RenderWindow *window){
 
 void MenuView::Update(sf::RenderWindow *window){
 
+	// handle navigation between menu options
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) && cur_select == 1){
 		cur_select++;
 	}
@@ -48,11 +49,12 @@ void MenuView::Update(sf::RenderWindow *window){
 		cur_select--;
 	}
 
+	// handle selected option
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Return)){
 		if(intro_return){ return; }
 
 		if(cur_select == 1){
-			// play screen
+			// level select screen
 			game_view.setView(new LvlSelectView());
 		}
 		else if(cur_select == 2){
@@ -67,6 +69,7 @@ void MenuView::Update(sf::RenderWindow *window){
 }
 
 void MenuView::Render(sf::RenderWindow *window){
+	// draw all texts with selected option = Blue
 
 	play.setFillColor(sf::Color::White);
 	exit.setFillColor(sf::Color::White);

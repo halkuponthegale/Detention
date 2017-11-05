@@ -35,17 +35,12 @@ void PlayView::Init(sf::RenderWindow *window){
 	tmp2.setPosition(window -> getSize().x / 2, window -> getSize().y / 2);
 	tmp3.setPosition(window -> getSize().x / 2, window -> getSize().y / 2 + 30);
 	
-	// Object w1(0.0,0.0,50,50,true);
-	// Object w2(150.0,150.0,25,2,true);
-	// objs.push_back(w1);
-	// objs.push_back(w2);
-
-	player PlayerInstance;
 
 
 }
 
 void PlayView::Update(sf::RenderWindow *window){
+	// handle *skip* movement to end screen (TEMPORARY)
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Return)){
 		if(intro_return){ return; }
 
@@ -60,24 +55,25 @@ void PlayView::Update(sf::RenderWindow *window){
 		intro_return = 0;
 	}
 
+	// quit game
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)){
 		window -> close();
 	}
 
-     // If user presses direction, move the player paddle
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+     // If user presses WASD direction, move the player paddle
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
             PlayerInstance.player_up();
     }
 
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
             PlayerInstance.player_down();
     }
 
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
            PlayerInstance.player_left();
     }
 
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
             PlayerInstance.player_right();
     }
 
@@ -86,6 +82,7 @@ void PlayView::Update(sf::RenderWindow *window){
 }
 
 void PlayView::Render(sf::RenderWindow *window){
+	// draw all objects extracted from Level
 	window -> draw(tmp);
 	window -> draw(tmp2);
 	window -> draw(tmp3);
