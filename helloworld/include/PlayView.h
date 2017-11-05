@@ -5,6 +5,8 @@
 #include "Object.h"
 #include "FileManager.h"
 #include "Player.h"
+// #include "Machine.h"
+#include "Builder.h"
 
 /*
 	PlayView handles level loading, drawing, and gameplay
@@ -34,7 +36,8 @@ class PlayView : public MiniView{
 		std::vector<Object> objs;
 		sf::RectangleShape wall;
 
-		player PlayerInstance;
+		Player PlayerInstance;
+		Builder builder;
 };
 
 

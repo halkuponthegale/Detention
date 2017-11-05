@@ -3,15 +3,34 @@
 
 #include <SFML/Graphics.hpp>
 
-class player {
+#include "Machine.h"
+
+class Player {
 
 public:
 
+    Player(); // Constructor
+
+    void Update(); // handles input
+
+    int intersects(Machine *m);
+
+    // Puts player back in original position
+    void reset();
+
+    // Accessor method
+    sf::RectangleShape getShape();
+
+    // return if player in machine or not
+    int inMachine();
+
+private:
+
     //Create a simple rectangle, stand in for the player
     sf::RectangleShape playerbody;
+    Machine *my_machine;
 
-    player(); // Constructor
-
+    int in_machine;
 
     // Moves the player up
     void player_up();
@@ -24,9 +43,6 @@ public:
 
     // Moves the player right
     void player_right();
-
-    // Puts player back in original position
-    void reset();
 
 };
 #endif

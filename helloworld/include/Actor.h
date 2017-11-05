@@ -1,4 +1,5 @@
 #pragma once
+
 class Actor{
 public:
   Actor(double x, double y, double w, double h){
@@ -27,7 +28,7 @@ public:
   int getH(){
     return h;
   }
-private:
+protected:
   double x,y;
   int w,h;
 };

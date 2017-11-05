@@ -60,22 +60,12 @@ void PlayView::Update(sf::RenderWindow *window){
 		window -> close();
 	}
 
-     // If user presses WASD direction, move the player paddle
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-            PlayerInstance.player_up();
-    }
+	PlayerInstance.Update();
 
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-            PlayerInstance.player_down();
-    }
-
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-           PlayerInstance.player_left();
-    }
-
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-            PlayerInstance.player_right();
-    }
+	// later need to move this to Player looping through list of machines
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up)){
+		PlayerInstance.intersects(&builder);
+	}
 
 
 
@@ -86,11 +76,16 @@ void PlayView::Render(sf::RenderWindow *window){
 	window -> draw(tmp);
 	window -> draw(tmp2);
 	window -> draw(tmp3);
-	window -> draw(PlayerInstance.playerbody);
+	window -> draw(builder.getShape());
 	
 	for(int i = 0; i < objs.size(); i++){
 		wall.setPosition(objs[i].getX(), objs[i].getY());
 		wall.setSize(sf::Vector2f(objs[i].getW(),objs[i].getH()));
 		window->draw(wall);
 	}
+
+	// draw Player last (if not in machine) so it can be in front
+	if(!PlayerInstance.inMachine())
+		window -> draw(PlayerInstance.getShape());
+
 }
