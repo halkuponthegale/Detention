@@ -1,5 +1,5 @@
-#ifndef VIEW_H
-#define VIEW_H
+#ifndef GAME_VIEW_H
+#define GAME_VIEW_H
 
 #include "MiniView.h"
 
@@ -10,9 +10,9 @@
 	Render() in the MiniView objects
 */
 
-class View{
+class GameView{
 	public:
-		View(){
+		GameView(){
 			game_view = NULL;
 		}
 
@@ -46,7 +46,7 @@ class View{
 			}
 		}
 
-		~View(){ }
+		~GameView(){ }
 
 
 	private:
@@ -54,7 +54,7 @@ class View{
 		MiniView *game_view;
 };
 
-extern View game_view;
+extern GameView game_view;
 extern int top_lvl;
 #define MAX_LVL 6
 

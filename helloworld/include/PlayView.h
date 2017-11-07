@@ -1,11 +1,10 @@
 #ifndef PLAY_VIEW_H
 #define PLAY_VIEW_H
 
-#include "View.h"
+#include "GameView.h"
 #include "Object.h"
 #include "FileManager.h"
 #include "Player.h"
-// #include "Machine.h"
 #include "Builder.h"
 
 /*

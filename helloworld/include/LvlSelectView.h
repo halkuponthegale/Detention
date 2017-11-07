@@ -1,7 +1,7 @@
 #ifndef LVL_SELECT_VIEW_H
 #define LVL_SELECT_VIEW_H
 
-#include "View.h"
+#include "GameView.h"
 
 /*
 	LvlSelectView handles all possible level options that the user could choose

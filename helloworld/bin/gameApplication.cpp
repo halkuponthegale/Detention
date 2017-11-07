@@ -1,10 +1,10 @@
 #include <SFML/Graphics.hpp>
 
-#include "View.h"
+#include "GameView.h"
 #include "MenuView.h"
 
 // push game display onto play_state, keep main loop clean
-View game_view;
+GameView game_view;
 int top_lvl;
 
 
