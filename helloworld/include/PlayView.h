@@ -1,22 +1,15 @@
 #ifndef PLAY_VIEW_H
 #define PLAY_VIEW_H
 
-#include "GameView.h"
+#include "View.h"
 #include "Object.h"
 #include "FileManager.h"
 #include "Player.h"
-#include "Builder.h"
-
-/*
-	PlayView handles level loading, drawing, and gameplay
-
-*/
 
 class PlayView : public MiniView{
 	public:
 		PlayView(int lvl){
 			play_lvl = lvl;
-			// load level from file
 			objs = File::loadLevel("./level"+std::to_string(play_lvl)+".json");
 		}
 		void Init(sf::RenderWindow *window);
@@ -32,11 +25,10 @@ class PlayView : public MiniView{
 		sf::Text tmp;
 		sf::Text tmp2;
 		sf::Text tmp3;
-		std::vector<Object> objs;
+		std::vector<std::unique_ptr<Actor>> objs;
 		sf::RectangleShape wall;
 
-		Player PlayerInstance;
-		Builder builder;
+		player PlayerInstance;
 };
 
 
