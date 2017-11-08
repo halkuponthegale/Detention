@@ -3,12 +3,6 @@
 
 #include <SFML/Graphics.hpp>
 
-/*
-	Abstract class that will be implemented in subclasses to hold each View State
-	Init is used to set instance variables
-	Update is used to handle keyInput
-	Render is used to draw onto the window
-*/
 
 class MiniView{
 	public:

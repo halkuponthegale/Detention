@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Box2D.h"
 class Actor{
 public:
   Actor(double x, double y, double w, double h){
@@ -28,7 +28,9 @@ public:
   int getH(){
     return h;
   }
-protected:
+
+private:
   double x,y;
   int w,h;
+
 };

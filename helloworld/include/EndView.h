@@ -1,13 +1,7 @@
 #ifndef END_VIEW_H
 #define END_VIEW_H
 
-#include "GameView.h"
-
-/*
-	EndView handles finish screen
-	Can choose to continue to next level, return to main menu, or quit game
-	Updates "unlocked levels" logic
-*/
+#include "View.h"
 
 class EndView : public MiniView{
 	public:

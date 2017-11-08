@@ -1,12 +1,7 @@
 #ifndef MENU_VIEW_H
 #define MENU_VIEW_H
 
-#include "GameView.h"
-
-/*
-	MenuView handles the text and selection in the main menu
-	Also handles transition to LvlSelectView
-*/
+#include "View.h"
 
 class MenuView : public MiniView{
 	public:

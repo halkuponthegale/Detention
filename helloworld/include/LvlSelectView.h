@@ -1,13 +1,7 @@
 #ifndef LVL_SELECT_VIEW_H
 #define LVL_SELECT_VIEW_H
 
-#include "GameView.h"
-
-/*
-	LvlSelectView handles all possible level options that the user could choose
-	Handles logic for what levels are accessible based on completion
-	Passes selected level to PlayView
-*/
+#include "View.h"
 
 typedef struct{
 	sf::Text text;
