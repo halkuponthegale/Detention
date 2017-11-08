@@ -34,7 +34,7 @@ void PlayView::Init(sf::RenderWindow *window){
 	tmp.setPosition(window -> getSize().x / 2, window -> getSize().y / 3);
 	tmp2.setPosition(window -> getSize().x / 2, window -> getSize().y / 2);
 	tmp3.setPosition(window -> getSize().x / 2, window -> getSize().y / 2 + 30);
-	
+	player PlayerInstance;
 
 
 }
@@ -59,11 +59,26 @@ void PlayView::Update(sf::RenderWindow *window){
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)){
 		window -> close();
 	}
-
+	
 	PlayerInstance.Update();
 
 	// later need to move this to Player looping through list of machines
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up)){
+	    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+            PlayerInstance.player_up();
+    }
+
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+            PlayerInstance.player_down();
+    }
+
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+           PlayerInstance.player_left();
+    }
+
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+            PlayerInstance.player_right();
+    }
+	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up)){
 		PlayerInstance.intersects(&builder);
 	}
 
@@ -78,9 +93,10 @@ void PlayView::Render(sf::RenderWindow *window){
 	window -> draw(tmp3);
 	window -> draw(builder.getShape());
 	
-	for(int i = 0; i < objs.size(); i++){
-		wall.setPosition(objs[i].getX(), objs[i].getY());
-		wall.setSize(sf::Vector2f(objs[i].getW(),objs[i].getH()));
+	window -> draw(PlayerInstance.playerbody);
+	for( auto&& pointer : objs) {
+		wall.setPosition(pointer->getX(), pointer->getY());
+		wall.setSize(sf::Vector2f(pointer->getW(),pointer->getH()));
 		window->draw(wall);
 	}
 
