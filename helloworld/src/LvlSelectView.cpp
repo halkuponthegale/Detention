@@ -41,7 +41,6 @@ void LvlSelectView::Init(sf::RenderWindow *window){
 
 void LvlSelectView::Update(sf::RenderWindow *window){
 
-	// handle left/right operations between level options
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right)){
 		if(right_press){ return; }
 		if(cur_select < top_lvl)
@@ -62,8 +61,6 @@ void LvlSelectView::Update(sf::RenderWindow *window){
 		left_press = 0;
 	}
 
-	// handle selected option
-	// pass level to PlayView
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Return)){
 		if(intro_return){ return; }
 
@@ -77,10 +74,7 @@ void LvlSelectView::Update(sf::RenderWindow *window){
 }
 
 void LvlSelectView::Render(sf::RenderWindow *window){
-	// draw everything to screen
-	// locked levels = Grey
-	// unlocked levels = White
-	// selected level = Blue
+
 
 	window -> draw(header);
 

@@ -43,7 +43,6 @@ void EndView::Init(sf::RenderWindow *window){
 
 void EndView::Update(sf::RenderWindow *window){
 
-	// handles menu option naviation
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) && cur_select == 1){
 		cur_select++;
 	}
@@ -52,7 +51,6 @@ void EndView::Update(sf::RenderWindow *window){
 		cur_select--;
 	}
 
-	// handles selected option
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Return)){
 		if(intro_return){ return; }
 
@@ -72,7 +70,7 @@ void EndView::Update(sf::RenderWindow *window){
 }
 
 void EndView::Render(sf::RenderWindow *window){
-	// draw texts to screen as in MainMenu
+
 
 	tmp2.setFillColor(sf::Color::White);
 	tmp3.setFillColor(sf::Color::White);
