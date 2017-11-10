@@ -1,6 +1,8 @@
 #include<SFML/Graphics.hpp>
+#include<SFML/Clock.hpp>
 #include<string>
 #include<iostream>
+//should be in the game engine class?
 //modeled after https://www.youtube.com/watch?v=ma5QWDYsmBg&index=11&list=PLHJE4y54mpC5j_x90UkuoMZOdmmL9-_rg
 //and Graphics lecture page 39
 
@@ -15,18 +17,29 @@ int main(){
 	sf::Texture pTexture;
 	std::vector<sf::IntRect> sequence;
 	sf::Sprite playerImage;
+	sf::Clock deltaClock;
+	sf::Time lastTime;
+	float timePerFrame;
 	
 	if(!pTexture.loadFromFile("Mario.png")){
 		std::cout << "Error could not load player image" << std::endl;
 		return 0;
 	}
 	playerImage.setTexture(pTexture);
+	sinceLastUpdate = sf::Time::Zero;
+	timePerFrame = (1.f/60.f); //can change this
 	
 	
 	while(Window.isOpen()){
 		sf::Event Event;
+		deltaClock = deltaClock.restart();
+		lastTime += deltaClock;
 		
+		
+			
+			
 		while(Window.pollEvent(Event)){
+			
 			
 			switch(Event.type){
 				
@@ -50,6 +63,11 @@ int main(){
 					   
 					   
 			   }
+		   }
+		   while(sinceLastUpdate > timePerFrame){   //could be >=
+			sinceLastUpdate -= timePerFrame;
+			
+			//this is where time per frame should pass to an update function for our game objects / actors (update events, update objects, draw objects)
 		   }
 		   playerImage.setTextureRect(sf::IntRect(source.x * 133, source.y * 200, 133, 200));
 		   Window.draw(playerImage);
