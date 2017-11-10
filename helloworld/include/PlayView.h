@@ -1,10 +1,11 @@
 #ifndef PLAY_VIEW_H
 #define PLAY_VIEW_H
 
-#include "View.h"
+#include "GameView.h"
 #include "Object.h"
 #include "FileManager.h"
 #include "Player.h"
+#include "Builder.h"
 
 static const float SCALE = 30.f;
 class PlayView : public MiniView{
@@ -13,6 +14,9 @@ class PlayView : public MiniView{
 			play_lvl = lvl;
 			objs = File::loadLevel("./level"+std::to_string(play_lvl)+".json");
 			CreateGround(world, 400.f, 500.f);
+			for( auto&& pointer : objs) {
+				CreateWall(world,pointer->getX(), pointer->getY(),pointer->getW(),pointer->getH());
+			}
 			b2BodyDef BodyDef;
     BodyDef.position = b2Vec2(80.f/SCALE, 80.f/SCALE);
     BodyDef.type = b2_dynamicBody;
@@ -25,6 +29,7 @@ class PlayView : public MiniView{
     FixtureDef.friction = 0;
     FixtureDef.shape = &Shape;
     pBody->CreateFixture(&FixtureDef);
+		pBody->SetFixedRotation(true);
 		PlayerInstance.setBody(*pBody);
 		}
 		void Init(sf::RenderWindow *window);
@@ -44,6 +49,19 @@ class PlayView : public MiniView{
 		    FixtureDef.shape = &Shape;
 		    Body->CreateFixture(&FixtureDef);
 		}
+		void CreateWall(b2World &World, double x, double y, int w, int h){
+			b2BodyDef BodyDef;
+			BodyDef.position = b2Vec2(x/SCALE, y/SCALE);
+			BodyDef.type = b2_staticBody;
+			b2Body* Body = World.CreateBody(&BodyDef);
+
+			b2PolygonShape Shape;
+			Shape.SetAsBox((w/2.0)/SCALE, (h/2.0)/SCALE);
+			b2FixtureDef FixtureDef;
+			FixtureDef.density = 0.f;
+			FixtureDef.shape = &Shape;
+			Body->CreateFixture(&FixtureDef);
+		}
 	private:
 		sf::Font font;
 
@@ -55,8 +73,8 @@ class PlayView : public MiniView{
 		sf::Text tmp3;
 		std::vector<std::unique_ptr<Actor>> objs;
 		sf::RectangleShape wall;
-
-		player PlayerInstance;
+Builder builder;
+		Player PlayerInstance;
 		b2Vec2 gravity;
 		b2World world;
 		b2Body* pBody;

@@ -1,7 +1,7 @@
 #ifndef END_VIEW_H
 #define END_VIEW_H
 
-#include "View.h"
+#include "GameView.h"
 
 class EndView : public MiniView{
 	public:

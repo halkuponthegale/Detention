@@ -1,7 +1,7 @@
 #ifndef MENU_VIEW_H
 #define MENU_VIEW_H
 
-#include "View.h"
+#include "GameView.h"
 
 class MenuView : public MiniView{
 	public:

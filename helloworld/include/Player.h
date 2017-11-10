@@ -3,14 +3,15 @@
 
 #include <SFML/Graphics.hpp>
 #include "Box2D.h"
-class player {
+#include "Machine.h"
+class Player {
 
 public:
 
     //Create a simple rectangle, stand in for the player
     sf::RectangleShape playerbody;
 
-    player(); // Constructor
+    Player(); // Constructor
 
 
     // Moves the player up
@@ -27,12 +28,27 @@ public:
 
     void launch(double velocity, double theta);
     // Puts player back in original position
-    void reset();
+    //oid reset();
     void setBody(b2Body& bod){
       body = &bod;
     }
+    void Update(); // handles input
+
+int intersects(Machine *m);
+
+// Puts player back in original position
+void reset();
+
+// Accessor method
+sf::RectangleShape getShape();
+
+// return if player in machine or not
+int inMachine();
+Machine *my_machine;
+
+int in_machine;
 private:
   b2Body* body;
-  bool inMachine;
+  //bool inMachine;
 };
 #endif
