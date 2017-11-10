@@ -40,7 +40,7 @@ void PlayView::Init(sf::RenderWindow *window){
 	// objs.push_back(w1);
 	// objs.push_back(w2);
 
-	player PlayerInstance;
+	//player PlayerInstance;
 	//gravity = b2Vec2(0.0f, -10.0f);
 
 	// Construct a world object, which will hold and simulate the rigid bodies.
@@ -69,20 +69,11 @@ void PlayView::Update(sf::RenderWindow *window){
 
      // If user presses direction, move the player paddle
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-            PlayerInstance.player_up();
+            //PlayerInstance.player_up();
+						PlayerInstance.intersects(&builder);
     }
 
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-            PlayerInstance.player_down();
-    }
-
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-           PlayerInstance.player_left();
-    }
-
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-            PlayerInstance.player_right();
-    }
+PlayerInstance.Update();
 world.Step(1/60.f, 8, 3);
 
 
@@ -92,6 +83,7 @@ void PlayView::Render(sf::RenderWindow *window){
 	window -> draw(tmp);
 	window -> draw(tmp2);
 	window -> draw(tmp3);
+	window -> draw(builder.getShape());
 	//window -> draw(PlayerInstance.playerbody);
 	for( auto&& pointer : objs) {
 		wall.setPosition(pointer->getX(), pointer->getY());
@@ -100,12 +92,13 @@ void PlayView::Render(sf::RenderWindow *window){
 	}
 	for (b2Body* BodyIterator = world.GetBodyList(); BodyIterator != 0; BodyIterator = BodyIterator->GetNext())
 {
-		if (BodyIterator->GetType() == b2_dynamicBody)
+		if (BodyIterator->GetType() == b2_dynamicBody )
 		{
 
 				PlayerInstance.playerbody.setPosition(SCALE * BodyIterator->GetPosition().x, SCALE * BodyIterator->GetPosition().y);
 				PlayerInstance.playerbody.setRotation(BodyIterator->GetAngle() * 180/b2_pi);
-				window->draw(PlayerInstance.playerbody);
+				if(!PlayerInstance.inMachine())
+					window->draw(PlayerInstance.playerbody);
 				//++BodyCount;
 		}
 		else
