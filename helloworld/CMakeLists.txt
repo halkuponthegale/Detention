@@ -115,6 +115,7 @@ foreach(EXEC ${EXECLIST})
 
   if(NOT SRC STREQUAL "")
     target_link_libraries(${EXECNAME} LINK_PUBLIC ${LIBNAME})
+    target_link_libraries(${EXECNAME} LINK_PUBLIC ${csci437_SOURCE_DIR}/bin/libBox2D.a )
   endif()
 
   message("-- Adding executable: ${EXECNAME}")
