@@ -7,10 +7,15 @@
 #include "Player.h"
 #include "Builder.h"
 
+/*
+	PlayView handles level loading, drawing, and gameplay
+	As of right now, also handles physics and logic
+*/
+
 static const float SCALE = 30.f;
 class PlayView : public MiniView{
 	public:
-		PlayView(int lvl) : gravity(0.0f, 10.0f), world(gravity){
+		PlayView(int lvl) : gravity(0.0f, 10.0f), world(gravity);{
 			play_lvl = lvl;
 			objs = File::loadLevel("./level"+std::to_string(play_lvl)+".json");
 			CreateGround(world, 400.f, 500.f);

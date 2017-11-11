@@ -4,7 +4,7 @@
 #include "MiniView.h"
 
 /*
-	View handles what is displayed on the screen, handles transitions between
+	GameView handles what is displayed on the screen, handles transitions between
 	different screens, each represented by a "MiniView". Serves as a wrapper
 	and handler between different screens, as well as calls to Update() and
 	Render() in the MiniView objects
