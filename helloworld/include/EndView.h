@@ -3,12 +3,6 @@
 
 #include "GameView.h"
 
-/*
-	EndView handles finish screen
-	Can choose to continue to next level, return to main menu, or quit game
-	Updates "unlocked levels" logic
-*/
-
 class EndView : public MiniView{
 	public:
 		EndView(int lvl){ finished_lvl = lvl; }

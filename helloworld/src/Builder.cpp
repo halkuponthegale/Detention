@@ -1,6 +1,11 @@
 #include "Builder.h"
 
 // constructor
+
+// define how this machine can move (can set limitations)
+#include "Builder.h"
+
+// constructor
 Builder::Builder(){
 	machine_body.setSize(sf::Vector2f(50,50));
 	machine_body.setPosition(100,100);

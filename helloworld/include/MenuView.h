@@ -3,11 +3,6 @@
 
 #include "GameView.h"
 
-/*
-	MenuView handles the text and selection in the main menu
-	Also handles transition to LvlSelectView
-*/
-
 class MenuView : public MiniView{
 	public:
 		void Init(sf::RenderWindow *window);
