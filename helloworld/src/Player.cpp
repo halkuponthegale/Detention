@@ -17,7 +17,7 @@
     void Player::player_up() {
         if(playerbody.getPosition().y > 0) {
             //playerbody.move(0, -.1);
-          //  this->launch(12.0,M_PI/4);
+          this->launch(12.0,M_PI/4);
         }
     }
 
