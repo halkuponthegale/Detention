@@ -62,22 +62,27 @@
 
             // TEMPORARY
             my_machine -> setColor(sf::Color::Red);
+
+            // reset player position
+            playerbody.setPosition(my_machine -> getShape().getPosition());
+
         }
     }
-
-    // If user presses WASD direction, move the player box
-    // (if in machine, move in background)
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-            player_up();
-    }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-           player_left();
-    }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-            player_down();
-    }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-            player_right();
+    else{
+        // If user presses WASD direction, move the player box
+        // (if in machine, don't move)
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+                player_up();
+        }
+        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+               player_left();
+        }
+        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+                player_down();
+        }
+        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+                player_right();
+        }
     }
 
     // if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){

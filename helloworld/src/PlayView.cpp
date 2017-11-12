@@ -45,7 +45,7 @@ void PlayView::Init(sf::RenderWindow *window){
 
 	// Construct a world object, which will hold and simulate the rigid bodies.
 	//world = b2World(gravity);
-window->setFramerateLimit(60);
+	window->setFramerateLimit(60);
 }
 
 void PlayView::Update(sf::RenderWindow *window){
@@ -84,6 +84,11 @@ void PlayView::Render(sf::RenderWindow *window){
 	window -> draw(tmp2);
 	window -> draw(tmp3);
 	window -> draw(builder.getShape());
+
+	// draw boxes
+	window -> draw(box1.getShape());
+	window -> draw(box2.getShape());
+
 	//window -> draw(PlayerInstance.playerbody);
 	for( auto&& pointer : objs) {
 		wall.setPosition(pointer->getX(), pointer->getY());

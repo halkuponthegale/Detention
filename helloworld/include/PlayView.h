@@ -23,19 +23,27 @@ class PlayView : public MiniView{
 				CreateWall(world,pointer->getX(), pointer->getY(),pointer->getW(),pointer->getH());
 			}
 			b2BodyDef BodyDef;
-    BodyDef.position = b2Vec2(80.f/SCALE, 80.f/SCALE);
-    BodyDef.type = b2_dynamicBody;
-    pBody = world.CreateBody(&BodyDef);
+		    BodyDef.position = b2Vec2(80.f/SCALE, 80.f/SCALE);
+		    BodyDef.type = b2_dynamicBody;
+		    pBody = world.CreateBody(&BodyDef);
 
-    b2PolygonShape Shape;
-    Shape.SetAsBox((32.f/2)/SCALE, (32.f/2)/SCALE);
-    b2FixtureDef FixtureDef;
-    FixtureDef.density = 1.f;
-    FixtureDef.friction = 0;
-    FixtureDef.shape = &Shape;
-    pBody->CreateFixture(&FixtureDef);
-		pBody->SetFixedRotation(true);
-		PlayerInstance.setBody(*pBody);
+		    b2PolygonShape Shape;
+		    Shape.SetAsBox((32.f/2)/SCALE, (32.f/2)/SCALE);
+		    b2FixtureDef FixtureDef;
+		    FixtureDef.density = 1.f;
+		    FixtureDef.friction = 0;
+		    FixtureDef.shape = &Shape;
+		    pBody->CreateFixture(&FixtureDef);
+			pBody->SetFixedRotation(true);
+			PlayerInstance.setBody(*pBody);
+
+
+			// temporary hard code boxes
+			box1.setPos(250,250);
+			builder.add_box(&box1);
+
+			box2.setPos(40, 300);
+			builder.add_box(&box2);
 		}
 		void Init(sf::RenderWindow *window);
 		void Update(sf::RenderWindow *window);
@@ -78,11 +86,14 @@ class PlayView : public MiniView{
 		sf::Text tmp3;
 		std::vector<std::unique_ptr<Actor>> objs;
 		sf::RectangleShape wall;
-Builder builder;
 		Player PlayerInstance;
 		b2Vec2 gravity;
 		b2World world;
 		b2Body* pBody;
+
+		Builder builder;
+		Box box1, box2;
+
 };
 
 
