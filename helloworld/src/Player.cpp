@@ -7,6 +7,7 @@
     // Creates a simple rectanglein place of player sprite
     Player::Player() {
         playerbody.setSize(sf::Vector2f(10,30));
+        playerbody.setOrigin(playerbody.getOrigin().x + 5, playerbody.getOrigin().y + 15);
         playerbody.setPosition(80,80);
         //inMachine = true;
         in_machine = 0;

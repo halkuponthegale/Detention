@@ -30,9 +30,9 @@ class PlayView : public MiniView{
 	    pBody = world.CreateBody(&BodyDef);
 
 	    b2PolygonShape Shape;
-	    Shape.SetAsBox((10.f/2)/SCALE, (10.f/2)/SCALE);
+	    Shape.SetAsBox((10.f/2)/SCALE, (30.f/2)/SCALE);
 	    b2FixtureDef FixtureDef;
-	    FixtureDef.density = 6.f;
+	    FixtureDef.density = 1.f;
 	    FixtureDef.friction = 1;
 	    FixtureDef.shape = &Shape;
 	    pBody->CreateFixture(&FixtureDef);
@@ -46,12 +46,11 @@ class PlayView : public MiniView{
 	    builderBody = world.CreateBody(&BodyDef2);
 
 	    b2PolygonShape Shape2;
-	    Shape2.SetAsBox((1.f/2)/SCALE, (50.f/2)/SCALE);
+	    Shape2.SetAsBox((50.f/2)/SCALE, (50.f/2)/SCALE);
 	    b2FixtureDef FixtureDef2;
 	    FixtureDef2.density = 100.f;
 	    FixtureDef2.friction = 1;
 	    FixtureDef2.shape = &Shape2;
-			// FixtureDef2.isSensor = true;
 	    builderBody->CreateFixture(&FixtureDef2);
 			builderBody->SetFixedRotation(true);
 			builder.setBody(*builderBody);
