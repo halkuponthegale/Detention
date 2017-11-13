@@ -47,8 +47,11 @@ int inMachine();
 Machine *my_machine;
 
 int in_machine;
+
 private:
   b2Body* body;
+  int jumping;
+  int facing; // 0 = left, 1 = right
   //bool inMachine;
 };
 #endif

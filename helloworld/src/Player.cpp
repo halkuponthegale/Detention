@@ -7,17 +7,24 @@
     // Creates a simple rectanglein place of player sprite
     Player::Player() {
         playerbody.setSize(sf::Vector2f(10,30));
-        playerbody.setPosition(0,0);
+        playerbody.setPosition(80,80);
         //inMachine = true;
         in_machine = 0;
+        jumping = 0;
+        facing = 1;
     }
 
 
     // Moves the player up, unless it's already at the top of the screen
     void Player::player_up() {
-        if(playerbody.getPosition().y > 0) {
+        if(playerbody.getPosition().y > 0 && body -> GetLinearVelocity().y == 0) {
             //playerbody.move(0, -.1);
-          this->launch(12.0,M_PI/4);
+          if(facing == 0){ // if facing left
+            this->launch(6.0,3*M_PI/4);
+          }
+          else{ // if facing right
+            this->launch(6.0,M_PI/4);
+          }
         }
     }
 
@@ -72,15 +79,24 @@
         // If user presses WASD direction, move the player box
         // (if in machine, don't move)
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-                player_up();
+              if(!jumping){
+                  jumping = 1;
+                  player_up();
+              }
         }
-        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+        else{
+          jumping = 0;
+        }
+
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+               facing = 0;
                player_left();
         }
-        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
                 player_down();
         }
-        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+                facing = 1;
                 player_right();
         }
     }
@@ -96,7 +112,7 @@
           double vy = sin(theta)* velocity;
           double impx = (vel.x)*body->GetMass();
           double impy = (vel.y)*body->GetMass();
-          std::cout << vx <<"," << vy;
+          //std::cout << vx <<"," << vy;
           body->ApplyLinearImpulse( b2Vec2(vx, -vy), body->GetWorldCenter(), true );
           //inMachine = false;
         //}

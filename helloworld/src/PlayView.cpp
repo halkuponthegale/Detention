@@ -95,16 +95,28 @@ void PlayView::Render(sf::RenderWindow *window){
 		wall.setSize(sf::Vector2f(pointer->getW(),pointer->getH()));
 		window->draw(wall);
 	}
+
+	int i = 0;
+
 	for (b2Body* BodyIterator = world.GetBodyList(); BodyIterator != 0; BodyIterator = BodyIterator->GetNext())
 {
 		if (BodyIterator->GetType() == b2_dynamicBody )
 		{
-
+				if( i == 1 ){
 				PlayerInstance.playerbody.setPosition(SCALE * BodyIterator->GetPosition().x, SCALE * BodyIterator->GetPosition().y);
 				PlayerInstance.playerbody.setRotation(BodyIterator->GetAngle() * 180/b2_pi);
 				if(!PlayerInstance.inMachine())
 					window->draw(PlayerInstance.playerbody);
 				//++BodyCount;
+				i++;
+				}
+				else if(i == 0){
+					builder.machine_body.setPosition(SCALE * BodyIterator->GetPosition().x, SCALE * BodyIterator->GetPosition().y);
+					builder.machine_body.setRotation(BodyIterator->GetAngle() * 180/b2_pi);
+					window->draw(builder.machine_body);
+					//++BodyCount;
+					i++;
+				}
 		}
 		else
 		{

@@ -12,11 +12,15 @@ class Machine{
 		sf::RectangleShape getShape() {return machine_body;}
 		bool intersects(Box* o){return machine_body.getGlobalBounds().intersects(o -> getShape().getGlobalBounds());}
 
+		b2Body* getBody(){ return body; }
 		void setColor(sf::Color c){	machine_body.setFillColor(c); } // TEMPORARY
 
-	protected:
-
 		sf::RectangleShape machine_body;
+
+
+	protected:
+		b2Body* body;
+
 
 		// tmp builder vars - later will be stored in Level
 		Box* boxlist[10];

@@ -4,7 +4,7 @@
 Builder::Builder(){
 
     machine_body.setSize(sf::Vector2f(50,50));
-    machine_body.setPosition(100,100);
+    machine_body.setPosition(150,150);
     machine_body.setFillColor(sf::Color::Red);
 
     cur_box_idx = 0;
@@ -27,8 +27,12 @@ void Machine::Update(){
     // move left
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         if(machine_body.getPosition().x > 0) {
-           machine_body.move(-1, 0);
-           facing = 0;
+          //  machine_body.move(-1, 0);
+          b2Vec2 vel = body->GetLinearVelocity();
+          vel.x = -5;
+          body->SetLinearVelocity( vel );
+
+          facing = 0;
 
             // if you have a box, move it as well
             if(carrybox){
@@ -50,7 +54,10 @@ void Machine::Update(){
     // move right
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         if(machine_body.getPosition().x < 750) {  // check
-            machine_body.move(1, 0);
+            // machine_body.move(1, 0);
+            b2Vec2 vel = body->GetLinearVelocity();
+            vel.x = 5;
+            body->SetLinearVelocity( vel );
             facing = 1;
 
              // if you have a box, move it as well

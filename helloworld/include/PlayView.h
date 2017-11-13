@@ -22,21 +22,39 @@ class PlayView : public MiniView{
 			for( auto&& pointer : objs) {
 				CreateWall(world,pointer->getX(), pointer->getY(),pointer->getW(),pointer->getH());
 			}
-			b2BodyDef BodyDef;
-		    BodyDef.position = b2Vec2(80.f/SCALE, 80.f/SCALE);
-		    BodyDef.type = b2_dynamicBody;
-		    pBody = world.CreateBody(&BodyDef);
 
-		    b2PolygonShape Shape;
-		    Shape.SetAsBox((32.f/2)/SCALE, (32.f/2)/SCALE);
-		    b2FixtureDef FixtureDef;
-		    FixtureDef.density = 1.f;
-		    FixtureDef.friction = 0;
-		    FixtureDef.shape = &Shape;
-		    pBody->CreateFixture(&FixtureDef);
+			// create player physics body
+			b2BodyDef BodyDef;
+	    BodyDef.position = b2Vec2(80.f/SCALE, 90.f/SCALE);
+	    BodyDef.type = b2_dynamicBody;
+	    pBody = world.CreateBody(&BodyDef);
+
+	    b2PolygonShape Shape;
+	    Shape.SetAsBox((10.f/2)/SCALE, (10.f/2)/SCALE);
+	    b2FixtureDef FixtureDef;
+	    FixtureDef.density = 6.f;
+	    FixtureDef.friction = 1;
+	    FixtureDef.shape = &Shape;
+	    pBody->CreateFixture(&FixtureDef);
 			pBody->SetFixedRotation(true);
 			PlayerInstance.setBody(*pBody);
 
+			// create builder physics body
+			b2BodyDef BodyDef2;
+	    BodyDef2.position = b2Vec2(200.f/SCALE, 200.f/SCALE);
+	    BodyDef2.type = b2_dynamicBody;
+	    builderBody = world.CreateBody(&BodyDef2);
+
+	    b2PolygonShape Shape2;
+	    Shape2.SetAsBox((1.f/2)/SCALE, (50.f/2)/SCALE);
+	    b2FixtureDef FixtureDef2;
+	    FixtureDef2.density = 100.f;
+	    FixtureDef2.friction = 1;
+	    FixtureDef2.shape = &Shape2;
+			// FixtureDef2.isSensor = true;
+	    builderBody->CreateFixture(&FixtureDef2);
+			builderBody->SetFixedRotation(true);
+			builder.setBody(*builderBody);
 
 			// temporary hard code boxes
 			box1.setPos(250,250);
@@ -90,6 +108,7 @@ class PlayView : public MiniView{
 		b2Vec2 gravity;
 		b2World world;
 		b2Body* pBody;
+		b2Body* builderBody;
 
 		Builder builder;
 		Box box1, box2;
