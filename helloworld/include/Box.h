@@ -7,6 +7,7 @@ class Box : public Object{
 	public:
 		Box() : Object(0, 0, 50, 50, true){
 			box_body.setSize(sf::Vector2f(50,50));
+			box_body.setOrigin(box_body.getOrigin().x + 25, box_body.getOrigin().y+25 );
 			box_body.setPosition(0,0);
 			box_body.setFillColor(sf::Color::Blue);
 		}
