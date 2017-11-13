@@ -5,7 +5,7 @@
 
 void EndView::Init(sf::RenderWindow *window){
 	// load font
-	font.loadFromFile("../include/Fonts/ComicSans.ttf");
+	font.loadFromFile("../include/Fonts/Beyblade Metal Fight Font.ttf");
 
 	intro_return = 1;
 	cur_select = 1;

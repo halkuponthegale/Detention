@@ -7,7 +7,7 @@ void MenuView::Init(sf::RenderWindow *window){
 	intro_return = 1;
 
 	// load font
-	font.loadFromFile("../include/Fonts/ComicSans.ttf");
+	font.loadFromFile("../include/Fonts/Beyblade Metal Fight Font.ttf");
 
 	// create texts
 	title.setFont(font);

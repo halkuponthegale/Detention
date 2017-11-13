@@ -9,7 +9,7 @@ void LvlSelectView::Init(sf::RenderWindow *window){
 	left_press = 0;
 
 	// load font
-	font.loadFromFile("../include/Fonts/ComicSans.ttf");
+	font.loadFromFile("../include/Fonts/Beyblade Metal Fight Font.ttf");
 
 	// create texts
 	header.setFont(font);
