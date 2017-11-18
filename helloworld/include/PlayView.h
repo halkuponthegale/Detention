@@ -6,6 +6,8 @@
 #include "FileManager.h"
 #include "Player.h"
 #include "Builder.h"
+#include "Launcher.h"
+#include "Mobile.h"
 
 /*
 	PlayView handles level loading, drawing, and gameplay
@@ -15,14 +17,16 @@
 static const float SCALE = 30.f;
 class PlayView : public MiniView{
 	public:
-		PlayView(int lvl) : gravity(0.0f, 10.0f), world(gravity){
+		PlayView(int lvl) : gravity(0.0f, 10.0f), world(gravity), box1(250,250,world), box2(40,300,world){
 			play_lvl = lvl;
 			objs = File::loadLevel("./level"+std::to_string(play_lvl)+".json");
 			CreateGround(world, 400.f, 500.f);
 			for( auto&& pointer : objs) {
 				CreateWall(world,pointer->getX(), pointer->getY(),pointer->getW(),pointer->getH());
 			}
-
+			line = sf::RectangleShape(sf::Vector2f(5,25));
+			line.setPosition(350,200);
+			line.setOrigin(2.5,25);
 			// create player physics body
 			b2BodyDef BodyDef;
 	    BodyDef.position = b2Vec2(80.f/SCALE, 90.f/SCALE);
@@ -35,8 +39,10 @@ class PlayView : public MiniView{
 	    FixtureDef.density = 1.f;
 	    FixtureDef.friction = 1;
 	    FixtureDef.shape = &Shape;
-	    pBody->CreateFixture(&FixtureDef);
+			FixtureDef.filter.categoryBits = 0x0002;
+			pBody->CreateFixture(&FixtureDef);
 			pBody->SetFixedRotation(true);
+
 			PlayerInstance.setBody(*pBody);
 
 			// create builder physics body
@@ -51,9 +57,55 @@ class PlayView : public MiniView{
 	    FixtureDef2.density = 100.f;
 	    FixtureDef2.friction = 1;
 	    FixtureDef2.shape = &Shape2;
+			FixtureDef2.filter.maskBits = ~0x0002;
 	    builderBody->CreateFixture(&FixtureDef2);
 			builderBody->SetFixedRotation(true);
+			//builderBody->SetGravityScale(0);
+
 			builder.setBody(*builderBody);
+
+
+///build Launcher
+b2BodyDef BodyDef3;
+BodyDef3.position = b2Vec2(350.f/SCALE, 200.f/SCALE);
+BodyDef3.type = b2_dynamicBody;
+launcherBody = world.CreateBody(&BodyDef3);
+
+b2PolygonShape Shape3;
+Shape3.SetAsBox((50.f/2)/SCALE, (50.f/2)/SCALE);
+b2FixtureDef FixtureDef3;
+FixtureDef3.density = 100.f;
+FixtureDef3.friction = 1;
+FixtureDef3.shape = &Shape3;
+FixtureDef3.filter.maskBits = ~0x0002;
+launcherBody->CreateFixture(&FixtureDef3);
+launcherBody->SetFixedRotation(true);
+//builderBody->SetGravityScale(0);
+
+launcher.setBody(*launcherBody);
+
+//build mobile
+b2BodyDef BodyDef4;
+BodyDef4.position = b2Vec2(450.f/SCALE, 200.f/SCALE);
+BodyDef4.type = b2_dynamicBody;
+mobileBody = world.CreateBody(&BodyDef4);
+
+b2PolygonShape Shape4;
+Shape4.SetAsBox((50.f/2)/SCALE, (50.f/2)/SCALE);
+b2FixtureDef FixtureDef4;
+FixtureDef4.density = 100.f;
+FixtureDef4.friction = 1;
+FixtureDef4.shape = &Shape4;
+FixtureDef4.filter.maskBits = ~0x0002;
+mobileBody->CreateFixture(&FixtureDef4);
+mobileBody->SetFixedRotation(true);
+//builderBody->SetGravityScale(0);
+
+mobile.setBody(*mobileBody);
+
+
+
+
 
 			// temporary hard code boxes
 			box1.setPos(250,250);
@@ -78,6 +130,7 @@ class PlayView : public MiniView{
 		    FixtureDef.density = 0.f;
 		    FixtureDef.shape = &Shape;
 		    Body->CreateFixture(&FixtureDef);
+				groundBody = Body;
 		}
 		void CreateWall(b2World &World, double x, double y, int w, int h){
 			b2BodyDef BodyDef;
@@ -101,6 +154,7 @@ class PlayView : public MiniView{
 		sf::Text tmp;
 		sf::Text tmp2;
 		sf::Text tmp3;
+		sf::RectangleShape line;
 		std::vector<std::unique_ptr<Actor>> objs;
 		sf::RectangleShape wall;
 		Player PlayerInstance;
@@ -108,9 +162,17 @@ class PlayView : public MiniView{
 		b2World world;
 		b2Body* pBody;
 		b2Body* builderBody;
-
+		b2Body* launcherBody;
+		b2Body* mobileBody;
+		Mobile mobile;
 		Builder builder;
+		Launcher launcher;
 		Box box1, box2;
+		sf::Texture Bkg;
+		sf::Sprite bgSprite;
+		b2Body* groundBody;
+		std::vector<int> ty;
+		std::vector<Machine*> vec;
 
 };
 

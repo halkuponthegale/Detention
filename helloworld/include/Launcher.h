@@ -1,6 +1,6 @@
 #include "Machine.h"
 
-class Mobile: public Machine{
+class Launcher: public Machine{
 public:
   void rotate(double dTheta){
     theta += dTheta;
@@ -11,20 +11,19 @@ public:
   void setBody(b2Body& bod){
     body = &bod;
   }
-  Mobile(){
+  Launcher(){
 
       machine_body.setSize(sf::Vector2f(50,50));
       machine_body.setPosition(150,150);
       machine_body.setOrigin(machine_body.getOrigin().x + 25, machine_body.getOrigin().y + 25);
-      machine_body.setFillColor(sf::Color::Magenta);
-
+      machine_body.setFillColor(sf::Color::Yellow);
+      theta = M_PI/2;
 
   }
 
   // define how this machine can move (can set limitations)
   void Update(){
       // move up
-
       if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
           if(machine_body.getPosition().y > 0) {
               machine_body.move(0, -1);
@@ -35,12 +34,12 @@ public:
       }
       // move left
       else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-        if(machine_body.getPosition().x < 750) {  // check
-            // machine_body.move(1, 0);
-            b2Vec2 vel = body->GetLinearVelocity();
-            vel.x = -5;
-            body->SetLinearVelocity( vel );
-        }
+          if(theta <= 5*(M_PI/6) ) {
+            //  machine_body.move(-1, 0);
+            theta += M_PI/50;
+
+
+          }
       }
       // move down
       else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
@@ -52,14 +51,14 @@ public:
       }
       // move right
       else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        if(machine_body.getPosition().x < 750) {  // check
-            // machine_body.move(1, 0);
-            b2Vec2 vel = body->GetLinearVelocity();
-            vel.x = 5;
-            body->SetLinearVelocity( vel );
+        if(theta >=(M_PI/6) ) {
+          //  machine_body.move(-1, 0);
+          theta -= M_PI/50;
+
+
+        }
       }
     }
-  }
 
 private:
   double theta;

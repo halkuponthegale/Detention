@@ -4,14 +4,19 @@
 // #include "Actor.h"
 #include <SFML/Graphics.hpp>
 #include "Box.h"
-
+#include <iostream>
 class Machine{
 	public:
-		void Update();
+		virtual void Update();
+		virtual double getTheta(){return 0;}
 		void setPosition(int x, int y);
 		sf::RectangleShape getShape() {return machine_body;}
-		bool intersects(Box* o){return machine_body.getGlobalBounds().intersects(o -> getShape().getGlobalBounds());}
-
+		bool intersects(Box* o){//return machine_body.getGlobalBounds().intersects(o -> getShape().getGlobalBounds());
+				return touching(o) < 52;//&& machine_body.getGlobalBounds().top == o -> getShape().getGlobalBounds().top;
+		}
+		float touching(Box* o){
+			return abs(machine_body.getGlobalBounds().left - o -> getShape().getGlobalBounds().left);
+		}
 		b2Body* getBody(){ return body; }
 		void setColor(sf::Color c){	machine_body.setFillColor(c); } // TEMPORARY
 

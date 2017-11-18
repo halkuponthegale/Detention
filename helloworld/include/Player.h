@@ -34,7 +34,7 @@ public:
     }
     void Update(); // handles input
 
-int intersects(Machine *m);
+int intersects(std::vector<Machine *> marr, std::vector<int> types);
 
 // Puts player back in original position
 void reset();
@@ -45,7 +45,7 @@ sf::RectangleShape getShape();
 // return if player in machine or not
 int inMachine();
 Machine *my_machine;
-
+int mType;
 int in_machine;
 
 private:
