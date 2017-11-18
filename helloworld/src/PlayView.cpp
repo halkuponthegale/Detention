@@ -46,6 +46,19 @@ void PlayView::Init(sf::RenderWindow *window){
 	// Construct a world object, which will hold and simulate the rigid bodies.
 	//world = b2World(gravity);
 	window->setFramerateLimit(60);
+
+if(!Bkg.loadFromFile("tile.jpg"));
+
+Bkg.setRepeated(true);
+
+bgSprite.setTexture(Bkg);
+bgSprite.setTextureRect(sf::IntRect(0,0,800,600));
+vec.push_back(&builder);
+vec.push_back(&launcher);
+vec.push_back(&mobile);
+ty.push_back(0);
+ty.push_back(1);
+ty.push_back(2);
 }
 
 void PlayView::Update(sf::RenderWindow *window){
@@ -70,7 +83,12 @@ void PlayView::Update(sf::RenderWindow *window){
      // If user presses direction, move the player paddle
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
             //PlayerInstance.player_up();
-						PlayerInstance.intersects(&builder);
+						//builder = 0, launcher = 1, mobile = 2;
+
+						if(!PlayerInstance.inMachine())
+							PlayerInstance.intersects(vec,ty);
+						//PlayerInstance.intersects(&builder);
+						//PlayerInstance.intersects(&launcher);
     }
 
 PlayerInstance.Update();
@@ -80,14 +98,15 @@ world.Step(1/60.f, 8, 3);
 }
 
 void PlayView::Render(sf::RenderWindow *window){
+	window -> draw(bgSprite);
 	window -> draw(tmp);
 	window -> draw(tmp2);
 	window -> draw(tmp3);
 	window -> draw(builder.getShape());
-
+//window->draw(line);
 	// draw boxes
-	window -> draw(box1.getShape());
-	window -> draw(box2.getShape());
+
+	//window -> draw(box2.getShape());
 
 	//window -> draw(PlayerInstance.playerbody);
 	for( auto&& pointer : objs) {
@@ -97,29 +116,66 @@ void PlayView::Render(sf::RenderWindow *window){
 	}
 
 	int i = 0;
-
+	box1.setPos(SCALE* box1.getBody()->GetPosition().x,SCALE*box1.getBody()->GetPosition().y);
+	window->draw(box1.getShape());
+	box2.setPos(SCALE* box2.getBody()->GetPosition().x,SCALE*box2.getBody()->GetPosition().y);
+	window->draw(box2.getShape());
+	//sf::Sprite GroundSprite;
+	//GroundSprite.SetTexture(GroundTexture);
+	//GroundSprite.SetOrigin(400.f, 8.f);
+	//GroundSprite.SetPosition(groundBody->GetPosition().x * SCALE, groundBody->GetPosition().y * SCALE);
+	//GroundSprite.SetRotation(180/b2_pi * BodyIterator->GetAngle());
+	//Window.Draw(GroundSprite);
 	for (b2Body* BodyIterator = world.GetBodyList(); BodyIterator != 0; BodyIterator = BodyIterator->GetNext())
 {
 		if (BodyIterator->GetType() == b2_dynamicBody )
 		{
-				if( i == 1 ){
+
+				if( i == 3 ){
 				PlayerInstance.playerbody.setPosition(SCALE * BodyIterator->GetPosition().x, SCALE * BodyIterator->GetPosition().y);
 				PlayerInstance.playerbody.setRotation(BodyIterator->GetAngle() * 180/b2_pi);
+
 				if(!PlayerInstance.inMachine())
 					window->draw(PlayerInstance.playerbody);
 				//++BodyCount;
 				i++;
-				}
-				else if(i == 0){
+			}else if(i==0){
+				mobile.machine_body.setPosition(SCALE * BodyIterator->GetPosition().x, SCALE * BodyIterator->GetPosition().y);
+				mobile.machine_body.setRotation(BodyIterator->GetAngle() * 180/b2_pi);
+				window->draw(mobile.machine_body);
+				i++;
+			}
+			else if (i==1){
+				launcher.machine_body.setPosition(SCALE * BodyIterator->GetPosition().x, SCALE * BodyIterator->GetPosition().y);
+				launcher.machine_body.setRotation(BodyIterator->GetAngle() * 180/b2_pi);
+				line.setPosition(SCALE * BodyIterator->GetPosition().x, SCALE * BodyIterator->GetPosition().y);
+				line.setRotation(90+(-1*( 180.0/3.141592653589793 )*launcher.getTheta()));
+				window->draw(launcher.machine_body);
+				if(PlayerInstance.inMachine() && PlayerInstance.mType == 1)
+					window->draw(line);
+				i++;
+			}
+				else if(i == 2){
 					builder.machine_body.setPosition(SCALE * BodyIterator->GetPosition().x, SCALE * BodyIterator->GetPosition().y);
 					builder.machine_body.setRotation(BodyIterator->GetAngle() * 180/b2_pi);
 					window->draw(builder.machine_body);
 					//++BodyCount;
 					i++;
 				}
+
 		}
-		else
+		else if (i==4){
+			//box1.setPos(SCALE * BodyIterator->GetPosition().x,SCALE * BodyIterator->GetPosition().y);
+			//window -> draw(box1.getShape());
+			//i++;
+		}
+		else if(i==5)
 		{
+			//box2.setPos(SCALE * box2.getBody()->GetPosition().x,SCALE * box2.getBody()->GetPosition().y);
+			//window -> draw(box2.getShape());
+
+				//window -> draw(box2.getShape());
+
 				/*sf::Sprite GroundSprite;
 				GroundSprite.SetTexture(GroundTexture);
 				GroundSprite.SetOrigin(400.f, 8.f);
@@ -127,5 +183,7 @@ void PlayView::Render(sf::RenderWindow *window){
 				GroundSprite.SetRotation(180/b2_pi * BodyIterator->GetAngle());
 				Window.Draw(GroundSprite);*/
 		}
+
 }
+//std::cout << i;
 }
