@@ -13,6 +13,7 @@ class Builder : public Machine{
 		void setBody(b2Body& bod){
       body = &bod;
     }
+		void Update();
 
 	private:
 

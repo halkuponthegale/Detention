@@ -11,6 +11,7 @@
         playerbody.setPosition(80,80);
         //inMachine = true;
         in_machine = 0;
+        mType = -1;
         jumping = 0;
         facing = 1;
     }
@@ -65,15 +66,36 @@
         my_machine -> Update();
 
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
+            if(mType==2){
 
+
+              my_machine->getBody()->SetLinearVelocity(b2Vec2(0,0));
+              my_machine->getBody()->SetGravityScale(1);
+            }
             in_machine = 0;
 
             // TEMPORARY
-            my_machine -> setColor(sf::Color::Red);
+            if(mType==0)
+              my_machine -> setColor(sf::Color::Red);
+            else if(mType==1)
+              my_machine -> setColor(sf::Color::Yellow);
+            else if(mType==2)
+              my_machine -> setColor(sf::Color::Magenta);
 
             // reset player position
-            playerbody.setPosition(my_machine -> getShape().getPosition());
+            body->SetTransform(my_machine -> getBody()->GetPosition(),0);
+            mType = -1;
 
+        }
+        if(mType == 1){
+
+          if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
+              in_machine = 0;
+              mType=-1;
+              my_machine -> setColor(sf::Color::Yellow);
+              body->SetTransform(my_machine -> getBody()->GetPosition(),0);
+              launch(5,my_machine->getTheta());
+          }
         }
     }
     else{
@@ -100,6 +122,8 @@
                 facing = 1;
                 player_right();
         }
+        //std::cout << mType;
+
     }
 
     // if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
@@ -133,15 +157,29 @@
     int Player::inMachine(){
         return in_machine;
     }
-    int Player::intersects(Machine *m){
-    if(playerbody.getGlobalBounds().intersects(m -> getShape().getGlobalBounds())){
+    int Player::intersects(std::vector<Machine *> marr, std::vector<int> types){
+      for(unsigned i = 0; i < marr.size(); i++){
+    if(playerbody.getGlobalBounds().intersects(marr[i] -> getShape().getGlobalBounds())){
         in_machine = 1;
-        my_machine = m;
-
+        my_machine = marr[i];
+        //std::cout << types[i];
+        this->mType = types[i];
+        if(mType==2){
+          my_machine->getBody()->SetGravityScale(0);
+          b2Vec2 pos = my_machine->getBody()->GetPosition();
+          my_machine->getBody()->SetTransform(b2Vec2(pos.x,pos.y-2),my_machine->getBody()->GetAngle());
+        }
+        //std::cout << mType;
+        body->SetLinearVelocity(b2Vec2(0,0));
+        //->SetGravityScale(0);
         // TEMPORARY
         my_machine -> setColor(sf::Color::Green);
+        std::cout << in_machine;
+        break;
     }
     else{
         in_machine = 0;
+      //  body->SetGravityScale(1);
     }
+  }
 }
