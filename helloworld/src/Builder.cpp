@@ -73,6 +73,10 @@ void Builder::Update(){
         }
     }
 
+    if(carrybox){
+      mybox->getBody()->SetTransform(b2Vec2(machine_body.getPosition().x / 30.0, (machine_body.getPosition().y - 60)/30.0),0);
+    }
+
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
         int intersect = 0;
         int i;
@@ -96,9 +100,10 @@ void Builder::Update(){
             carrybox = 0;
         }
         // if you aren't carrying a box and you're intersecting one, pick it up
-        else if(intersect){
+        else if(intersect && !space){
             mybox = boxlist[i];
             mybox->getBody()->SetTransform(b2Vec2(machine_body.getPosition().x / 30.0, (machine_body.getPosition().y - 60)/30.0),0);
+            mybox->getBody()->SetGravityScale(0);
             carrybox = 1;
         }
         space = 1;

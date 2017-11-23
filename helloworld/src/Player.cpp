@@ -21,12 +21,12 @@
     void Player::player_up() {
         if(playerbody.getPosition().y > 0 && body -> GetLinearVelocity().y == 0) {
             //playerbody.move(0, -.1);
-          if(facing == 0){ // if facing left
-            this->launch(6.0,3*M_PI/4);
-          }
-          else{ // if facing right
-            this->launch(6.0,M_PI/4);
-          }
+  //        if(facing == 0){ // if facing left
+            this->launch(1.8,M_PI/2);
+//          }
+          // else{ // if facing right
+          //   this->launch(3.0,M_PI/2);
+          // }
         }
     }
 
@@ -66,12 +66,11 @@
         my_machine -> Update();
 
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
-            if(mType==2){
 
+            my_machine->getBody()->SetLinearVelocity(b2Vec2(0,0));
+            my_machine->getBody()->SetGravityScale(1);
+            my_machine->Update();
 
-              my_machine->getBody()->SetLinearVelocity(b2Vec2(0,0));
-              my_machine->getBody()->SetGravityScale(1);
-            }
             in_machine = 0;
 
             // TEMPORARY

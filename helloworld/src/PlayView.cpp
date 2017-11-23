@@ -127,10 +127,11 @@ void PlayView::Render(sf::RenderWindow *window){
 	// box.setPos(SCALE* box.getBody()->GetPosition().x,SCALE*box.getBody()->GetPosition().y);
 	// window->draw(box.getShape());
 	int j;
-	for(j = 0; j < b4.size(); j++){
-		// Box box = *b4[j];
-		(*b4[j]).setPos(SCALE* (*b4[j]).getBody()->GetPosition().x,SCALE*(*b4[j]).getBody()->GetPosition().y);
-		window->draw((*b4[j]).getShape());
+	if(b4.size() > 1){
+			for(j = 1; j < b4.size(); j++){
+				(*b4[j]).setPos(SCALE* (*b4[j]).getBody()->GetPosition().x,SCALE*(*b4[j]).getBody()->GetPosition().y);
+				window->draw((*b4[j]).getShape());
+			}
 	}
 	// *b4.front() -> setPos(SCALE* b4.front() -> getBody()->GetPosition().x,SCALE*b4.front() -> getBody()->GetPosition().y);
 	// window->draw(*b4.front()->getShape());
@@ -146,21 +147,20 @@ void PlayView::Render(sf::RenderWindow *window){
 		if (BodyIterator->GetType() == b2_dynamicBody )
 		{
 
-				if( i == 3 ){
+				if( i == 0 ){
 				PlayerInstance.playerbody.setPosition(SCALE * BodyIterator->GetPosition().x, SCALE * BodyIterator->GetPosition().y);
 				PlayerInstance.playerbody.setRotation(BodyIterator->GetAngle() * 180/b2_pi);
 
-				if(!PlayerInstance.inMachine())
-					window->draw(PlayerInstance.playerbody);
+
 				//++BodyCount;
 				i++;
-			}else if(i==0){
+			}else if(i==1){
 				mobile.machine_body.setPosition(SCALE * BodyIterator->GetPosition().x, SCALE * BodyIterator->GetPosition().y);
 				mobile.machine_body.setRotation(BodyIterator->GetAngle() * 180/b2_pi);
 				window->draw(mobile.machine_body);
 				i++;
 			}
-			else if (i==1){
+			else if (i==2){
 				launcher.machine_body.setPosition(SCALE * BodyIterator->GetPosition().x, SCALE * BodyIterator->GetPosition().y);
 				launcher.machine_body.setRotation(BodyIterator->GetAngle() * 180/b2_pi);
 				line.setPosition(SCALE * BodyIterator->GetPosition().x, SCALE * BodyIterator->GetPosition().y);
@@ -170,7 +170,7 @@ void PlayView::Render(sf::RenderWindow *window){
 					window->draw(line);
 				i++;
 			}
-				else if(i == 2){
+				else if(i == 3){
 					builder.machine_body.setPosition(SCALE * BodyIterator->GetPosition().x, SCALE * BodyIterator->GetPosition().y);
 					builder.machine_body.setRotation(BodyIterator->GetAngle() * 180/b2_pi);
 					window->draw(builder.machine_body);
@@ -198,6 +198,9 @@ void PlayView::Render(sf::RenderWindow *window){
 				GroundSprite.SetRotation(180/b2_pi * BodyIterator->GetAngle());
 				Window.Draw(GroundSprite);*/
 		}
+
+		if(!PlayerInstance.inMachine())
+			window->draw(PlayerInstance.playerbody);
 
 }
 //std::cout << i;

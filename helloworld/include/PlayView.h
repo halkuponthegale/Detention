@@ -27,10 +27,11 @@ class PlayView : public MiniView{
 			// b4[0] -> setWorld(world);
 
 			int i;
-			for(i = 0; i < b4.size(); i++){
-				(*b4[i]).setWorld(world);
+			if(b4.size() > 1){
+					for(i = 1; i < b4.size(); i++){
+						(*b4[i]).setWorld(world);
+					}
 			}
-
 			CreateGround(world, 400.f, 500.f);
 			for( auto&& pointer : objs) {
 				CreateWall(world,pointer->getX(), pointer->getY(),pointer->getW(),pointer->getH());
@@ -38,23 +39,7 @@ class PlayView : public MiniView{
 			line = sf::RectangleShape(sf::Vector2f(5,25));
 			line.setPosition(350,200);
 			line.setOrigin(2.5,25);
-			// create player physics body
-			b2BodyDef BodyDef;
-	    BodyDef.position = b2Vec2(200.f/SCALE, 200.f/SCALE);
-	    BodyDef.type = b2_dynamicBody;
-	    pBody = world.CreateBody(&BodyDef);
 
-	    b2PolygonShape Shape;
-	    Shape.SetAsBox((10.f/2)/SCALE, (30.f/2)/SCALE);
-	    b2FixtureDef FixtureDef;
-	    FixtureDef.density = 1.f;
-	    FixtureDef.friction = 1;
-	    FixtureDef.shape = &Shape;
-			FixtureDef.filter.categoryBits = 0x0002;
-			pBody->CreateFixture(&FixtureDef);
-			pBody->SetFixedRotation(true);
-
-			PlayerInstance.setBody(*pBody);
 
 			// create builder physics body
 			b2BodyDef BodyDef2;
@@ -116,7 +101,23 @@ class PlayView : public MiniView{
 
 
 
+		// create player physics body
+		b2BodyDef BodyDef;
+		BodyDef.position = b2Vec2(80.f/SCALE, 90.f/SCALE);
+		BodyDef.type = b2_dynamicBody;
+		pBody = world.CreateBody(&BodyDef);
 
+		b2PolygonShape Shape;
+		Shape.SetAsBox((10.f/2)/SCALE, (30.f/2)/SCALE);
+		b2FixtureDef FixtureDef;
+		FixtureDef.density = 1.f;
+		FixtureDef.friction = 1;
+		FixtureDef.shape = &Shape;
+		FixtureDef.filter.categoryBits = 0x0002;
+		pBody->CreateFixture(&FixtureDef);
+		pBody->SetFixedRotation(true);
+
+		PlayerInstance.setBody(*pBody);
 
 			// temporary hard code boxes
 			// box1.setPos(250,250);
@@ -127,11 +128,11 @@ class PlayView : public MiniView{
 			//
 			// builder.add_box(&(*b4.front()));
 
-			(*b4[0]).setPos(250,250);
-
 			int z;
-			for(z = 0; z < b4.size(); z++){
-				builder.add_box(&(*b4[z]));
+			if(b4.size() > 1){
+					for(z = 1; z < b4.size(); z++){
+						builder.add_box(&(*b4[z]));
+					}
 			}
 		}
 		void Init(sf::RenderWindow *window);
