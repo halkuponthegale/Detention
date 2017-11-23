@@ -174,7 +174,7 @@
         //->SetGravityScale(0);
         // TEMPORARY
         my_machine -> setColor(sf::Color::Green);
-        std::cout << in_machine;
+      //  std::cout << in_machine;
         break;
     }
     else{

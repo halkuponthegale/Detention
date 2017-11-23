@@ -6,14 +6,22 @@
 static const double SCALEd = 30.f;
 class Box : public Object{
 	public:
-		Box(double xo, double yo, b2World& World) : Object(0, 0, 50, 50, true){
+		Box(double xo, double yo) : Object(0, 0, 50, 50, true){
 			box_body.setSize(sf::Vector2f(50,50));
 			box_body.setOrigin(box_body.getOrigin().x + 25, box_body.getOrigin().y+25 );
 			box_body.setPosition(0,0);
 			box_body.setFillColor(sf::Color::Blue);
 
+			x = xo; y = yo;
+
+			box_body.setPosition(xo,yo);
+
+
+		}
+
+		void setWorld(b2World& World){
 			b2BodyDef BodyDef2;
-	    BodyDef2.position = b2Vec2(xo/SCALEd, yo/SCALEd);
+	    BodyDef2.position = b2Vec2(x/SCALEd, y/SCALEd);
 	    BodyDef2.type = b2_dynamicBody;
 			bod = World.CreateBody(&BodyDef2);
 			b2PolygonShape Shape2;
@@ -44,6 +52,7 @@ class Box : public Object{
 	private:
 		sf::RectangleShape box_body;
 		b2Body *bod;
+		double x, y;
 };
 
 

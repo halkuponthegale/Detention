@@ -47,18 +47,20 @@ void PlayView::Init(sf::RenderWindow *window){
 	//world = b2World(gravity);
 	window->setFramerateLimit(60);
 
-if(!Bkg.loadFromFile("tile.jpg"));
+	if(!Bkg.loadFromFile("../include/Textures/brick.jpg"));
 
-Bkg.setRepeated(true);
+	Bkg.setRepeated(true);
 
-bgSprite.setTexture(Bkg);
-bgSprite.setTextureRect(sf::IntRect(0,0,800,600));
-vec.push_back(&builder);
-vec.push_back(&launcher);
-vec.push_back(&mobile);
-ty.push_back(0);
-ty.push_back(1);
-ty.push_back(2);
+	bgSprite.setTexture(Bkg);
+	bgSprite.setTextureRect(sf::IntRect(0,0,800,600));
+	vec.push_back(&builder);
+	vec.push_back(&launcher);
+	vec.push_back(&mobile);
+	ty.push_back(0);
+	ty.push_back(1);
+	ty.push_back(2);
+
+
 }
 
 void PlayView::Update(sf::RenderWindow *window){
@@ -120,6 +122,13 @@ void PlayView::Render(sf::RenderWindow *window){
 	window->draw(box1.getShape());
 	box2.setPos(SCALE* box2.getBody()->GetPosition().x,SCALE*box2.getBody()->GetPosition().y);
 	window->draw(box2.getShape());
+
+	Box box = *b4.front();
+	box.setPos(SCALE* box.getBody()->GetPosition().x,SCALE*box.getBody()->GetPosition().y);
+	window->draw(box.getShape());
+	// *b4.front() -> setPos(SCALE* b4.front() -> getBody()->GetPosition().x,SCALE*b4.front() -> getBody()->GetPosition().y);
+	// window->draw(*b4.front()->getShape());
+
 	//sf::Sprite GroundSprite;
 	//GroundSprite.SetTexture(GroundTexture);
 	//GroundSprite.SetOrigin(400.f, 8.f);

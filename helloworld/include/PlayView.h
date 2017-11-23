@@ -8,6 +8,7 @@
 #include "Builder.h"
 #include "Launcher.h"
 #include "Mobile.h"
+#include "Level.h"
 
 /*
 	PlayView handles level loading, drawing, and gameplay
@@ -17,9 +18,14 @@
 static const float SCALE = 30.f;
 class PlayView : public MiniView{
 	public:
-		PlayView(int lvl) : gravity(0.0f, 10.0f), world(gravity), box1(250,250,world), box2(40,300,world){
+		PlayView(int lvl) : gravity(0.0f, 10.0f), world(gravity), box1(250,250), box2(40,300),
+							level("../include/Levels/level"+std::to_string(lvl)+".txt"),b4(level.getBoxes()){
 			play_lvl = lvl;
 			objs = File::loadLevel("./level"+std::to_string(play_lvl)+".json");
+			box1.setWorld(world);
+			box2.setWorld(world);
+			b4[0] -> setWorld(world);
+
 			CreateGround(world, 400.f, 500.f);
 			for( auto&& pointer : objs) {
 				CreateWall(world,pointer->getX(), pointer->getY(),pointer->getW(),pointer->getH());
@@ -65,54 +71,56 @@ class PlayView : public MiniView{
 			builder.setBody(*builderBody);
 
 
-///build Launcher
-b2BodyDef BodyDef3;
-BodyDef3.position = b2Vec2(350.f/SCALE, 200.f/SCALE);
-BodyDef3.type = b2_dynamicBody;
-launcherBody = world.CreateBody(&BodyDef3);
+		///build Launcher
+		b2BodyDef BodyDef3;
+		BodyDef3.position = b2Vec2(350.f/SCALE, 200.f/SCALE);
+		BodyDef3.type = b2_dynamicBody;
+		launcherBody = world.CreateBody(&BodyDef3);
 
-b2PolygonShape Shape3;
-Shape3.SetAsBox((50.f/2)/SCALE, (50.f/2)/SCALE);
-b2FixtureDef FixtureDef3;
-FixtureDef3.density = 100.f;
-FixtureDef3.friction = 1;
-FixtureDef3.shape = &Shape3;
-FixtureDef3.filter.maskBits = ~0x0002;
-launcherBody->CreateFixture(&FixtureDef3);
-launcherBody->SetFixedRotation(true);
-//builderBody->SetGravityScale(0);
+		b2PolygonShape Shape3;
+		Shape3.SetAsBox((50.f/2)/SCALE, (50.f/2)/SCALE);
+		b2FixtureDef FixtureDef3;
+		FixtureDef3.density = 100.f;
+		FixtureDef3.friction = 1;
+		FixtureDef3.shape = &Shape3;
+		FixtureDef3.filter.maskBits = ~0x0002;
+		launcherBody->CreateFixture(&FixtureDef3);
+		launcherBody->SetFixedRotation(true);
+		//builderBody->SetGravityScale(0);
 
-launcher.setBody(*launcherBody);
+		launcher.setBody(*launcherBody);
 
-//build mobile
-b2BodyDef BodyDef4;
-BodyDef4.position = b2Vec2(450.f/SCALE, 200.f/SCALE);
-BodyDef4.type = b2_dynamicBody;
-mobileBody = world.CreateBody(&BodyDef4);
+		//build mobile
+		b2BodyDef BodyDef4;
+		BodyDef4.position = b2Vec2(450.f/SCALE, 200.f/SCALE);
+		BodyDef4.type = b2_dynamicBody;
+		mobileBody = world.CreateBody(&BodyDef4);
 
-b2PolygonShape Shape4;
-Shape4.SetAsBox((50.f/2)/SCALE, (50.f/2)/SCALE);
-b2FixtureDef FixtureDef4;
-FixtureDef4.density = 100.f;
-FixtureDef4.friction = 1;
-FixtureDef4.shape = &Shape4;
-FixtureDef4.filter.maskBits = ~0x0002;
-mobileBody->CreateFixture(&FixtureDef4);
-mobileBody->SetFixedRotation(true);
-//builderBody->SetGravityScale(0);
+		b2PolygonShape Shape4;
+		Shape4.SetAsBox((50.f/2)/SCALE, (50.f/2)/SCALE);
+		b2FixtureDef FixtureDef4;
+		FixtureDef4.density = 100.f;
+		FixtureDef4.friction = 1;
+		FixtureDef4.shape = &Shape4;
+		FixtureDef4.filter.maskBits = ~0x0002;
+		mobileBody->CreateFixture(&FixtureDef4);
+		mobileBody->SetFixedRotation(true);
+		//builderBody->SetGravityScale(0);
 
-mobile.setBody(*mobileBody);
+		mobile.setBody(*mobileBody);
 
 
 
 
 
 			// temporary hard code boxes
-			box1.setPos(250,250);
+			// box1.setPos(250,250);
 			builder.add_box(&box1);
 
-			box2.setPos(40, 300);
+			// box2.setPos(40, 300);
 			builder.add_box(&box2);
+
+			builder.add_box(&(*b4.front()));
 		}
 		void Init(sf::RenderWindow *window);
 		void Update(sf::RenderWindow *window);
@@ -174,6 +182,8 @@ mobile.setBody(*mobileBody);
 		std::vector<int> ty;
 		std::vector<Machine*> vec;
 
+		Level level;
+		std::vector<std::unique_ptr<Box>> const& b4;
 };
 
 
