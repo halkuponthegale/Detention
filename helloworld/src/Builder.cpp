@@ -21,7 +21,7 @@ void Builder::Update(){
 
             // if you have a box, move it as well
             if(carrybox){
-                mybox -> move(0,-1);
+              //  mybox -> move(0,-1);
             }
         }
     }
@@ -38,7 +38,7 @@ void Builder::Update(){
             // if you have a box, move it as well
             if(carrybox){
               mybox->getBody()->SetTransform(b2Vec2(machine_body.getPosition().x / 30.0, (machine_body.getPosition().y - 60)/30.0),0);
-                mybox -> move(-1,0);
+              mybox -> move(-1,0);
             }
         }
     }
@@ -51,6 +51,8 @@ void Builder::Update(){
            if(carrybox){
 
                 mybox -> move(0,1);
+                mybox->getBody()->SetTransform(b2Vec2(machine_body.getPosition().x / 30.0, (machine_body.getPosition().y - 60)/30.0),0);
+
             }
         }
     }
@@ -65,7 +67,7 @@ void Builder::Update(){
 
              // if you have a box, move it as well
            if(carrybox){
-                // mybox -> move(1,0);
+                mybox -> move(1,0);
                 mybox->getBody()->SetTransform(b2Vec2(machine_body.getPosition().x / 30.0, (machine_body.getPosition().y - 60)/30.0),0);
             }
         }

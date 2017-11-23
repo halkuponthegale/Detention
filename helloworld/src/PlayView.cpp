@@ -118,14 +118,20 @@ void PlayView::Render(sf::RenderWindow *window){
 	}
 
 	int i = 0;
-	box1.setPos(SCALE* box1.getBody()->GetPosition().x,SCALE*box1.getBody()->GetPosition().y);
-	window->draw(box1.getShape());
-	box2.setPos(SCALE* box2.getBody()->GetPosition().x,SCALE*box2.getBody()->GetPosition().y);
-	window->draw(box2.getShape());
-
-	Box box = *b4.front();
-	box.setPos(SCALE* box.getBody()->GetPosition().x,SCALE*box.getBody()->GetPosition().y);
-	window->draw(box.getShape());
+	// box1.setPos(SCALE* box1.getBody()->GetPosition().x,SCALE*box1.getBody()->GetPosition().y);
+	// window->draw(box1.getShape());
+	// box2.setPos(SCALE* box2.getBody()->GetPosition().x,SCALE*box2.getBody()->GetPosition().y);
+	// window->draw(box2.getShape());
+	//
+	// Box box = *b4.front();
+	// box.setPos(SCALE* box.getBody()->GetPosition().x,SCALE*box.getBody()->GetPosition().y);
+	// window->draw(box.getShape());
+	int j;
+	for(j = 0; j < b4.size(); j++){
+		// Box box = *b4[j];
+		(*b4[j]).setPos(SCALE* (*b4[j]).getBody()->GetPosition().x,SCALE*(*b4[j]).getBody()->GetPosition().y);
+		window->draw((*b4[j]).getShape());
+	}
 	// *b4.front() -> setPos(SCALE* b4.front() -> getBody()->GetPosition().x,SCALE*b4.front() -> getBody()->GetPosition().y);
 	// window->draw(*b4.front()->getShape());
 

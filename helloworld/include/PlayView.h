@@ -18,13 +18,18 @@
 static const float SCALE = 30.f;
 class PlayView : public MiniView{
 	public:
-		PlayView(int lvl) : gravity(0.0f, 10.0f), world(gravity), box1(250,250), box2(40,300),
+		PlayView(int lvl) : gravity(0.0f, 10.0f), world(gravity), //box1(250,250), box2(40,300),
 							level("../include/Levels/level"+std::to_string(lvl)+".txt"),b4(level.getBoxes()){
 			play_lvl = lvl;
 			objs = File::loadLevel("./level"+std::to_string(play_lvl)+".json");
-			box1.setWorld(world);
-			box2.setWorld(world);
-			b4[0] -> setWorld(world);
+			// box1.setWorld(world);
+			// box2.setWorld(world);
+			// b4[0] -> setWorld(world);
+
+			int i;
+			for(i = 0; i < b4.size(); i++){
+				(*b4[i]).setWorld(world);
+			}
 
 			CreateGround(world, 400.f, 500.f);
 			for( auto&& pointer : objs) {
@@ -35,7 +40,7 @@ class PlayView : public MiniView{
 			line.setOrigin(2.5,25);
 			// create player physics body
 			b2BodyDef BodyDef;
-	    BodyDef.position = b2Vec2(80.f/SCALE, 90.f/SCALE);
+	    BodyDef.position = b2Vec2(200.f/SCALE, 200.f/SCALE);
 	    BodyDef.type = b2_dynamicBody;
 	    pBody = world.CreateBody(&BodyDef);
 
@@ -115,12 +120,19 @@ class PlayView : public MiniView{
 
 			// temporary hard code boxes
 			// box1.setPos(250,250);
-			builder.add_box(&box1);
+			// builder.add_box(&box1);
+			//
+			// // box2.setPos(40, 300);
+			// builder.add_box(&box2);
+			//
+			// builder.add_box(&(*b4.front()));
 
-			// box2.setPos(40, 300);
-			builder.add_box(&box2);
+			(*b4[0]).setPos(250,250);
 
-			builder.add_box(&(*b4.front()));
+			int z;
+			for(z = 0; z < b4.size(); z++){
+				builder.add_box(&(*b4[z]));
+			}
 		}
 		void Init(sf::RenderWindow *window);
 		void Update(sf::RenderWindow *window);
@@ -175,7 +187,7 @@ class PlayView : public MiniView{
 		Mobile mobile;
 		Builder builder;
 		Launcher launcher;
-		Box box1, box2;
+		//Box box1, box2;
 		sf::Texture Bkg;
 		sf::Sprite bgSprite;
 		b2Body* groundBody;
