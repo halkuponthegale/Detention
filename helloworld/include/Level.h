@@ -42,8 +42,8 @@ public:
         boxes.push_back(unique_ptr<Box>(new Box(x, y)));
       }
 
-      if(type == "mobile"){
-        
+      if(type == "builder"){
+      //  builders.push_back(unique_ptr<Builder>(new Builder(x,y)));
       }
     }
 
@@ -56,9 +56,14 @@ public:
     return boxes;
   }
 
+  std::vector<std::unique_ptr<Builder>> const& getBuilders(){
+    return builders;
+  }
+
 
 private:
   std::vector<std::unique_ptr<Box>> boxes;
+  std::vector<std::unique_ptr<Builder>> builders;
   std::vector<std::unique_ptr<Actor>> walls;
   std::vector<std::unique_ptr<Actor>> machines;
   std::vector<std::unique_ptr<Actor>> objects;

@@ -24,6 +24,7 @@ class Machine{
 
 		void getOut(){return;}
 
+		void setWorld(b2World& World);
 
 	protected:
 		b2Body* body;

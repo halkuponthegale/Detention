@@ -38,24 +38,25 @@ class PlayView : public MiniView{
 			line.setOrigin(2.5,25);
 
 
+			builder.setWorld(world);
 			// create builder physics body
-			b2BodyDef BodyDef2;
-	    BodyDef2.position = b2Vec2(200.f/SCALE, 200.f/SCALE);
-	    BodyDef2.type = b2_dynamicBody;
-	    builderBody = world.CreateBody(&BodyDef2);
-
-	    b2PolygonShape Shape2;
-	    Shape2.SetAsBox((50.f/2)/SCALE, (50.f/2)/SCALE);
-	    b2FixtureDef FixtureDef2;
-	    FixtureDef2.density = 10.f;
-	    FixtureDef2.friction = 1;
-	    FixtureDef2.shape = &Shape2;
-			FixtureDef2.filter.maskBits = ~0x0002;
-	    builderBody->CreateFixture(&FixtureDef2);
-			builderBody->SetFixedRotation(true);
-			//builderBody->SetGravityScale(0);
-
-			builder.setBody(*builderBody);
+			// b2BodyDef BodyDef2;
+	    // BodyDef2.position = b2Vec2(200.f/SCALE, 200.f/SCALE);
+	    // BodyDef2.type = b2_dynamicBody;
+	    // builderBody = world.CreateBody(&BodyDef2);
+			//
+	    // b2PolygonShape Shape2;
+	    // Shape2.SetAsBox((50.f/2)/SCALE, (50.f/2)/SCALE);
+	    // b2FixtureDef FixtureDef2;
+	    // FixtureDef2.density = 10.f;
+	    // FixtureDef2.friction = 1;
+	    // FixtureDef2.shape = &Shape2;
+			// FixtureDef2.filter.maskBits = ~0x0002;
+	    // builderBody->CreateFixture(&FixtureDef2);
+			// builderBody->SetFixedRotation(true);
+			// //builderBody->SetGravityScale(0);
+			//
+			// builder.setBody(*builderBody);
 
 
 		///build Launcher
@@ -128,6 +129,7 @@ class PlayView : public MiniView{
 			int z;
 			if(!boxes_list.empty()){
 					for(z = 0; z < boxes_list.size(); z++){
+						// for builder in builder_list
 						builder.add_box(&(*boxes_list[z]));
 					}
 			}
@@ -179,7 +181,7 @@ class PlayView : public MiniView{
 		b2Vec2 gravity;
 		b2World world;
 		b2Body* pBody;
-		b2Body* builderBody;
+		// b2Body* builderBody;
 		b2Body* launcherBody;
 		b2Body* mobileBody;
 		Mobile mobile;

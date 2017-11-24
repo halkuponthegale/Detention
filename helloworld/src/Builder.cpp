@@ -131,3 +131,25 @@ void Builder::launch(double velocity, double theta){
       //inMachine = false;
     //}
 }
+
+void Machine::setWorld(b2World& World){
+  static const float SCALE = 30.f;
+
+  b2BodyDef BodyDef2;
+  BodyDef2.position = b2Vec2(200.f/SCALE, 200.f/SCALE);
+  BodyDef2.type = b2_dynamicBody;
+  body = World.CreateBody(&BodyDef2);
+
+  b2PolygonShape Shape2;
+  Shape2.SetAsBox((50.f/2)/SCALE, (50.f/2)/SCALE);
+  b2FixtureDef FixtureDef2;
+  FixtureDef2.density = 10.f;
+  FixtureDef2.friction = 1;
+  FixtureDef2.shape = &Shape2;
+  FixtureDef2.filter.maskBits = ~0x0002;
+  body->CreateFixture(&FixtureDef2);
+  body->SetFixedRotation(true);
+  //builderBody->SetGravityScale(0);
+
+  //builder.setBody(*builderBody);
+}
