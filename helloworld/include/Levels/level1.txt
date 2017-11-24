@@ -2,4 +2,5 @@
 40 300 box
 250 100 box
 150 200 builder
+600 150 builder
 

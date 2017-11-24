@@ -101,9 +101,12 @@ void Builder::Update(){
         if(carrybox && !space){
             if(facing == 0){ // if facing left
                 mybox->getBody()->SetTransform(b2Vec2((machine_body.getPosition().x - 60)/30.0, machine_body.getPosition().y/30.0),0);
+                mybox->getBody()->SetGravityScale(1);
             }
             else{
                 mybox->getBody()->SetTransform(b2Vec2((machine_body.getPosition().x + 60)/30.0, machine_body.getPosition().y/30.0),0);
+                mybox->getBody()->SetGravityScale(1);
+
             }
             carrybox = 0;
         }

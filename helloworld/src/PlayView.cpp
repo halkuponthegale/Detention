@@ -53,10 +53,18 @@ void PlayView::Init(sf::RenderWindow *window){
 
 	bgSprite.setTexture(Bkg);
 	bgSprite.setTextureRect(sf::IntRect(0,0,800,600));
-	vec.push_back(&(*builders_list[0]));
+	if(!builders_list.empty()){
+		int z;
+		for(z = 0; z < builders_list.size(); z++){
+			vec.push_back(&(*builders_list[z]));
+			ty.push_back(0);
+		}
+	}
+	//vec.push_back(&(*builders_list[0]));
 	vec.push_back(&launcher);
 	vec.push_back(&mobile);
-	ty.push_back(0);
+	// ty.push_back(0);
+	// ty.push_back(0);
 	ty.push_back(1);
 	ty.push_back(2);
 
@@ -159,20 +167,25 @@ void PlayView::Render(sf::RenderWindow *window){
 					window->draw(line);
 				i++;
 			}
-			else if(i == 3){
-				(*builders_list[0]).machine_body.setPosition(SCALE * BodyIterator->GetPosition().x, SCALE * BodyIterator->GetPosition().y);
-				(*builders_list[0]).machine_body.setRotation(BodyIterator->GetAngle() * 180/b2_pi);
-				window->draw((*builders_list[0]).machine_body);
-				//++BodyCount;
+			else if(i == 3 || i == 4){
+				if(!builders_list.empty()){
+					int z;
+					for(z = 0; z < builders_list.size(); z++){
+						(*builders_list[z]).machine_body.setPosition(SCALE * (*builders_list[z]).getBody()->GetPosition().x, SCALE *  (*builders_list[z]).getBody()->GetPosition().y);
+						(*builders_list[z]).machine_body.setRotation( (*builders_list[z]).getBody()->GetAngle() * 180/b2_pi);
+						window->draw((*builders_list[z]).machine_body);
+						//++BodyCount;
+					}
+				}
 				i++;
 			}
 
 		}
-		else if (i==4){
+		// else if (i==4){
 			//box1.setPos(SCALE * BodyIterator->GetPosition().x,SCALE * BodyIterator->GetPosition().y);
 			//window -> draw(box1.getShape());
 			//i++;
-		}
+		//}
 		else if(i==5)
 		{
 			//box2.setPos(SCALE * box2.getBody()->GetPosition().x,SCALE * box2.getBody()->GetPosition().y);
