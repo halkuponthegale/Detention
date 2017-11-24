@@ -2,6 +2,19 @@
 
 class Mobile: public Machine{
 public:
+  Mobile(double xo, double yo){
+
+      machine_body.setSize(sf::Vector2f(50,50));
+      machine_body.setPosition(0,0);
+      machine_body.setOrigin(machine_body.getOrigin().x + 25, machine_body.getOrigin().y + 25);
+      machine_body.setFillColor(sf::Color::Magenta);
+
+      x = xo; y = yo;
+
+      machine_body.setPosition(xo, yo);
+
+  }
+
   void rotate(double dTheta){
     theta += dTheta;
   }
@@ -11,15 +24,9 @@ public:
   void setBody(b2Body& bod){
     body = &bod;
   }
-  Mobile(){
 
-      machine_body.setSize(sf::Vector2f(50,50));
-      machine_body.setPosition(150,150);
-      machine_body.setOrigin(machine_body.getOrigin().x + 25, machine_body.getOrigin().y + 25);
-      machine_body.setFillColor(sf::Color::Magenta);
+  void setWorld(b2World& World);
 
-
-  }
 
   // define how this machine can move (can set limitations)
   void Update(){

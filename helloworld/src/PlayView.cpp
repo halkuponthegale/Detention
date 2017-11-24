@@ -62,11 +62,20 @@ void PlayView::Init(sf::RenderWindow *window){
 	}
 	//vec.push_back(&(*builders_list[0]));
 	vec.push_back(&launcher);
-	vec.push_back(&mobile);
-	// ty.push_back(0);
-	// ty.push_back(0);
 	ty.push_back(1);
-	ty.push_back(2);
+
+
+	if(!mobiles_list.empty()){
+		int z;
+		for(z = 0; z < mobiles_list.size(); z++){
+			vec.push_back(&(*mobiles_list[z]));
+			ty.push_back(2);
+		}
+	}
+	//vec.push_back(&mobile);
+	// ty.push_back(0);
+	// ty.push_back(0);
+	// ty.push_back(2);
 
 
 }
@@ -151,13 +160,18 @@ void PlayView::Render(sf::RenderWindow *window){
 				//++BodyCount;
 				i++;
 			}
-			else if(i==1){
-				mobile.machine_body.setPosition(SCALE * BodyIterator->GetPosition().x, SCALE * BodyIterator->GetPosition().y);
-				mobile.machine_body.setRotation(BodyIterator->GetAngle() * 180/b2_pi);
-				window->draw(mobile.machine_body);
+			else if(i==1 || i == 2){
+				if(!mobiles_list.empty()){
+					int z;
+					for(z = 0; z < mobiles_list.size(); z++){
+						(*mobiles_list[z]).machine_body.setPosition(SCALE * (*mobiles_list[z]).getBody()->GetPosition().x, SCALE * (*mobiles_list[z]).getBody()->GetPosition().y);
+						(*mobiles_list[z]).machine_body.setRotation((*mobiles_list[z]).getBody()->GetAngle() * 180/b2_pi);
+						window->draw((*mobiles_list[z]).machine_body);
+					}
+				}
 				i++;
 			}
-			else if (i==2){
+			else if (i==3){
 				launcher.machine_body.setPosition(SCALE * BodyIterator->GetPosition().x, SCALE * BodyIterator->GetPosition().y);
 				launcher.machine_body.setRotation(BodyIterator->GetAngle() * 180/b2_pi);
 				line.setPosition(SCALE * BodyIterator->GetPosition().x, SCALE * BodyIterator->GetPosition().y);
@@ -167,7 +181,7 @@ void PlayView::Render(sf::RenderWindow *window){
 					window->draw(line);
 				i++;
 			}
-			else if(i == 3 || i == 4){
+			else if(i == 5 || i == 4){
 				if(!builders_list.empty()){
 					int z;
 					for(z = 0; z < builders_list.size(); z++){

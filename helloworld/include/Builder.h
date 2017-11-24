@@ -16,6 +16,8 @@ class Builder : public Machine{
 		void Update();
 		void launch(double velocity, double theta);
 
+		void setWorld(b2World& World);
+
 	private:
 		//double x, y;
 

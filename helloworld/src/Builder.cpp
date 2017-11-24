@@ -139,7 +139,7 @@ void Builder::launch(double velocity, double theta){
     //}
 }
 
-void Machine::setWorld(b2World& World){
+void Builder::setWorld(b2World& World){
   static const float SCALE = 30.f;
 
   b2BodyDef BodyDef2;

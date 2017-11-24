@@ -45,6 +45,10 @@ public:
       if(type == "builder"){
         builders.push_back(unique_ptr<Builder>(new Builder(x, y)));
       }
+
+      if(type == "mobile"){
+        mobiles.push_back(unique_ptr<Mobile>(new Mobile(x, y)));
+      }
     }
 
     inFile.close();
@@ -60,10 +64,15 @@ public:
     return builders;
   }
 
+  std::vector<std::unique_ptr<Mobile>> const& getMobiles(){
+    return mobiles;
+  }
 
 private:
   std::vector<std::unique_ptr<Box>> boxes;
   std::vector<std::unique_ptr<Builder>> builders;
+  std::vector<std::unique_ptr<Mobile>> mobiles;
+
   std::vector<std::unique_ptr<Actor>> walls;
   std::vector<std::unique_ptr<Actor>> machines;
   std::vector<std::unique_ptr<Actor>> objects;

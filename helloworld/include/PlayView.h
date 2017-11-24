@@ -20,7 +20,8 @@ class PlayView : public MiniView{
 	public:
 		PlayView(int lvl) : gravity(0.0f, 10.0f), world(gravity),
 							level("../include/Levels/level"+std::to_string(lvl)+".txt"),
-							boxes_list(level.getBoxes()),builders_list(level.getBuilders()){
+							boxes_list(level.getBoxes()),builders_list(level.getBuilders()),
+							mobiles_list(level.getMobiles()){
 			play_lvl = lvl;
 			// objs = File::loadLevel("./level"+std::to_string(play_lvl)+".json");
 
@@ -84,23 +85,29 @@ class PlayView : public MiniView{
 		launcher.setBody(*launcherBody);
 
 		//build mobile
-		b2BodyDef BodyDef4;
-		BodyDef4.position = b2Vec2(450.f/SCALE, 200.f/SCALE);
-		BodyDef4.type = b2_dynamicBody;
-		mobileBody = world.CreateBody(&BodyDef4);
+		// b2BodyDef BodyDef4;
+		// BodyDef4.position = b2Vec2(450.f/SCALE, 200.f/SCALE);
+		// BodyDef4.type = b2_dynamicBody;
+		// mobileBody = world.CreateBody(&BodyDef4);
+		//
+		// b2PolygonShape Shape4;
+		// Shape4.SetAsBox((50.f/2)/SCALE, (50.f/2)/SCALE);
+		// b2FixtureDef FixtureDef4;
+		// FixtureDef4.density = 100.f;
+		// FixtureDef4.friction = 1;
+		// FixtureDef4.shape = &Shape4;
+		// FixtureDef4.filter.maskBits = ~0x0002;
+		// mobileBody->CreateFixture(&FixtureDef4);
+		// mobileBody->SetFixedRotation(true);
+		// //builderBody->SetGravityScale(0);
+		//
+		// mobile.setBody(*mobileBody);
 
-		b2PolygonShape Shape4;
-		Shape4.SetAsBox((50.f/2)/SCALE, (50.f/2)/SCALE);
-		b2FixtureDef FixtureDef4;
-		FixtureDef4.density = 100.f;
-		FixtureDef4.friction = 1;
-		FixtureDef4.shape = &Shape4;
-		FixtureDef4.filter.maskBits = ~0x0002;
-		mobileBody->CreateFixture(&FixtureDef4);
-		mobileBody->SetFixedRotation(true);
-		//builderBody->SetGravityScale(0);
-
-		mobile.setBody(*mobileBody);
+		if(!mobiles_list.empty()){
+			for(i = 0; i < mobiles_list.size(); i++){
+				(*mobiles_list[i]).setWorld(world);
+			}
+		}
 
 
 
@@ -193,7 +200,7 @@ class PlayView : public MiniView{
 		// b2Body* builderBody;
 		b2Body* launcherBody;
 		b2Body* mobileBody;
-		Mobile mobile;
+		// Mobile mobile;
 		// Builder builder;
 		Launcher launcher;
 		//Box box1, box2;
@@ -206,6 +213,7 @@ class PlayView : public MiniView{
 		Level level;
 		std::vector<std::unique_ptr<Box>> const& boxes_list;
 		std::vector<std::unique_ptr<Builder>> const& builders_list;
+		std::vector<std::unique_ptr<Mobile>> const& mobiles_list;
 };
 
 
