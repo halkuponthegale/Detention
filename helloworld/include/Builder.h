@@ -7,7 +7,7 @@
 
 class Builder : public Machine{
 	public:
-		Builder();
+		Builder(double xo, double yo);
 		void add_box(Box *b){boxlist[cur_box_idx] = b; cur_box_idx++;}
 		// void Update();
 		void setBody(b2Body& bod){
@@ -17,6 +17,7 @@ class Builder : public Machine{
 		void launch(double velocity, double theta);
 
 	private:
+		double x, y;
 
 };
 

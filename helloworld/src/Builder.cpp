@@ -1,12 +1,14 @@
 #include "Builder.h"
 
 // constructor
-Builder::Builder(){
+Builder::Builder(double xo, double yo){
 
     machine_body.setSize(sf::Vector2f(50,50));
-    machine_body.setPosition(150,150);
+    machine_body.setPosition(xo,yo);
     machine_body.setOrigin(machine_body.getOrigin().x + 25, machine_body.getOrigin().y + 25);
     machine_body.setFillColor(sf::Color::Red);
+
+    x = xo; y = yo;
 
     cur_box_idx = 0;
     carrybox = 0;

@@ -36,14 +36,14 @@ public:
 
     while (inFile >> x >> y >> type){
 
-      //cout << x << " " << y << " " << type << "\n";
+      cout << x << " " << y << " " << type << "\n";
 
       if(type == "box"){
         boxes.push_back(unique_ptr<Box>(new Box(x, y)));
       }
 
       if(type == "builder"){
-      //  builders.push_back(unique_ptr<Builder>(new Builder(x,y)));
+        builders.push_back(unique_ptr<Builder>(new Builder(x, y)));
       }
     }
 

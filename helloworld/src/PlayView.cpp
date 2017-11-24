@@ -53,7 +53,7 @@ void PlayView::Init(sf::RenderWindow *window){
 
 	bgSprite.setTexture(Bkg);
 	bgSprite.setTextureRect(sf::IntRect(0,0,800,600));
-	vec.push_back(&builder);
+	vec.push_back(&(*builders_list[0]));
 	vec.push_back(&launcher);
 	vec.push_back(&mobile);
 	ty.push_back(0);
@@ -160,9 +160,9 @@ void PlayView::Render(sf::RenderWindow *window){
 				i++;
 			}
 			else if(i == 3){
-				builder.machine_body.setPosition(SCALE * BodyIterator->GetPosition().x, SCALE * BodyIterator->GetPosition().y);
-				builder.machine_body.setRotation(BodyIterator->GetAngle() * 180/b2_pi);
-				window->draw(builder.machine_body);
+				(*builders_list[0]).machine_body.setPosition(SCALE * BodyIterator->GetPosition().x, SCALE * BodyIterator->GetPosition().y);
+				(*builders_list[0]).machine_body.setRotation(BodyIterator->GetAngle() * 180/b2_pi);
+				window->draw((*builders_list[0]).machine_body);
 				//++BodyCount;
 				i++;
 			}

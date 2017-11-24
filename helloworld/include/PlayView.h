@@ -19,7 +19,8 @@ static const float SCALE = 30.f;
 class PlayView : public MiniView{
 	public:
 		PlayView(int lvl) : gravity(0.0f, 10.0f), world(gravity),
-							level("../include/Levels/level"+std::to_string(lvl)+".txt"),boxes_list(level.getBoxes()){
+							level("../include/Levels/level"+std::to_string(lvl)+".txt"),
+							boxes_list(level.getBoxes()),builders_list(level.getBuilders()){
 			play_lvl = lvl;
 			// objs = File::loadLevel("./level"+std::to_string(play_lvl)+".json");
 
@@ -37,8 +38,12 @@ class PlayView : public MiniView{
 			line.setPosition(350,200);
 			line.setOrigin(2.5,25);
 
-
-			builder.setWorld(world);
+			if(!builders_list.empty()){
+				for(i = 0; i < builders_list.size(); i++){
+					(*builders_list[i]).setWorld(world);
+				}
+			}
+			// builder.setWorld(world);
 			// create builder physics body
 			// b2BodyDef BodyDef2;
 	    // BodyDef2.position = b2Vec2(200.f/SCALE, 200.f/SCALE);
@@ -126,12 +131,16 @@ class PlayView : public MiniView{
 			//
 			// builder.add_box(&(*boxes_list.front()));
 
-			int z;
+			int z,b;
 			if(!boxes_list.empty()){
-					for(z = 0; z < boxes_list.size(); z++){
-						// for builder in builder_list
-						builder.add_box(&(*boxes_list[z]));
+				if(!builders_list.empty()){
+					for(b = 0; b < builders_list.size(); b++){
+						for(z = 0; z < boxes_list.size(); z++){
+							// for builder in builder_list
+							(*builders_list[b]).add_box(&(*boxes_list[z]));
+						}
 					}
+				}
 			}
 		}
 		void Init(sf::RenderWindow *window);
@@ -185,7 +194,7 @@ class PlayView : public MiniView{
 		b2Body* launcherBody;
 		b2Body* mobileBody;
 		Mobile mobile;
-		Builder builder;
+		// Builder builder;
 		Launcher launcher;
 		//Box box1, box2;
 		sf::Texture Bkg;
@@ -196,6 +205,7 @@ class PlayView : public MiniView{
 
 		Level level;
 		std::vector<std::unique_ptr<Box>> const& boxes_list;
+		std::vector<std::unique_ptr<Builder>> const& builders_list;
 };
 
 
