@@ -59,6 +59,17 @@ public:
             body->SetLinearVelocity( vel );
       }
     }
+
+    if(!sf::Keyboard::isKeyPressed(sf::Keyboard::A) && !sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
+      body->SetLinearVelocity(b2Vec2(0,0));
+    }
+  }
+
+  void getOut(){
+    b2Vec2 vel = body->GetLinearVelocity();
+    vel.x = 0;
+    vel.y = -1;
+    body->SetLinearVelocity(vel);
   }
 
 private:

@@ -70,6 +70,7 @@
             my_machine->getBody()->SetLinearVelocity(b2Vec2(0,0));
             my_machine->getBody()->SetGravityScale(1);
             my_machine->Update();
+            my_machine->getOut();
 
             in_machine = 0;
 

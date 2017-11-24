@@ -18,24 +18,21 @@
 static const float SCALE = 30.f;
 class PlayView : public MiniView{
 	public:
-		PlayView(int lvl) : gravity(0.0f, 10.0f), world(gravity), //box1(250,250), box2(40,300),
-							level("../include/Levels/level"+std::to_string(lvl)+".txt"),b4(level.getBoxes()){
+		PlayView(int lvl) : gravity(0.0f, 10.0f), world(gravity),
+							level("../include/Levels/level"+std::to_string(lvl)+".txt"),boxes_list(level.getBoxes()){
 			play_lvl = lvl;
-			objs = File::loadLevel("./level"+std::to_string(play_lvl)+".json");
-			// box1.setWorld(world);
-			// box2.setWorld(world);
-			// b4[0] -> setWorld(world);
+			// objs = File::loadLevel("./level"+std::to_string(play_lvl)+".json");
 
 			int i;
-			if(b4.size() > 1){
-					for(i = 1; i < b4.size(); i++){
-						(*b4[i]).setWorld(world);
+			if(!boxes_list.empty()){
+					for(i = 0; i < boxes_list.size(); i++){
+						(*boxes_list[i]).setWorld(world);
 					}
 			}
 			CreateGround(world, 400.f, 500.f);
-			for( auto&& pointer : objs) {
-				CreateWall(world,pointer->getX(), pointer->getY(),pointer->getW(),pointer->getH());
-			}
+			// for( auto&& pointer : objs) {
+			// 	CreateWall(world,pointer->getX(), pointer->getY(),pointer->getW(),pointer->getH());
+			// }
 			line = sf::RectangleShape(sf::Vector2f(5,25));
 			line.setPosition(350,200);
 			line.setOrigin(2.5,25);
@@ -50,7 +47,7 @@ class PlayView : public MiniView{
 	    b2PolygonShape Shape2;
 	    Shape2.SetAsBox((50.f/2)/SCALE, (50.f/2)/SCALE);
 	    b2FixtureDef FixtureDef2;
-	    FixtureDef2.density = 100.f;
+	    FixtureDef2.density = 10.f;
 	    FixtureDef2.friction = 1;
 	    FixtureDef2.shape = &Shape2;
 			FixtureDef2.filter.maskBits = ~0x0002;
@@ -126,12 +123,12 @@ class PlayView : public MiniView{
 			// // box2.setPos(40, 300);
 			// builder.add_box(&box2);
 			//
-			// builder.add_box(&(*b4.front()));
+			// builder.add_box(&(*boxes_list.front()));
 
 			int z;
-			if(b4.size() > 1){
-					for(z = 1; z < b4.size(); z++){
-						builder.add_box(&(*b4[z]));
+			if(!boxes_list.empty()){
+					for(z = 0; z < boxes_list.size(); z++){
+						builder.add_box(&(*boxes_list[z]));
 					}
 			}
 		}
@@ -176,7 +173,7 @@ class PlayView : public MiniView{
 		sf::Text tmp2;
 		sf::Text tmp3;
 		sf::RectangleShape line;
-		std::vector<std::unique_ptr<Actor>> objs;
+		//std::vector<std::unique_ptr<Actor>> objs;
 		sf::RectangleShape wall;
 		Player PlayerInstance;
 		b2Vec2 gravity;
@@ -196,7 +193,7 @@ class PlayView : public MiniView{
 		std::vector<Machine*> vec;
 
 		Level level;
-		std::vector<std::unique_ptr<Box>> const& b4;
+		std::vector<std::unique_ptr<Box>> const& boxes_list;
 };
 
 

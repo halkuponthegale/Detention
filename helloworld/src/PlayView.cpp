@@ -104,37 +104,29 @@ void PlayView::Render(sf::RenderWindow *window){
 	window -> draw(tmp);
 	window -> draw(tmp2);
 	window -> draw(tmp3);
-	window -> draw(builder.getShape());
+	//window -> draw(builder.getShape());
 //window->draw(line);
 	// draw boxes
 
 	//window -> draw(box2.getShape());
 
 	//window -> draw(PlayerInstance.playerbody);
-	for( auto&& pointer : objs) {
-		wall.setPosition(pointer->getX(), pointer->getY());
-		wall.setSize(sf::Vector2f(pointer->getW(),pointer->getH()));
-		window->draw(wall);
-	}
+	// for( auto&& pointer : objs) {
+	// 	wall.setPosition(pointer->getX(), pointer->getY());
+	// 	wall.setSize(sf::Vector2f(pointer->getW(),pointer->getH()));
+	// 	window->draw(wall);
+	// }
 
-	int i = 0;
-	// box1.setPos(SCALE* box1.getBody()->GetPosition().x,SCALE*box1.getBody()->GetPosition().y);
-	// window->draw(box1.getShape());
-	// box2.setPos(SCALE* box2.getBody()->GetPosition().x,SCALE*box2.getBody()->GetPosition().y);
-	// window->draw(box2.getShape());
-	//
-	// Box box = *b4.front();
-	// box.setPos(SCALE* box.getBody()->GetPosition().x,SCALE*box.getBody()->GetPosition().y);
-	// window->draw(box.getShape());
+
 	int j;
-	if(b4.size() > 1){
-			for(j = 1; j < b4.size(); j++){
-				(*b4[j]).setPos(SCALE* (*b4[j]).getBody()->GetPosition().x,SCALE*(*b4[j]).getBody()->GetPosition().y);
-				window->draw((*b4[j]).getShape());
+	if(!boxes_list.empty()){
+			for(j = 0; j < boxes_list.size(); j++){
+				(*boxes_list[j]).setPos(SCALE* (*boxes_list[j]).getBody()->GetPosition().x,SCALE*(*boxes_list[j]).getBody()->GetPosition().y);
+				window->draw((*boxes_list[j]).getShape());
 			}
 	}
-	// *b4.front() -> setPos(SCALE* b4.front() -> getBody()->GetPosition().x,SCALE*b4.front() -> getBody()->GetPosition().y);
-	// window->draw(*b4.front()->getShape());
+	// *boxes_list.front() -> setPos(SCALE* boxes_list.front() -> getBody()->GetPosition().x,SCALE*boxes_list.front() -> getBody()->GetPosition().y);
+	// window->draw(*boxes_list.front()->getShape());
 
 	//sf::Sprite GroundSprite;
 	//GroundSprite.SetTexture(GroundTexture);
@@ -142,19 +134,16 @@ void PlayView::Render(sf::RenderWindow *window){
 	//GroundSprite.SetPosition(groundBody->GetPosition().x * SCALE, groundBody->GetPosition().y * SCALE);
 	//GroundSprite.SetRotation(180/b2_pi * BodyIterator->GetAngle());
 	//Window.Draw(GroundSprite);
-	for (b2Body* BodyIterator = world.GetBodyList(); BodyIterator != 0; BodyIterator = BodyIterator->GetNext())
-{
-		if (BodyIterator->GetType() == b2_dynamicBody )
-		{
-
+	int i = 0;
+	for (b2Body* BodyIterator = world.GetBodyList(); BodyIterator != 0; BodyIterator = BodyIterator->GetNext()){
+		if (BodyIterator->GetType() == b2_dynamicBody ){
 				if( i == 0 ){
 				PlayerInstance.playerbody.setPosition(SCALE * BodyIterator->GetPosition().x, SCALE * BodyIterator->GetPosition().y);
 				PlayerInstance.playerbody.setRotation(BodyIterator->GetAngle() * 180/b2_pi);
-
-
 				//++BodyCount;
 				i++;
-			}else if(i==1){
+			}
+			else if(i==1){
 				mobile.machine_body.setPosition(SCALE * BodyIterator->GetPosition().x, SCALE * BodyIterator->GetPosition().y);
 				mobile.machine_body.setRotation(BodyIterator->GetAngle() * 180/b2_pi);
 				window->draw(mobile.machine_body);
@@ -170,13 +159,13 @@ void PlayView::Render(sf::RenderWindow *window){
 					window->draw(line);
 				i++;
 			}
-				else if(i == 3){
-					builder.machine_body.setPosition(SCALE * BodyIterator->GetPosition().x, SCALE * BodyIterator->GetPosition().y);
-					builder.machine_body.setRotation(BodyIterator->GetAngle() * 180/b2_pi);
-					window->draw(builder.machine_body);
-					//++BodyCount;
-					i++;
-				}
+			else if(i == 3){
+				builder.machine_body.setPosition(SCALE * BodyIterator->GetPosition().x, SCALE * BodyIterator->GetPosition().y);
+				builder.machine_body.setRotation(BodyIterator->GetAngle() * 180/b2_pi);
+				window->draw(builder.machine_body);
+				//++BodyCount;
+				i++;
+			}
 
 		}
 		else if (i==4){

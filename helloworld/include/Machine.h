@@ -22,6 +22,8 @@ class Machine{
 
 		sf::RectangleShape machine_body;
 
+		void getOut(){return;}
+
 
 	protected:
 		b2Body* body;

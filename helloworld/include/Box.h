@@ -27,7 +27,7 @@ class Box : public Object{
 			b2PolygonShape Shape2;
 			 Shape2.SetAsBox((50.0/2)/SCALEd, (50.0/2)/SCALEd);
 			 b2FixtureDef FixtureDef2;
-			 FixtureDef2.density = 100000.f;
+			 FixtureDef2.density = 1000000.f;
 			 FixtureDef2.friction = 1;
 			 FixtureDef2.shape = &Shape2;
 			 //FixtureDef2.filter.maskBits = ~0x0002;
