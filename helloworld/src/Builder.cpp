@@ -91,7 +91,8 @@ void Builder::Update(){
           //std:: cout << touching(boxlist[i]) << " ";
           // std::cout << boxlist[i] -> getShape().getPosition().y << "\n";
           // std::cout << machine_body.getPosition().y << "\n\n";
-            if(intersects(boxlist[i]) &&  (boxlist[i] -> getBody()->GetPosition().y < (body ->GetPosition().y + 1))){
+            if(intersects(boxlist[i]) &&  (boxlist[i] -> getBody()->GetPosition().y < (body ->GetPosition().y + 1))
+                                      &&  (boxlist[i] -> getBody()->GetPosition().y > (body ->GetPosition().y - 1))){
                 intersect = 1;
                 break;
             }
