@@ -34,24 +34,28 @@ public:
     }
     void Update(); // handles input
 
-int intersects(std::vector<Machine *> marr, std::vector<int> types);
+    b2Body* getBody(){
+      return body;
+    }
 
-// Puts player back in original position
-void reset();
+    int intersects(std::vector<Machine *> marr, std::vector<int> types);
 
-// Accessor method
-sf::RectangleShape getShape();
+    // Puts player back in original position
+    void reset();
 
-// return if player in machine or not
-int inMachine();
-Machine *my_machine;
-int mType;
-int in_machine;
+    // Accessor method
+    sf::RectangleShape getShape();
+
+    // return if player in machine or not
+    int inMachine();
+    Machine *my_machine;
+    int mType;
+    int in_machine;
 
 private:
   b2Body* body;
   int jumping;
   int facing; // 0 = left, 1 = right
-  //bool inMachine;
+
 };
 #endif

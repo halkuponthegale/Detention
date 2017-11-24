@@ -2,6 +2,24 @@
 
 class Launcher: public Machine{
 public:
+  Launcher(double xo, double yo){
+
+      machine_body.setSize(sf::Vector2f(50,50));
+      machine_body.setPosition(0,0);
+      machine_body.setOrigin(machine_body.getOrigin().x + 25, machine_body.getOrigin().y + 25);
+      machine_body.setFillColor(sf::Color::Yellow);
+      theta = M_PI/2;
+
+      line = sf::RectangleShape(sf::Vector2f(5,25));
+			line.setPosition(350,200);
+			line.setOrigin(2.5,25);
+
+      x = xo; y = yo;
+
+      machine_body.setPosition(xo, yo);
+
+  }
+
   void rotate(double dTheta){
     theta += dTheta;
   }
@@ -10,15 +28,6 @@ public:
   }
   void setBody(b2Body& bod){
     body = &bod;
-  }
-  Launcher(){
-
-      machine_body.setSize(sf::Vector2f(50,50));
-      machine_body.setPosition(150,150);
-      machine_body.setOrigin(machine_body.getOrigin().x + 25, machine_body.getOrigin().y + 25);
-      machine_body.setFillColor(sf::Color::Yellow);
-      theta = M_PI/2;
-
   }
 
   // define how this machine can move (can set limitations)
@@ -59,6 +68,31 @@ public:
         }
       }
     }
+
+   void setWorld(b2World& World){
+     static const float SCALE = 30.f;
+
+
+      b2BodyDef BodyDef3;
+   		BodyDef3.position = b2Vec2(x/SCALE, y/SCALE);
+   		BodyDef3.type = b2_dynamicBody;
+   		body = World.CreateBody(&BodyDef3);
+
+   		b2PolygonShape Shape3;
+   		Shape3.SetAsBox((50.f/2)/SCALE, (50.f/2)/SCALE);
+   		b2FixtureDef FixtureDef3;
+   		FixtureDef3.density = 100.f;
+   		FixtureDef3.friction = 1;
+   		FixtureDef3.shape = &Shape3;
+   		FixtureDef3.filter.maskBits = ~0x0002;
+   		body->CreateFixture(&FixtureDef3);
+   		body->SetFixedRotation(true);
+   		//builderBody->SetGravityScale(0);
+
+   	// 	launcher.setBody(*launcherBody);
+   }
+
+   sf::RectangleShape line;
 
 private:
   double theta;
