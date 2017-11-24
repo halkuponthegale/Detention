@@ -4,11 +4,13 @@
 Builder::Builder(double xo, double yo){
 
     machine_body.setSize(sf::Vector2f(50,50));
-    machine_body.setPosition(xo,yo);
+    machine_body.setPosition(0,0);
     machine_body.setOrigin(machine_body.getOrigin().x + 25, machine_body.getOrigin().y + 25);
     machine_body.setFillColor(sf::Color::Red);
 
     x = xo; y = yo;
+
+    machine_body.setPosition(xo, yo);
 
     cur_box_idx = 0;
     carrybox = 0;
@@ -138,7 +140,7 @@ void Machine::setWorld(b2World& World){
   static const float SCALE = 30.f;
 
   b2BodyDef BodyDef2;
-  BodyDef2.position = b2Vec2(200.f/SCALE, 200.f/SCALE);
+  BodyDef2.position = b2Vec2(x/SCALE, y/SCALE);
   BodyDef2.type = b2_dynamicBody;
   body = World.CreateBody(&BodyDef2);
 

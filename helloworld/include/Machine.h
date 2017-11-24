@@ -38,6 +38,8 @@ class Machine{
 		int space;
 		int cur_box_idx;
 
+		double x, y;
+
 
 
 

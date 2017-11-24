@@ -17,7 +17,7 @@ class Builder : public Machine{
 		void launch(double velocity, double theta);
 
 	private:
-		double x, y;
+		//double x, y;
 
 };
 
