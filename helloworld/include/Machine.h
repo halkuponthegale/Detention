@@ -12,7 +12,7 @@ class Machine{
 		void setPosition(int x, int y);
 		sf::RectangleShape getShape() {return machine_body;}
 		bool intersects(Box* o){//return machine_body.getGlobalBounds().intersects(o -> getShape().getGlobalBounds());
-				return touching(o) < 52;//&& machine_body.getGlobalBounds().top == o -> getShape().getGlobalBounds().top;
+				return touching(o) < 51;//&& machine_body.getGlobalBounds().top == o -> getShape().getGlobalBounds().top;
 		}
 		float touching(Box* o){
 			return abs(machine_body.getGlobalBounds().left - o -> getShape().getGlobalBounds().left);

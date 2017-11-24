@@ -35,7 +35,7 @@ class Box : public Object{
 			 bod->SetFixedRotation(true);
 		}
 
-		void setPos(double x, double y){
+		void setPos(float x, float y){
 			box_body.setPosition(x, y);
 			//bod->SetTransform(b2Vec2(x,y),0);
 		}

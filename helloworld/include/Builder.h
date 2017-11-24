@@ -14,6 +14,7 @@ class Builder : public Machine{
       body = &bod;
     }
 		void Update();
+		void launch(double velocity, double theta);
 
 	private:
 

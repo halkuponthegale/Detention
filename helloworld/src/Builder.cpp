@@ -15,12 +15,14 @@ Builder::Builder(){
 // define how this machine can move (can set limitations)
 void Builder::Update(){
     // move up
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W) && body->GetLinearVelocity().y == 0) {
         if(machine_body.getPosition().y > 0) {
             machine_body.move(0, -1);
+            this->launch(180,M_PI/2);
 
             // if you have a box, move it as well
             if(carrybox){
+              // mybox->getBody()->SetTransform(b2Vec2(machine_body.getPosition().x / 30.0, (machine_body.getPosition().y - 60)/30.0),0);
               //  mybox -> move(0,-1);
             }
         }
@@ -37,8 +39,8 @@ void Builder::Update(){
 
             // if you have a box, move it as well
             if(carrybox){
-              mybox->getBody()->SetTransform(b2Vec2(machine_body.getPosition().x / 30.0, (machine_body.getPosition().y - 60)/30.0),0);
-              mybox -> move(-1,0);
+              // mybox->getBody()->SetTransform(b2Vec2(machine_body.getPosition().x / 30.0, (machine_body.getPosition().y - 60)/30.0),0);
+              // mybox -> move(-1,0);
             }
         }
     }
@@ -50,8 +52,8 @@ void Builder::Update(){
              // if you have a box, move it as well
            if(carrybox){
 
-                mybox -> move(0,1);
-                mybox->getBody()->SetTransform(b2Vec2(machine_body.getPosition().x / 30.0, (machine_body.getPosition().y - 60)/30.0),0);
+                // mybox -> move(0,1);
+                // mybox->getBody()->SetTransform(b2Vec2(machine_body.getPosition().x / 30.0, (machine_body.getPosition().y - 60)/30.0),0);
 
             }
         }
@@ -67,8 +69,8 @@ void Builder::Update(){
 
              // if you have a box, move it as well
            if(carrybox){
-                mybox -> move(1,0);
-                mybox->getBody()->SetTransform(b2Vec2(machine_body.getPosition().x / 30.0, (machine_body.getPosition().y - 60)/30.0),0);
+                // mybox -> move(1,0);
+                // mybox->getBody()->SetTransform(b2Vec2(machine_body.getPosition().x / 30.0, (machine_body.getPosition().y - 60)/30.0),0);
             }
         }
     }
@@ -83,7 +85,9 @@ void Builder::Update(){
 
         for(i = 0; i < cur_box_idx; i++){
           //std:: cout << touching(boxlist[i]) << " ";
-            if(intersects(boxlist[i])){
+          // std::cout << boxlist[i] -> getShape().getPosition().y << "\n";
+          // std::cout << machine_body.getPosition().y << "\n\n";
+            if(intersects(boxlist[i]) &&  (boxlist[i] -> getBody()->GetPosition().y < (body ->GetPosition().y + 1))){
                 intersect = 1;
                 break;
             }
@@ -112,4 +116,18 @@ void Builder::Update(){
     else{
         space = 0;
     }
+}
+
+
+void Builder::launch(double velocity, double theta){
+    b2Vec2 vel = body->GetLinearVelocity();
+    //if(inMachine == true){
+      double vx = cos(theta)* velocity;
+      double vy = sin(theta)* velocity;
+      double impx = (vel.x)*body->GetMass();
+      double impy = (vel.y)*body->GetMass();
+      //std::cout << vx <<"," << vy;
+      body->ApplyLinearImpulse( b2Vec2(vx, -vy), body->GetWorldCenter(), true );
+      //inMachine = false;
+    //}
 }
