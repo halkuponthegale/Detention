@@ -10,9 +10,10 @@ public:
       machine_body.setFillColor(sf::Color::Yellow);
       theta = M_PI/2;
 
-      line = sf::RectangleShape(sf::Vector2f(5,25));
-			line.setPosition(350,200);
-			line.setOrigin(2.5,25);
+      barrel = sf::RectangleShape(sf::Vector2f(5,25));
+			barrel.setPosition(350,200);
+			barrel.setOrigin(2.5,25);
+      barrel.setFillColor(sf::Color::Black);
 
       x = xo; y = yo;
 
@@ -92,7 +93,7 @@ public:
    	// 	launcher.setBody(*launcherBody);
    }
 
-   sf::RectangleShape line;
+   sf::RectangleShape barrel;
 
 private:
   double theta;

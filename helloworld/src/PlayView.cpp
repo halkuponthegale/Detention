@@ -96,11 +96,11 @@ void PlayView::Update(sf::RenderWindow *window){
 
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 					//builder = 0, launcher = 1, mobile = 2;
-					if(!PlayerInstance.inMachine())
-						PlayerInstance.intersects(vec,ty);
+					if(!(*player).inMachine())
+						(*player).intersects(vec,ty);
   }
 
-	PlayerInstance.Update();
+	(*player).Update();
 	world.Step(1/60.f, 8, 3);
 
 
@@ -143,11 +143,10 @@ void PlayView::Render(sf::RenderWindow *window){
 		for(z = 0; z < launchers_list.size(); z++){
 			(*launchers_list[z]).machine_body.setPosition(SCALE * (*launchers_list[z]).getBody()->GetPosition().x, SCALE * (*launchers_list[z]).getBody()->GetPosition().y);
 			(*launchers_list[z]).machine_body.setRotation((*launchers_list[z]).getBody()->GetAngle() * 180/b2_pi);
-			(*launchers_list[z]).line.setPosition(SCALE * (*launchers_list[z]).getBody()->GetPosition().x, SCALE * (*launchers_list[z]).getBody()->GetPosition().y);
-			(*launchers_list[z]).line.setRotation(90+(-1*( 180.0/3.141592653589793 )*(*launchers_list[z]).getTheta()));
+			(*launchers_list[z]).barrel.setPosition(SCALE * (*launchers_list[z]).getBody()->GetPosition().x, SCALE * (*launchers_list[z]).getBody()->GetPosition().y);
+			(*launchers_list[z]).barrel.setRotation(90+(-1*( 180.0/3.141592653589793 )*(*launchers_list[z]).getTheta()));
 			window->draw((*launchers_list[z]).machine_body);
-			if(PlayerInstance.inMachine() && PlayerInstance.mType == 1)
-				window->draw((*launchers_list[z]).line);
+			window->draw((*launchers_list[z]).barrel);
 		}
 	}
 
@@ -162,10 +161,10 @@ void PlayView::Render(sf::RenderWindow *window){
 	}
 
 	// draw player
-	PlayerInstance.playerbody.setPosition(SCALE * PlayerInstance.getBody()->GetPosition().x, SCALE * PlayerInstance.getBody()->GetPosition().y);
-	PlayerInstance.playerbody.setRotation(PlayerInstance.getBody()->GetAngle() * 180/b2_pi);
-	if(!PlayerInstance.inMachine())
-		window->draw(PlayerInstance.playerbody);
+	(*player).playerbody.setPosition(SCALE * (*player).getBody()->GetPosition().x, SCALE * (*player).getBody()->GetPosition().y);
+	(*player).playerbody.setRotation((*player).getBody()->GetAngle() * 180/b2_pi);
+	if(!(*player).inMachine())
+		window->draw((*player).playerbody);
 
 
 }

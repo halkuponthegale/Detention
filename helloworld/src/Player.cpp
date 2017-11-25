@@ -5,11 +5,13 @@
 
     // Constructor
     // Creates a simple rectanglein place of player sprite
-    Player::Player() {
+    Player::Player(double xo, double yo) {
         playerbody.setSize(sf::Vector2f(10,30));
         playerbody.setOrigin(playerbody.getOrigin().x + 5, playerbody.getOrigin().y + 15);
-        playerbody.setPosition(80,80);
-        //inMachine = true;
+        playerbody.setPosition(xo,yo);
+
+        x = xo; y = yo;
+
         in_machine = 0;
         mType = -1;
         jumping = 0;

@@ -6,6 +6,7 @@
 #include <fstream>
 #include "Object.h"
 #include "Box.h"
+#include "Player.h"
 
 using namespace std;
 
@@ -53,6 +54,10 @@ public:
       if(type == "launcher"){
         launchers.push_back(unique_ptr<Launcher>(new Launcher(x, y)));
       }
+
+      if(type == "player"){
+        player = unique_ptr<Player>(new Player(x,y));
+      }
     }
 
     inFile.close();
@@ -76,11 +81,16 @@ public:
     return launchers;
   }
 
+  std::unique_ptr<Player> const& getPlayer(){
+    return player;
+  }
+
 private:
   std::vector<std::unique_ptr<Box>> boxes;
   std::vector<std::unique_ptr<Builder>> builders;
   std::vector<std::unique_ptr<Mobile>> mobiles;
   std::vector<std::unique_ptr<Launcher>> launchers;
+  std::unique_ptr<Player> player;
 
   std::vector<std::unique_ptr<Actor>> walls;
   std::vector<std::unique_ptr<Actor>> machines;

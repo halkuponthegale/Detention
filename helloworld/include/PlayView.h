@@ -21,7 +21,8 @@ class PlayView : public MiniView{
 		PlayView(int lvl) : gravity(0.0f, 10.0f), world(gravity),
 							level("../include/Levels/level"+std::to_string(lvl)+".txt"),
 							boxes_list(level.getBoxes()),builders_list(level.getBuilders()),
-							mobiles_list(level.getMobiles()), launchers_list(level.getLaunchers()){
+							mobiles_list(level.getMobiles()), launchers_list(level.getLaunchers()),
+							player(level.getPlayer()){
 
 			play_lvl = lvl;
 			// objs = File::loadLevel("./level"+std::to_string(play_lvl)+".json");
@@ -66,28 +67,13 @@ class PlayView : public MiniView{
 
 
 
-		// create player physics body
-		b2BodyDef BodyDef;
-		BodyDef.position = b2Vec2(80.f/SCALE, 90.f/SCALE);
-		BodyDef.type = b2_dynamicBody;
-		pBody = world.CreateBody(&BodyDef);
-
-		b2PolygonShape Shape;
-		Shape.SetAsBox((10.f/2)/SCALE, (30.f/2)/SCALE);
-		b2FixtureDef FixtureDef;
-		FixtureDef.density = 1.f;
-		FixtureDef.friction = 1;
-		FixtureDef.shape = &Shape;
-		FixtureDef.filter.categoryBits = 0x0002;
-		pBody->CreateFixture(&FixtureDef);
-		pBody->SetFixedRotation(true);
-
-		PlayerInstance.setBody(*pBody);
+		// set player to world
+		(*player).setWorld(world);
 
 
 			// add boxes to builder machines if necessary
-			int z,b;
 			if(!boxes_list.empty()){
+				int b,z;
 				if(!builders_list.empty()){
 					for(b = 0; b < builders_list.size(); b++){
 						for(z = 0; z < boxes_list.size(); z++){
@@ -96,6 +82,8 @@ class PlayView : public MiniView{
 					}
 				}
 			}
+
+
 		}
 		void Init(sf::RenderWindow *window);
 		void Update(sf::RenderWindow *window);
@@ -140,7 +128,6 @@ class PlayView : public MiniView{
 
 		//std::vector<std::unique_ptr<Actor>> objs;
 		sf::RectangleShape wall;
-		Player PlayerInstance;
 		b2Vec2 gravity;
 		b2World world;
 		b2Body* pBody;
@@ -156,6 +143,7 @@ class PlayView : public MiniView{
 		std::vector<std::unique_ptr<Builder>> const& builders_list;
 		std::vector<std::unique_ptr<Mobile>> const& mobiles_list;
 		std::vector<std::unique_ptr<Launcher>> const& launchers_list;
+		std::unique_ptr<Player> const& player;
 };
 
 
