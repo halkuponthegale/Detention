@@ -28,8 +28,7 @@ public:
       exit(1);
     }
 
-    // placeholder box, never used
-    //boxes.push_back(unique_ptr<Box>(new Box(0,0)));
+    cout << "\n" << file << "\n";
 
     // read in x coord, y coord, object
     double x,y;
@@ -43,20 +42,27 @@ public:
         boxes.push_back(unique_ptr<Box>(new Box(x, y)));
       }
 
-      if(type == "builder"){
+      else if(type == "builder"){
         builders.push_back(unique_ptr<Builder>(new Builder(x, y)));
       }
 
-      if(type == "mobile"){
+      else if(type == "mobile"){
         mobiles.push_back(unique_ptr<Mobile>(new Mobile(x, y)));
       }
 
-      if(type == "launcher"){
+      else if(type == "launcher"){
         launchers.push_back(unique_ptr<Launcher>(new Launcher(x, y)));
       }
 
-      if(type == "player"){
+      else if(type == "player"){
         player = unique_ptr<Player>(new Player(x,y));
+      }
+
+      else if(type == "wall"){
+        double half_w, half_h;
+        inFile >> half_w >> half_h;
+        // build a wall centered at x, y
+        // set wall dimensions to w,h
       }
     }
 

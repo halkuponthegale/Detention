@@ -22,7 +22,8 @@ class PlayView : public MiniView{
 							level("../include/Levels/level"+std::to_string(lvl)+".txt"),
 							boxes_list(level.getBoxes()),builders_list(level.getBuilders()),
 							mobiles_list(level.getMobiles()), launchers_list(level.getLaunchers()),
-							player(level.getPlayer()){
+							player(level.getPlayer())
+		{
 
 			play_lvl = lvl;
 			// objs = File::loadLevel("./level"+std::to_string(play_lvl)+".json");
@@ -31,6 +32,7 @@ class PlayView : public MiniView{
 
 
 			CreateGround(world, 400.f, 500.f);
+
 			// for( auto&& pointer : objs) {
 			// 	CreateWall(world,pointer->getX(), pointer->getY(),pointer->getW(),pointer->getH());
 			// }
@@ -71,17 +73,17 @@ class PlayView : public MiniView{
 		(*player).setWorld(world);
 
 
-			// add boxes to builder machines if necessary
-			if(!boxes_list.empty()){
-				int b,z;
-				if(!builders_list.empty()){
-					for(b = 0; b < builders_list.size(); b++){
-						for(z = 0; z < boxes_list.size(); z++){
-							(*builders_list[b]).add_box(&(*boxes_list[z]));
-						}
+		// add boxes to builder machines if necessary
+		if(!boxes_list.empty()){
+			int b,z;
+			if(!builders_list.empty()){
+				for(b = 0; b < builders_list.size(); b++){
+					for(z = 0; z < boxes_list.size(); z++){
+						(*builders_list[b]).add_box(&(*boxes_list[z]));
 					}
 				}
 			}
+		}
 
 
 		}

@@ -21,7 +21,7 @@ void EndView::Init(sf::RenderWindow *window){
 
 	char tmptext[20];
 	sprintf(tmptext, "You completed level %d", finished_lvl);
-	
+
 	tmp.setString(tmptext);
 	tmp2.setString("Main Menu");
 	tmp3.setString("Continue");
@@ -60,7 +60,10 @@ void EndView::Update(sf::RenderWindow *window){
 		}
 		else if(cur_select == 2){
 			// back to lvl select
-			game_view.setView(new PlayView(finished_lvl + 1));
+		  if(finished_lvl < MAX_LVL)
+				game_view.setView(new PlayView(finished_lvl + 1));
+			else if(finished_lvl == MAX_LVL)
+				game_view.setView(new PlayView(finished_lvl));
 		}
 	}
 	else{
@@ -88,4 +91,3 @@ void EndView::Render(sf::RenderWindow *window){
 	window -> draw(tmp3);
 
 }
-

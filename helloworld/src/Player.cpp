@@ -65,14 +65,15 @@
     void Player::Update(){
     // if player in machine, call update on that machine object (handle appropriate moves)
     if(in_machine){
+      // builder = 0, launcher = 1, mobile = 2
         my_machine -> Update();
 
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
 
-            my_machine->getBody()->SetLinearVelocity(b2Vec2(0,0));
-            my_machine->getBody()->SetGravityScale(1);
-            my_machine->Update();
-            my_machine->getOut();
+            // my_machine->getBody()->SetLinearVelocity(b2Vec2(0,0));
+            // my_machine->getBody()->SetGravityScale(1);
+            //my_machine->Update();
+          //  my_machine->getOut();
 
             in_machine = 0;
 
@@ -86,6 +87,14 @@
 
             // reset player position
             body->SetTransform(my_machine -> getBody()->GetPosition(),0);
+            body->SetLinearVelocity(b2Vec2(0,1));
+
+
+            my_machine->getBody()->SetLinearVelocity(b2Vec2(0,0));
+            my_machine->getBody()->SetGravityScale(1);
+            my_machine->Update();
+            my_machine->getOut();
+
             mType = -1;
 
         }
@@ -162,6 +171,7 @@
     int Player::intersects(std::vector<Machine *> marr, std::vector<int> types){
       for(unsigned i = 0; i < marr.size(); i++){
     if(playerbody.getGlobalBounds().intersects(marr[i] -> getShape().getGlobalBounds())){
+      if(marr[i] -> getBody() -> GetLinearVelocity().y != 0) { break; }
         in_machine = 1;
         my_machine = marr[i];
         //std::cout << types[i];

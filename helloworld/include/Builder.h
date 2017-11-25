@@ -18,6 +18,10 @@ class Builder : public Machine{
 
 		void setWorld(b2World& World);
 
+		void getOut(){
+			body -> SetLinearVelocity(b2Vec2(0,0));
+		}
+
 	private:
 		//double x, y;
 

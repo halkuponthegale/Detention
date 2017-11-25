@@ -22,7 +22,7 @@ class Machine{
 
 		sf::RectangleShape machine_body;
 
-		void getOut(){return;}
+		virtual void getOut(){};//{return;}
 
 		//void setWorld(b2World& World);
 

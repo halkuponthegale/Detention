@@ -32,16 +32,17 @@ public:
   void Update(){
       // move up
 
-      if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-          if(machine_body.getPosition().y > 0) {
-              machine_body.move(0, -1);
+      // if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+      //     if(machine_body.getPosition().y > 0) {
+      //         machine_body.move(0, -1);
+      //
+      //         // if you have a box, move it as well
+      //
+      //     }
+      // }
 
-              // if you have a box, move it as well
-
-          }
-      }
       // move left
-      else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+      if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         if(machine_body.getPosition().x < 750) {  // check
             // machine_body.move(1, 0);
             b2Vec2 vel = body->GetLinearVelocity();
@@ -49,14 +50,14 @@ public:
             body->SetLinearVelocity( vel );
         }
       }
-      // move down
-      else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-          if(machine_body.getPosition().y < 550) {  // check
-              machine_body.move(0, 1);
-
-
-          }
-      }
+      // // move down
+      // else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+      //     if(machine_body.getPosition().y < 550) {  // check
+      //         machine_body.move(0, 1);
+      //
+      //
+      //     }
+      // }
       // move right
       else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         if(machine_body.getPosition().x < 750) {  // check
@@ -73,10 +74,13 @@ public:
   }
 
   void getOut(){
-    b2Vec2 vel = body->GetLinearVelocity();
-    vel.x = 0;
-    vel.y = -1;
-    body->SetLinearVelocity(vel);
+    // b2Vec2 vel = body->GetLinearVelocity();
+    // vel.x = 0;
+    // vel.y = -1;
+    // body->SetLinearVelocity(vel);
+    printf("getting out\n");
+    body->SetGravityScale(1);
+    body->SetLinearVelocity(b2Vec2(0,1));
   }
 
 private:
