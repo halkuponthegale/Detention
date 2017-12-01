@@ -45,7 +45,7 @@ void PlayView::Init(sf::RenderWindow *window){
 	bgSprite.setTexture(Bkg);
 	bgSprite.setTextureRect(sf::IntRect(0,0,800,600));
 
-	// push builders onto launcher
+	// push builders onto vector
 	if(!builders_list.empty()){
 		int z;
 		for(z = 0; z < builders_list.size(); z++){
@@ -145,8 +145,8 @@ void PlayView::Render(sf::RenderWindow *window){
 			(*launchers_list[z]).machine_body.setRotation((*launchers_list[z]).getBody()->GetAngle() * 180/b2_pi);
 			(*launchers_list[z]).barrel.setPosition(SCALE * (*launchers_list[z]).getBody()->GetPosition().x, SCALE * (*launchers_list[z]).getBody()->GetPosition().y);
 			(*launchers_list[z]).barrel.setRotation(90+(-1*( 180.0/3.141592653589793 )*(*launchers_list[z]).getTheta()));
-			window->draw((*launchers_list[z]).machine_body);
 			window->draw((*launchers_list[z]).barrel);
+			window->draw((*launchers_list[z]).machine_body);
 		}
 	}
 

@@ -10,9 +10,9 @@ public:
       machine_body.setFillColor(sf::Color::Yellow);
       theta = M_PI/2;
 
-      barrel = sf::RectangleShape(sf::Vector2f(5,25));
+      barrel = sf::RectangleShape(sf::Vector2f(5,45));
 			barrel.setPosition(350,200);
-			barrel.setOrigin(2.5,25);
+			barrel.setOrigin(2.5,45);
       barrel.setFillColor(sf::Color::Black);
 
       x = xo; y = yo;
