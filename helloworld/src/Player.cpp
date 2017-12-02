@@ -179,14 +179,14 @@
 
           //builder = 0, launcher = 1, mobile = 2;
 
-          // priority system for entering
-          if(types[i] == 0 && type >= -1){
-            desired = i;
-            type = 0;
-          }
-          else if(types[i] == 2 && (type == -1 || type == 1)){
+          // priority system for entering: mobile, builder, launcher
+          if(types[i] == 2){
             desired = i;
             type = 2;
+          }
+          else if(types[i] == 0 && (type == -1 || type == 1)){
+            desired = i;
+            type = 0;
           }
           else if(types[i] == 1 && (type == -1)){
               desired = i;
