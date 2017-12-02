@@ -160,6 +160,14 @@ void PlayView::Render(sf::RenderWindow *window){
 		}
 	}
 
+	// draw walls
+	if(!walls_list.empty()){
+		int z;
+		for(z = 0; z < walls_list.size(); z++){
+			window->draw((*walls_list[z]).getShape());
+		}
+	}
+
 	// draw player
 	(*player).playerbody.setPosition(SCALE * (*player).getBody()->GetPosition().x, SCALE * (*player).getBody()->GetPosition().y);
 	(*player).playerbody.setRotation((*player).getBody()->GetAngle() * 180/b2_pi);

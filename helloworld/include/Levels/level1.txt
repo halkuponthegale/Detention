@@ -4,3 +4,4 @@
 450 200 mobile
 350 200 launcher
 80 90 player
+550 300 wall 50 10

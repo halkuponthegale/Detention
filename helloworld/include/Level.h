@@ -7,6 +7,7 @@
 #include "Object.h"
 #include "Box.h"
 #include "Player.h"
+#include "Wall.h"
 
 using namespace std;
 
@@ -61,8 +62,8 @@ public:
       else if(type == "wall"){
         double half_w, half_h;
         inFile >> half_w >> half_h;
-        // build a wall centered at x, y
-        // set wall dimensions to w,h
+        walls.push_back(unique_ptr<Wall>(new Wall(x, y, half_w, half_h)));
+
       }
     }
 
@@ -87,6 +88,10 @@ public:
     return launchers;
   }
 
+  std::vector<std::unique_ptr<Wall>> const& getWalls(){
+    return walls;
+  }
+
   std::unique_ptr<Player> const& getPlayer(){
     return player;
   }
@@ -96,9 +101,10 @@ private:
   std::vector<std::unique_ptr<Builder>> builders;
   std::vector<std::unique_ptr<Mobile>> mobiles;
   std::vector<std::unique_ptr<Launcher>> launchers;
+  std::vector<std::unique_ptr<Wall>> walls;
   std::unique_ptr<Player> player;
 
-  std::vector<std::unique_ptr<Actor>> walls;
+  // std::vector<std::unique_ptr<Actor>> walls;
   std::vector<std::unique_ptr<Actor>> machines;
   std::vector<std::unique_ptr<Actor>> objects;
 };

@@ -3,7 +3,7 @@
 
 #include "Object.h"
 #include "Box2D.h"
-static const double SCALEd = 30.f;
+
 class Box : public Object{
 	public:
 		Box(double xo, double yo) : Object(0, 0, 50, 50, true){
@@ -20,12 +20,15 @@ class Box : public Object{
 		}
 
 		void setWorld(b2World& World){
+
+			static const double SCALE = 30.f;
+
 			b2BodyDef BodyDef2;
-	    BodyDef2.position = b2Vec2(x/SCALEd, y/SCALEd);
+	    BodyDef2.position = b2Vec2(x/SCALE, y/SCALE);
 	    BodyDef2.type = b2_dynamicBody;
 			bod = World.CreateBody(&BodyDef2);
 			b2PolygonShape Shape2;
-			 Shape2.SetAsBox((50.0/2)/SCALEd, (50.0/2)/SCALEd);
+			 Shape2.SetAsBox((50.0/2)/SCALE, (50.0/2)/SCALE);
 			 b2FixtureDef FixtureDef2;
 			 FixtureDef2.density = 1000000.f;
 			 FixtureDef2.friction = 1;

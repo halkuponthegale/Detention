@@ -9,6 +9,7 @@
 #include "Launcher.h"
 #include "Mobile.h"
 #include "Level.h"
+#include "Wall.h"
 
 /*
 	PlayView handles level loading, drawing, and gameplay
@@ -22,7 +23,7 @@ class PlayView : public MiniView{
 							level("../include/Levels/level"+std::to_string(lvl)+".txt"),
 							boxes_list(level.getBoxes()),builders_list(level.getBuilders()),
 							mobiles_list(level.getMobiles()), launchers_list(level.getLaunchers()),
-							player(level.getPlayer())
+							walls_list(level.getWalls()),player(level.getPlayer())
 		{
 
 			play_lvl = lvl;
@@ -67,6 +68,12 @@ class PlayView : public MiniView{
 			}
 		}
 
+		// set walls to world
+		if(!walls_list.empty()){
+			for(i = 0; i < walls_list.size(); i++){
+				(*walls_list[i]).setWorld(world);
+			}
+		}
 
 
 		// set player to world
@@ -145,6 +152,7 @@ class PlayView : public MiniView{
 		std::vector<std::unique_ptr<Builder>> const& builders_list;
 		std::vector<std::unique_ptr<Mobile>> const& mobiles_list;
 		std::vector<std::unique_ptr<Launcher>> const& launchers_list;
+		std::vector<std::unique_ptr<Wall>> const& walls_list;
 		std::unique_ptr<Player> const& player;
 };
 
