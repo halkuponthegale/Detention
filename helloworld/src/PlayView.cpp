@@ -94,24 +94,37 @@ void PlayView::Update(sf::RenderWindow *window){
 	}
 
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-					//builder = 0, launcher = 1, mobile = 2;
-					if(!(*player).inMachine()){
-						if(!(*player).isAtExit((*exit_r).getShape()))
-							 (*player).intersects(vec,ty);
-						else{
+			//builder = 0, launcher = 1, mobile = 2;
+			if(!players_list.empty()){
+				int z;
+				for(z = 0; z < players_list.size(); z++){
+					if(!(*players_list[z]).inMachine()){
+						// if player is at exit, leave
+						if(!exits_list.empty() && (*players_list[z]).isAtExit((*exits_list[0]).getShape())){
 							if(play_lvl == top_lvl && top_lvl < MAX_LVL){
 								top_lvl++;
 							}
 
 							game_view.setView(new EndView(play_lvl));
 						}
-
-
+						// otherwise, check if in machine
+						else
+							 (*players_list[z]).intersects(vec,ty);
 
 					}
+				}
+
+
+
+			}
   }
 
-	(*player).Update();
+	if(!players_list.empty()){
+		int z;
+		for(z = 0; z < players_list.size(); z++){
+			(*players_list[z]).Update();
+		}
+	}
 	world.Step(1/60.f, 8, 3);
 
 
@@ -123,10 +136,16 @@ void PlayView::Render(sf::RenderWindow *window){
 	window -> draw(tmp2);
 	window -> draw(tmp3);
 
-	// draw exit
-	(*exit_r).bounds.setPosition(SCALE * (*exit_r).getBody()->GetPosition().x, SCALE * (*exit_r).getBody()->GetPosition().y);
-	(*exit_r).bounds.setRotation((*exit_r).getBody()->GetAngle() * 180/b2_pi);
-	window->draw((*exit_r).getShape());
+	// draw exit(s)
+	if(!exits_list.empty()){
+		int z;
+		for(z = 0; z < exits_list.size(); z++){
+			(*exits_list[z]).bounds.setPosition(SCALE * (*exits_list[z]).getBody()->GetPosition().x, SCALE * (*exits_list[z]).getBody()->GetPosition().y);
+			(*exits_list[z]).bounds.setRotation((*exits_list[z]).getBody()->GetAngle() * 180/b2_pi);
+			window->draw((*exits_list[z]).getShape());
+		}
+	}
+
 
 
 	// draw walls
@@ -181,10 +200,21 @@ void PlayView::Render(sf::RenderWindow *window){
 	}
 
 
-	// draw player
-	(*player).playerbody.setPosition(SCALE * (*player).getBody()->GetPosition().x, SCALE * (*player).getBody()->GetPosition().y);
-	(*player).playerbody.setRotation((*player).getBody()->GetAngle() * 180/b2_pi);
-	if(!(*player).inMachine())
-		window->draw((*player).playerbody);
+	// draw plauers
+	if(!players_list.empty()){
+		int z;
+		for(z = 0; z < players_list.size(); z++){
+			(*players_list[z]).playerbody.setPosition(SCALE * (*players_list[z]).getBody()->GetPosition().x, SCALE * (*players_list[z]).getBody()->GetPosition().y);
+			(*players_list[z]).playerbody.setRotation((*players_list[z]).getBody()->GetAngle() * 180/b2_pi);
+			if(!(*players_list[z]).inMachine())
+				window->draw((*players_list[z]).playerbody);
+		}
+	}
+	//
+	// // draw player
+	// (*player).playerbody.setPosition(SCALE * (*player).getBody()->GetPosition().x, SCALE * (*player).getBody()->GetPosition().y);
+	// (*player).playerbody.setRotation((*player).getBody()->GetAngle() * 180/b2_pi);
+	// if(!(*player).inMachine())
+	// 	window->draw((*player).playerbody);
 
 }

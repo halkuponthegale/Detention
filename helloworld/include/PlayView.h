@@ -24,8 +24,8 @@ class PlayView : public MiniView{
 							level("../include/Levels/level"+std::to_string(lvl)+".txt"),
 							boxes_list(level.getBoxes()),builders_list(level.getBuilders()),
 							mobiles_list(level.getMobiles()), launchers_list(level.getLaunchers()),
-							walls_list(level.getWalls()),player(level.getPlayer()),
-							exit_r(level.getExit())
+							walls_list(level.getWalls()),players_list(level.getPlayers()),
+							exits_list(level.getExits())
 		{
 
 			play_lvl = lvl;
@@ -70,12 +70,19 @@ class PlayView : public MiniView{
 		}
 
 
-		// set player to world
-		(*player).setWorld(world);
+		// set player(s) to world
+		if(!players_list.empty()){
+			for(i = 0; i < players_list.size(); i++){
+				(*players_list[i]).setWorld(world);
+			}
+		}
 
 		// set exit to world
-		(*exit_r).setWorld(world);
-
+		if(!exits_list.empty()){
+			for(i = 0; i < exits_list.size(); i++){
+				(*exits_list[i]).setWorld(world);
+			}
+		}
 
 		// add boxes to builder machines if necessary
 		if(!boxes_list.empty()){
@@ -120,8 +127,10 @@ class PlayView : public MiniView{
 		std::vector<std::unique_ptr<Mobile>> const& mobiles_list;
 		std::vector<std::unique_ptr<Launcher>> const& launchers_list;
 		std::vector<std::unique_ptr<Wall>> const& walls_list;
-		std::unique_ptr<Player> const& player;
-		std::unique_ptr<Exit> const& exit_r;
+		std::vector<std::unique_ptr<Player>> const& players_list;
+		std::vector<std::unique_ptr<Exit>> const& exits_list;
+		// std::unique_ptr<Player> const& player;
+		// std::unique_ptr<Exit> const& exit_r;
 };
 
 

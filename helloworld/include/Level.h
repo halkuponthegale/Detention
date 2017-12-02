@@ -57,7 +57,7 @@ public:
       }
 
       else if(type == "player"){
-        player = unique_ptr<Player>(new Player(x,y));
+        players.push_back(unique_ptr<Player>(new Player(x,y)));
       }
 
       else if(type == "wall"){
@@ -68,7 +68,7 @@ public:
       }
 
       else if(type == "exit"){
-        exit_r = unique_ptr<Exit>(new Exit(x, y));
+        exits.push_back(unique_ptr<Exit>(new Exit(x, y)));
       }
     }
 
@@ -97,12 +97,12 @@ public:
     return walls;
   }
 
-  std::unique_ptr<Player> const& getPlayer(){
-    return player;
+  std::vector<std::unique_ptr<Player>> const& getPlayers(){
+    return players;
   }
 
-  std::unique_ptr<Exit> const& getExit(){
-    return exit_r;
+  std::vector<std::unique_ptr<Exit>> const& getExits(){
+    return exits;
   }
 
 private:
@@ -111,8 +111,10 @@ private:
   std::vector<std::unique_ptr<Mobile>> mobiles;
   std::vector<std::unique_ptr<Launcher>> launchers;
   std::vector<std::unique_ptr<Wall>> walls;
-  std::unique_ptr<Player> player;
-  std::unique_ptr<Exit> exit_r;
+  std::vector<std::unique_ptr<Player>> players;
+  std::vector<std::unique_ptr<Exit>> exits;
+  // std::unique_ptr<Player> player;
+  // std::unique_ptr<Exit> exit_r;
 
   // std::vector<std::unique_ptr<Actor>> walls;
   std::vector<std::unique_ptr<Actor>> machines;
