@@ -101,11 +101,19 @@
         if(mType == 1){
 
           if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
+            if(my_machine->launchVel <5){
+              my_machine->launchVel += .05;
+            }
+
+          }else{
+            if(my_machine->launchVel!=0){
+              launch(my_machine->launchVel,my_machine->getTheta());
+              my_machine->launchVel = 0;
               in_machine = 0;
               mType=-1;
               my_machine -> setColor(sf::Color::Yellow);
               body->SetTransform(my_machine -> getBody()->GetPosition(),0);
-              launch(5,my_machine->getTheta());
+            }
           }
         }
     }
