@@ -71,6 +71,8 @@ public:
       FixtureDef.friction = 1;
       FixtureDef.shape = &Shape;
       FixtureDef.filter.categoryBits = 0x0002;
+      FixtureDef.filter.groupIndex = -2;
+
       body->CreateFixture(&FixtureDef);
       body->SetFixedRotation(true);
 

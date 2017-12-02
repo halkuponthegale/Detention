@@ -123,11 +123,19 @@ void PlayView::Render(sf::RenderWindow *window){
 	window -> draw(tmp2);
 	window -> draw(tmp3);
 
-	// for( auto&& pointer : objs) {
-	// 	wall.setPosition(pointer->getX(), pointer->getY());
-	// 	wall.setSize(sf::Vector2f(pointer->getW(),pointer->getH()));
-	// 	window->draw(wall);
-	// }
+	// draw exit
+	(*exit_r).bounds.setPosition(SCALE * (*exit_r).getBody()->GetPosition().x, SCALE * (*exit_r).getBody()->GetPosition().y);
+	(*exit_r).bounds.setRotation((*exit_r).getBody()->GetAngle() * 180/b2_pi);
+	window->draw((*exit_r).getShape());
+
+
+	// draw walls
+	if(!walls_list.empty()){
+		int z;
+		for(z = 0; z < walls_list.size(); z++){
+			window->draw((*walls_list[z]).getShape());
+		}
+	}
 
 	// draw boxes
 	if(!boxes_list.empty()){
@@ -172,18 +180,6 @@ void PlayView::Render(sf::RenderWindow *window){
 		}
 	}
 
-	// draw walls
-	if(!walls_list.empty()){
-		int z;
-		for(z = 0; z < walls_list.size(); z++){
-			window->draw((*walls_list[z]).getShape());
-		}
-	}
-
-	// draw exit
-	(*exit_r).bounds.setPosition(SCALE * (*exit_r).getBody()->GetPosition().x, SCALE * (*exit_r).getBody()->GetPosition().y);
-	(*exit_r).bounds.setRotation((*exit_r).getBody()->GetAngle() * 180/b2_pi);
-	window->draw((*exit_r).getShape());
 
 	// draw player
 	(*player).playerbody.setPosition(SCALE * (*player).getBody()->GetPosition().x, SCALE * (*player).getBody()->GetPosition().y);

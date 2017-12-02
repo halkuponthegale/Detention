@@ -87,6 +87,8 @@ public:
    		FixtureDef3.shape = &Shape3;
       FixtureDef3.filter.maskBits = ~0x0002;
       FixtureDef3.filter.categoryBits = ~0x0006;
+      FixtureDef3.filter.groupIndex = -2;
+
    		body->CreateFixture(&FixtureDef3);
    		body->SetFixedRotation(true);
    		//builderBody->SetGravityScale(0);

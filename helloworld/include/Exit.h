@@ -35,7 +35,7 @@ public:
     FixtureDef2.friction = 1;
     FixtureDef2.filter.maskBits = ~0x0002;
     FixtureDef2.filter.categoryBits = ~0x0005;
-
+    FixtureDef2.filter.groupIndex = -2;
     FixtureDef2.shape = &Shape2;
 
     bod->CreateFixture(&FixtureDef2);
