@@ -78,7 +78,6 @@ public:
     // vel.x = 0;
     // vel.y = -1;
     // body->SetLinearVelocity(vel);
-    printf("getting out\n");
     body->SetGravityScale(1);
     body->SetLinearVelocity(b2Vec2(0,1));
   }

@@ -127,15 +127,6 @@ void PlayView::Render(sf::RenderWindow *window){
 		}
 	}
 
-	// draw mobiles
-	if(!mobiles_list.empty()){
-		int z;
-		for(z = 0; z < mobiles_list.size(); z++){
-			(*mobiles_list[z]).machine_body.setPosition(SCALE * (*mobiles_list[z]).getBody()->GetPosition().x, SCALE * (*mobiles_list[z]).getBody()->GetPosition().y);
-			(*mobiles_list[z]).machine_body.setRotation((*mobiles_list[z]).getBody()->GetAngle() * 180/b2_pi);
-			window->draw((*mobiles_list[z]).machine_body);
-		}
-	}
 
   // draw launchers
 	if(!launchers_list.empty()){
@@ -147,6 +138,16 @@ void PlayView::Render(sf::RenderWindow *window){
 			(*launchers_list[z]).barrel.setRotation(90+(-1*( 180.0/3.141592653589793 )*(*launchers_list[z]).getTheta()));
 			window->draw((*launchers_list[z]).barrel);
 			window->draw((*launchers_list[z]).machine_body);
+		}
+	}
+
+	// draw mobiles
+	if(!mobiles_list.empty()){
+		int z;
+		for(z = 0; z < mobiles_list.size(); z++){
+			(*mobiles_list[z]).machine_body.setPosition(SCALE * (*mobiles_list[z]).getBody()->GetPosition().x, SCALE * (*mobiles_list[z]).getBody()->GetPosition().y);
+			(*mobiles_list[z]).machine_body.setRotation((*mobiles_list[z]).getBody()->GetAngle() * 180/b2_pi);
+			window->draw((*mobiles_list[z]).machine_body);
 		}
 	}
 

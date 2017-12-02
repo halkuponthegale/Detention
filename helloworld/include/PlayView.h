@@ -32,7 +32,7 @@ class PlayView : public MiniView{
 			int i;
 
 
-			CreateGround(world, 400.f, 500.f);
+			// CreateGround(world, 400.f, 500.f);
 
 			// for( auto&& pointer : objs) {
 			// 	CreateWall(world,pointer->getX(), pointer->getY(),pointer->getW(),pointer->getH());
@@ -97,34 +97,34 @@ class PlayView : public MiniView{
 		void Init(sf::RenderWindow *window);
 		void Update(sf::RenderWindow *window);
 		void Render(sf::RenderWindow *window);
-		void CreateGround(b2World& World, float X, float Y)
-		{
-		    b2BodyDef BodyDef;
-		    BodyDef.position = b2Vec2(X/SCALE, Y/SCALE);
-		    BodyDef.type = b2_staticBody;
-		    b2Body* Body = World.CreateBody(&BodyDef);
-
-		    b2PolygonShape Shape;
-		    Shape.SetAsBox((800.f/2)/SCALE, (16.f/2)/SCALE);
-		    b2FixtureDef FixtureDef;
-		    FixtureDef.density = 0.f;
-		    FixtureDef.shape = &Shape;
-		    Body->CreateFixture(&FixtureDef);
-				groundBody = Body;
-		}
-		void CreateWall(b2World &World, double x, double y, int w, int h){
-			b2BodyDef BodyDef;
-			BodyDef.position = b2Vec2(x/SCALE, y/SCALE);
-			BodyDef.type = b2_staticBody;
-			b2Body* Body = World.CreateBody(&BodyDef);
-
-			b2PolygonShape Shape;
-			Shape.SetAsBox((w/2.0)/SCALE, (h/2.0)/SCALE);
-			b2FixtureDef FixtureDef;
-			FixtureDef.density = 0.f;
-			FixtureDef.shape = &Shape;
-			Body->CreateFixture(&FixtureDef);
-		}
+		// void CreateGround(b2World& World, float X, float Y)
+		// {
+		//     b2BodyDef BodyDef;
+		//     BodyDef.position = b2Vec2(X/SCALE, Y/SCALE);
+		//     BodyDef.type = b2_staticBody;
+		//     b2Body* Body = World.CreateBody(&BodyDef);
+		//
+		//     b2PolygonShape Shape;
+		//     Shape.SetAsBox((800.f/2)/SCALE, (16.f/2)/SCALE);
+		//     b2FixtureDef FixtureDef;
+		//     FixtureDef.density = 0.f;
+		//     FixtureDef.shape = &Shape;
+		//     Body->CreateFixture(&FixtureDef);
+		// 		groundBody = Body;
+		// }
+		// void CreateWall(b2World &World, double x, double y, int w, int h){
+		// 	b2BodyDef BodyDef;
+		// 	BodyDef.position = b2Vec2(x/SCALE, y/SCALE);
+		// 	BodyDef.type = b2_staticBody;
+		// 	b2Body* Body = World.CreateBody(&BodyDef);
+		//
+		// 	b2PolygonShape Shape;
+		// 	Shape.SetAsBox((w/2.0)/SCALE, (h/2.0)/SCALE);
+		// 	b2FixtureDef FixtureDef;
+		// 	FixtureDef.density = 0.f;
+		// 	FixtureDef.shape = &Shape;
+		// 	Body->CreateFixture(&FixtureDef);
+		// }
 	private:
 		sf::Font font;
 
@@ -143,7 +143,7 @@ class PlayView : public MiniView{
 
 		sf::Texture Bkg;
 		sf::Sprite bgSprite;
-		b2Body* groundBody;
+		// b2Body* groundBody;
 		std::vector<int> ty;
 		std::vector<Machine*> vec;
 
