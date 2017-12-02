@@ -25,8 +25,6 @@ public:
     body = &bod;
   }
 
-  void setWorld(b2World& World);
-
 
   // define how this machine can move (can set limitations)
   void Update(){
@@ -80,6 +78,29 @@ public:
     // body->SetLinearVelocity(vel);
     body->SetGravityScale(1);
     body->SetLinearVelocity(b2Vec2(0,1));
+  }
+
+  void setWorld(b2World& World){
+    static const float SCALE = 30.f;
+
+    b2BodyDef BodyDef4;
+    BodyDef4.position = b2Vec2(x/SCALE, y/SCALE);
+    BodyDef4.type = b2_dynamicBody;
+    body = World.CreateBody(&BodyDef4);
+
+    b2PolygonShape Shape4;
+    Shape4.SetAsBox((50.f/2)/SCALE, (50.f/2)/SCALE);
+    b2FixtureDef FixtureDef4;
+    FixtureDef4.density = 100.f;
+    FixtureDef4.friction = 1;
+    FixtureDef4.shape = &Shape4;
+    FixtureDef4.filter.maskBits = ~0x0002;
+    FixtureDef4.filter.categoryBits = ~0x0008;
+    body->CreateFixture(&FixtureDef4);
+    body->SetFixedRotation(true);
+    //builderBody->SetGravityScale(0);
+
+    // mobile.setBody(*mobileBody);
   }
 
 private:

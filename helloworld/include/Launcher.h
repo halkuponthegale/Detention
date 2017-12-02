@@ -85,7 +85,8 @@ public:
    		FixtureDef3.density = 100.f;
    		FixtureDef3.friction = 1;
    		FixtureDef3.shape = &Shape3;
-   		FixtureDef3.filter.maskBits = ~0x0002;
+      FixtureDef3.filter.maskBits = ~0x0002;
+      FixtureDef3.filter.categoryBits = ~0x0006;
    		body->CreateFixture(&FixtureDef3);
    		body->SetFixedRotation(true);
    		//builderBody->SetGravityScale(0);

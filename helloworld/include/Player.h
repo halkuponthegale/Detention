@@ -52,6 +52,10 @@ public:
     int mType;
     int in_machine;
 
+    int isAtExit(sf::RectangleShape door){
+      return playerbody.getGlobalBounds().intersects(door.getGlobalBounds());
+    }
+
     void setWorld(b2World &World){
       static const float SCALE = 30.f;
 

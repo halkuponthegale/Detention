@@ -10,6 +10,7 @@
 #include "Mobile.h"
 #include "Level.h"
 #include "Wall.h"
+#include "Exit.h"
 
 /*
 	PlayView handles level loading, drawing, and gameplay
@@ -23,7 +24,8 @@ class PlayView : public MiniView{
 							level("../include/Levels/level"+std::to_string(lvl)+".txt"),
 							boxes_list(level.getBoxes()),builders_list(level.getBuilders()),
 							mobiles_list(level.getMobiles()), launchers_list(level.getLaunchers()),
-							walls_list(level.getWalls()),player(level.getPlayer())
+							walls_list(level.getWalls()),player(level.getPlayer()),
+							exit_r(level.getExit())
 		{
 
 			play_lvl = lvl;
@@ -78,6 +80,9 @@ class PlayView : public MiniView{
 
 		// set player to world
 		(*player).setWorld(world);
+
+		// set exit to world
+		(*exit_r).setWorld(world);
 
 
 		// add boxes to builder machines if necessary
@@ -154,6 +159,7 @@ class PlayView : public MiniView{
 		std::vector<std::unique_ptr<Launcher>> const& launchers_list;
 		std::vector<std::unique_ptr<Wall>> const& walls_list;
 		std::unique_ptr<Player> const& player;
+		std::unique_ptr<Exit> const& exit_r;
 };
 
 

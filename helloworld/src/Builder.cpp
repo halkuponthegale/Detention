@@ -155,6 +155,7 @@ void Builder::setWorld(b2World& World){
   FixtureDef2.friction = 1;
   FixtureDef2.shape = &Shape2;
   FixtureDef2.filter.maskBits = ~0x0002;
+  FixtureDef2.filter.categoryBits = ~0x0007;
   body->CreateFixture(&FixtureDef2);
   body->SetFixedRotation(true);
   //builderBody->SetGravityScale(0);

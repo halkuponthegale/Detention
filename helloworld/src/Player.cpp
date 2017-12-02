@@ -170,28 +170,29 @@
     }
     int Player::intersects(std::vector<Machine *> marr, std::vector<int> types){
       for(unsigned i = 0; i < marr.size(); i++){
-    if(playerbody.getGlobalBounds().intersects(marr[i] -> getShape().getGlobalBounds())){
-      if(marr[i] -> getBody() -> GetLinearVelocity().y != 0) { break; }
-        in_machine = 1;
-        my_machine = marr[i];
-        //std::cout << types[i];
-        this->mType = types[i];
-        if(mType==2){
-          my_machine->getBody()->SetGravityScale(0);
-          b2Vec2 pos = my_machine->getBody()->GetPosition();
-          my_machine->getBody()->SetTransform(b2Vec2(pos.x,pos.y-2),my_machine->getBody()->GetAngle());
+        if(playerbody.getGlobalBounds().intersects(marr[i] -> getShape().getGlobalBounds())){
+          if(marr[i] -> getBody() -> GetLinearVelocity().y != 0) { break; }
+
+          in_machine = 1;
+          my_machine = marr[i];
+          //std::cout << types[i];
+          this->mType = types[i];
+          if(mType==2){
+            my_machine->getBody()->SetGravityScale(0);
+            b2Vec2 pos = my_machine->getBody()->GetPosition();
+            my_machine->getBody()->SetTransform(b2Vec2(pos.x,pos.y-2),my_machine->getBody()->GetAngle());
+          }
+          //std::cout << mType;
+          body->SetLinearVelocity(b2Vec2(0,0));
+          //->SetGravityScale(0);
+          // TEMPORARY
+          my_machine -> setColor(sf::Color::Green);
+        //  std::cout << in_machine;
+          break;
         }
-        //std::cout << mType;
-        body->SetLinearVelocity(b2Vec2(0,0));
-        //->SetGravityScale(0);
-        // TEMPORARY
-        my_machine -> setColor(sf::Color::Green);
-      //  std::cout << in_machine;
-        break;
-    }
     else{
         in_machine = 0;
-      //  body->SetGravityScale(1);
+          //  body->SetGravityScale(1);
+        }
+      }
     }
-  }
-}

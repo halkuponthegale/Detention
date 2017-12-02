@@ -23,8 +23,8 @@ void EndView::Init(sf::RenderWindow *window){
 	sprintf(tmptext, "You completed level %d", finished_lvl);
 
 	tmp.setString(tmptext);
-	tmp2.setString("Main Menu");
-	tmp3.setString("Continue");
+	tmp2.setString("Continue");
+	tmp3.setString("Main Menu");
 
 	sf::FloatRect tmp_bounds = tmp.getLocalBounds();
 	sf::FloatRect tmp2_bounds = tmp2.getLocalBounds();
@@ -54,11 +54,11 @@ void EndView::Update(sf::RenderWindow *window){
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Return)){
 		if(intro_return){ return; }
 
-		if(cur_select == 1){
+		if(cur_select == 2){
 			// play screen
 			game_view.setView(new MenuView());
 		}
-		else if(cur_select == 2){
+		else if(cur_select == 1){
 			// back to lvl select
 		  if(finished_lvl < MAX_LVL)
 				game_view.setView(new PlayView(finished_lvl + 1));

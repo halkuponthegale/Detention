@@ -72,19 +72,18 @@ void PlayView::Init(sf::RenderWindow *window){
 		}
 	}
 
-
 }
 
 void PlayView::Update(sf::RenderWindow *window){
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Return)){
 		if(intro_return){ return; }
 
-		// increase top level if completed level is top level
-		if(play_lvl == top_lvl && top_lvl < MAX_LVL){
-			top_lvl++;
-		}
-
-		game_view.setView(new EndView(play_lvl));
+		// // increase top level if completed level is top level
+		// if(play_lvl == top_lvl && top_lvl < MAX_LVL){
+		// 	top_lvl++;
+		// }
+		//
+		// game_view.setView(new EndView(play_lvl));
 	}
 	else{
 		intro_return = 0;
@@ -96,8 +95,20 @@ void PlayView::Update(sf::RenderWindow *window){
 
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 					//builder = 0, launcher = 1, mobile = 2;
-					if(!(*player).inMachine())
-						(*player).intersects(vec,ty);
+					if(!(*player).inMachine()){
+						if(!(*player).isAtExit((*exit_r).getShape()))
+							 (*player).intersects(vec,ty);
+						else{
+							if(play_lvl == top_lvl && top_lvl < MAX_LVL){
+								top_lvl++;
+							}
+
+							game_view.setView(new EndView(play_lvl));
+						}
+
+
+
+					}
   }
 
 	(*player).Update();
@@ -169,11 +180,15 @@ void PlayView::Render(sf::RenderWindow *window){
 		}
 	}
 
+	// draw exit
+	(*exit_r).bounds.setPosition(SCALE * (*exit_r).getBody()->GetPosition().x, SCALE * (*exit_r).getBody()->GetPosition().y);
+	(*exit_r).bounds.setRotation((*exit_r).getBody()->GetAngle() * 180/b2_pi);
+	window->draw((*exit_r).getShape());
+
 	// draw player
 	(*player).playerbody.setPosition(SCALE * (*player).getBody()->GetPosition().x, SCALE * (*player).getBody()->GetPosition().y);
 	(*player).playerbody.setRotation((*player).getBody()->GetAngle() * 180/b2_pi);
 	if(!(*player).inMachine())
 		window->draw((*player).playerbody);
-
 
 }

@@ -8,6 +8,7 @@
 #include "Box.h"
 #include "Player.h"
 #include "Wall.h"
+#include "Exit.h"
 
 using namespace std;
 
@@ -65,6 +66,10 @@ public:
         walls.push_back(unique_ptr<Wall>(new Wall(x, y, half_w, half_h)));
 
       }
+
+      else if(type == "exit"){
+        exit_r = unique_ptr<Exit>(new Exit(x, y));
+      }
     }
 
     inFile.close();
@@ -96,6 +101,10 @@ public:
     return player;
   }
 
+  std::unique_ptr<Exit> const& getExit(){
+    return exit_r;
+  }
+
 private:
   std::vector<std::unique_ptr<Box>> boxes;
   std::vector<std::unique_ptr<Builder>> builders;
@@ -103,6 +112,7 @@ private:
   std::vector<std::unique_ptr<Launcher>> launchers;
   std::vector<std::unique_ptr<Wall>> walls;
   std::unique_ptr<Player> player;
+  std::unique_ptr<Exit> exit_r;
 
   // std::vector<std::unique_ptr<Actor>> walls;
   std::vector<std::unique_ptr<Actor>> machines;

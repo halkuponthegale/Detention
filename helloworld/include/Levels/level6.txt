@@ -7,3 +7,5 @@
 700 150 launcher
 350 200 launcher
 80 90 player
+600 400 exit
+400 500 wall 800 10
