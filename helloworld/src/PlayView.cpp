@@ -93,6 +93,19 @@ void PlayView::Update(sf::RenderWindow *window){
 		window -> close();
 	}
 
+	// if last level, check if two player bodies are touching
+	// if so, end level
+	if(players_list.size() > 1){
+		if(!(players_list[0] -> inMachine()) && !(players_list[1] -> inMachine()) &&
+		   players_list[0] -> getShape().getGlobalBounds().intersects(players_list[1] -> getShape().getGlobalBounds()) ){
+			if(play_lvl == top_lvl && top_lvl < MAX_LVL){
+				top_lvl++;
+			}
+
+			game_view.setView(new EndView(play_lvl));
+		}
+	}
+
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 			//builder = 0, launcher = 1, mobile = 2;
 			if(!players_list.empty()){
