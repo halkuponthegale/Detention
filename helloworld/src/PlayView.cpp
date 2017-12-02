@@ -78,12 +78,12 @@ void PlayView::Update(sf::RenderWindow *window){
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Return)){
 		if(intro_return){ return; }
 
-		// // increase top level if completed level is top level
-		// if(play_lvl == top_lvl && top_lvl < MAX_LVL){
-		// 	top_lvl++;
-		// }
-		//
-		// game_view.setView(new EndView(play_lvl));
+		// increase top level if completed level is top level
+		if(play_lvl == top_lvl && top_lvl < MAX_LVL){
+			top_lvl++;
+		}
+
+		game_view.setView(new EndView(play_lvl));
 	}
 	else{
 		intro_return = 0;

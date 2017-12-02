@@ -1,7 +1,9 @@
+0 300 wall 2 300
+800 300 wall 2 300
+400 500 wall 800 10
 200 100 player
 400 200 builder
 50 200 box
 50 100 box
 100 100 box
 600 400 exit
-400 500 wall 800 10
