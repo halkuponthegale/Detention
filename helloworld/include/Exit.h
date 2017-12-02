@@ -10,7 +10,7 @@ public:
     bounds.setSize(sf::Vector2f(40, 80));
     bounds.setOrigin(bounds.getOrigin().x + 20, bounds.getOrigin().y + 40);
     bounds.setPosition(cx, cy);
-    bounds.setFillColor(sf::Color(130,255,0));
+    bounds.setFillColor(sf::Color(139,69,19));
 
     x = cx; y = cy;
   }
