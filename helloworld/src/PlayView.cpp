@@ -187,8 +187,14 @@ void PlayView::Render(sf::RenderWindow *window){
 			(*launchers_list[z]).machine_body.setRotation((*launchers_list[z]).getBody()->GetAngle() * 180/b2_pi);
 			(*launchers_list[z]).barrel.setPosition(SCALE * (*launchers_list[z]).getBody()->GetPosition().x, SCALE * (*launchers_list[z]).getBody()->GetPosition().y);
 			(*launchers_list[z]).barrel.setRotation(90+(-1*( 180.0/3.141592653589793 )*(*launchers_list[z]).getTheta()));
+			(*launchers_list[z]).powerBG.setPosition(SCALE * (*launchers_list[z]).getBody()->GetPosition().x, SCALE * (*launchers_list[z]).getBody()->GetPosition().y);
+			(*launchers_list[z]).power.setPosition(SCALE * (*launchers_list[z]).getBody()->GetPosition().x, SCALE * (*launchers_list[z]).getBody()->GetPosition().y);
+				(*launchers_list[z]).power.move(22.5,-25);
+				(*launchers_list[z]).powerBG.move(22.5,-25);
 			window->draw((*launchers_list[z]).barrel);
 			window->draw((*launchers_list[z]).machine_body);
+			window->draw((*launchers_list[z]).powerBG);
+			window->draw((*launchers_list[z]).power);
 		}
 	}
 

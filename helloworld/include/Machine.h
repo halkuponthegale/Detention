@@ -25,7 +25,7 @@ class Machine{
 		virtual void getOut(){};//{return;}
 
 		//void setWorld(b2World& World);
-
+double launchVel;
 	protected:
 		b2Body* body;
 

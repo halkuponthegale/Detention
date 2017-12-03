@@ -14,11 +14,22 @@ public:
 			barrel.setPosition(350,200);
 			barrel.setOrigin(2.5,45);
       barrel.setFillColor(sf::Color::Black);
+      powerBG= sf::RectangleShape(sf::Vector2f(5,45));
+			powerBG.setPosition(350,200);
+			powerBG.setOrigin(2.5,45);
+      powerBG.setFillColor(sf::Color::White);
+      powerBG.rotate(180);
+      power= sf::RectangleShape(sf::Vector2f(5,0));
+      power.setPosition(350,200);
+      power.setOrigin(2.5,45);
+      power.setFillColor(sf::Color::Red);
+      power.rotate(180);
+      //power.move(0,50);
 
       x = xo; y = yo;
 
       machine_body.setPosition(xo, yo);
-
+      launchVel = 0;
   }
 
   void rotate(double dTheta){
@@ -33,6 +44,7 @@ public:
 
   // define how this machine can move (can set limitations)
   void Update(){
+    power.setSize(sf::Vector2f(5,9.0*launchVel));
       // move up
       if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
           if(machine_body.getPosition().y > 0) {
@@ -96,8 +108,9 @@ public:
    	// 	launcher.setBody(*launcherBody);
    }
 
-   sf::RectangleShape barrel;
+   sf::RectangleShape barrel,powerBG,power;
 
 private:
   double theta;
+
 };
