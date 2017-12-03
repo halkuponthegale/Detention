@@ -8,8 +8,15 @@ class Player {
 
 public:
 
-    //Create a simple rectangle, stand in for the player
+    // Create a simple rectangle, stand in for the player
     sf::RectangleShape playerbody;
+
+    
+    // used for spritesheet
+    sf::Texture playerTexture;
+    sf::Sprite playerImage;
+    enum Directions { Down, Left, Right, Up };
+    sf::Vector2i source;
 
     Player(double xo, double yo); // Constructor
 
@@ -53,7 +60,7 @@ public:
     int in_machine;
 
     int isAtExit(sf::RectangleShape door){
-      return playerbody.getGlobalBounds().intersects(door.getGlobalBounds());
+      return playerImage.getGlobalBounds().intersects(door.getGlobalBounds());
     }
 
     void setWorld(b2World &World){
