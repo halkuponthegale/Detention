@@ -5,6 +5,7 @@ void PlayView::Init(sf::RenderWindow *window){
 	// load font
 	font.loadFromFile("../include/Fonts/Beyblade Metal Fight Font.ttf");
 
+    
 	intro_return = 1;
 
 	// create tmp text
@@ -213,14 +214,14 @@ void PlayView::Render(sf::RenderWindow *window){
 	}
 
 
-	// draw plauers
+	// draw players
 	if(!players_list.empty()){
 		int z;
 		for(z = 0; z < players_list.size(); z++){
-			(*players_list[z]).playerbody.setPosition(SCALE * (*players_list[z]).getBody()->GetPosition().x, SCALE * (*players_list[z]).getBody()->GetPosition().y);
-			(*players_list[z]).playerbody.setRotation((*players_list[z]).getBody()->GetAngle() * 180/b2_pi);
+			(*players_list[z]).playerImage.setPosition(SCALE * (*players_list[z]).getBody()->GetPosition().x, SCALE * (*players_list[z]).getBody()->GetPosition().y);
+			(*players_list[z]).playerImage.setRotation((*players_list[z]).getBody()->GetAngle() * 180/b2_pi);
 			if(!(*players_list[z]).inMachine())
-				window->draw((*players_list[z]).playerbody);
+				window->draw((*players_list[z]).playerImage);
 		}
 	}
 	//

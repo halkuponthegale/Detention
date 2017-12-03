@@ -4,11 +4,21 @@
 #include "iostream"
 
     // Constructor
-    // Creates a simple rectanglein place of player sprite
+    // Creates a simple rectangle in place of player sprite
     Player::Player(double xo, double yo) {
-        playerbody.setSize(sf::Vector2f(10,30));
-        playerbody.setOrigin(playerbody.getOrigin().x + 5, playerbody.getOrigin().y + 15);
-        playerbody.setPosition(xo,yo);
+        
+        // Load player spritesheet from png file (in include folder)
+        if(!playerTexture.loadFromFile("../include/sprites/FinalCalSprite.png",sf::IntRect(0, 0, 100, 140)))
+        {        
+        }
+        
+        playerImage.setTexture(playerTexture);
+    
+       playerbody.setSize(sf::Vector2f(25,35));
+       // playerbody.setOrigin(playerbody.getOrigin().x + 5, playerbody.getOrigin().y + 15);
+       // playerbody.setPosition(xo,yo);
+        
+        sf::Vector2i source(1, Down); //keeps track of what direction the player is moving in, so we can draw the correct sprite 
 
         x = xo; y = yo;
 
@@ -21,22 +31,26 @@
 
     // Moves the player up, unless it's already at the top of the screen
     void Player::player_up() {
-        if(playerbody.getPosition().y > 0 && body -> GetLinearVelocity().y == 0) {
+        if(playerImage.getPosition().y > 0 && body -> GetLinearVelocity().y == 0) {
             //playerbody.move(0, -.1);
   //        if(facing == 0){ // if facing left
             this->launch(1.8,M_PI/2);
 //          }
+            //source.y = Up;
+            //source.x++;
+        }
           // else{ // if facing right
           //   this->launch(3.0,M_PI/2);
           // }
-        }
     }
 
 
     // Moves the player down, unless it's already at the bottom of the screen
     void Player::player_down() {
-        if(playerbody.getPosition().y < 570) {
+        if(playerImage.getPosition().y < 570) {
             //playerbody.move(0, .1);
+            //source.y = Down;
+            //source.x++;
 
         }
     }
@@ -44,22 +58,26 @@
 
     // Moves the player left, unless it's already at the left of the screen
     void Player::player_left() {
-        if(playerbody.getPosition().x > 0) {  // check
+        if(playerImage.getPosition().x > 0) {  // check
             //playerbody.move(-.1, 0);  // check
             b2Vec2 vel = body->GetLinearVelocity();
             vel.x = -5;
             body->SetLinearVelocity( vel );
+            source.y = Left;
+            source.x++;
         }
     }
 
 
     // Moves the player right, unless it's already at the right of the screen
     void Player::player_right() {
-        if(playerbody.getPosition().x < 800) {  // check
+        if(playerImage.getPosition().x < 800) {  // check
             //playerbody.move(.1, 0);  // check
             b2Vec2 vel = body->GetLinearVelocity();
             vel.x = 5;
             body->SetLinearVelocity( vel );
+            source.y = Right;
+            source.x++;
         }
     }
     void Player::Update(){
@@ -134,6 +152,14 @@
                 player_right();
         }
         //std::cout << mType;
+        
+        
+
+        if (source.x * 20 >= playerTexture.getSize().x)
+            source.x = 0;
+        
+        playerImage.setTextureRect(sf::IntRect(source.x*25, source.y*35, 25, 35));
+
 
     }
 
@@ -157,7 +183,7 @@
 
     // Puts paddle back to original position
     void Player::reset() {
-        playerbody.setPosition(700,300);
+        playerImage.setPosition(700,300);
     }
     // Accessor method for rectangle shape
     sf::RectangleShape Player::getShape(){
@@ -174,7 +200,7 @@
       int type = -1;
 
       for(unsigned i = 0; i < marr.size(); i++){
-        if(playerbody.getGlobalBounds().intersects(marr[i] -> getShape().getGlobalBounds())){
+        if(playerImage.getGlobalBounds().intersects(marr[i] -> getShape().getGlobalBounds())){
           if(marr[i] -> getBody() -> GetLinearVelocity().y != 0) { break; }
 
           //builder = 0, launcher = 1, mobile = 2;
