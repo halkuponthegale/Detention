@@ -160,8 +160,14 @@ int Player::intersects(std::vector<Machine *> marr, std::vector<int> types){
   int type = -1;
 
   for(unsigned i = 0; i < marr.size(); i++){
+    // account for dome shape on launcher
+    int intersects_dome = 0;
+    if(types[i] == 1){
+      intersects_dome = playerbody.getGlobalBounds().intersects(marr[i] -> dome.getGlobalBounds());
+    }
+
     // if player body intersects machine box
-    if(playerbody.getGlobalBounds().intersects(marr[i] -> getShape().getGlobalBounds())){
+    if(playerbody.getGlobalBounds().intersects(marr[i] -> getShape().getGlobalBounds()) || intersects_dome){
       // if machine is not currently falling (for mobile bug)
       if(marr[i] -> getBody() -> GetLinearVelocity().y != 0) { break; }
         //builder = 0, launcher = 1, mobile = 2;

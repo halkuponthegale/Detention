@@ -9,6 +9,8 @@ void EndView::Init(sf::RenderWindow *window){
 
 	intro_return = 1;
 	cur_select = 1;
+	if(finished_lvl == MAX_LVL)
+		cur_select = 2;
 	up_press = 0; down_press = 0;
 
 	// create tmp text
@@ -65,7 +67,9 @@ void EndView::Update(sf::RenderWindow *window){
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up)){
 		if(up_press){return;}
 
-		if(cur_select > 1)
+		if(finished_lvl == MAX_LVL && cur_select > 2)
+			cur_select--;
+		else if(!(finished_lvl == MAX_LVL) && cur_select > 1)
 			cur_select--;
 		up_press = 1;
 	}
@@ -117,7 +121,8 @@ void EndView::Render(sf::RenderWindow *window){
 	}
 
 	window -> draw(tmp);
-	window -> draw(tmp2);
+	if(finished_lvl != MAX_LVL)
+		window -> draw(tmp2);
 	window -> draw(tmp3);
 	window -> draw(tmp4);
 

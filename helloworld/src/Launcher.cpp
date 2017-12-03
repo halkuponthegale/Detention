@@ -3,12 +3,18 @@
 Launcher::Launcher(double xo, double yo){
 
     // make machine body
-    machine_body.setSize(sf::Vector2f(50,50));
-    machine_body.setOrigin(machine_body.getOrigin().x + 25, machine_body.getOrigin().y + 25);
+    machine_body.setSize(sf::Vector2f(50,25));
+    machine_body.setOrigin(machine_body.getOrigin().x + 25, machine_body.getOrigin().y);
     machine_body.setPosition(xo, yo);
 
-    machine_body.setFillColor(sf::Color::Yellow);
+    machine_body.setFillColor(sf::Color(40,40,40));
     theta = M_PI/2;
+
+    // make dome
+    dome.setRadius(25);
+    dome.setOrigin(dome.getOrigin().x + 25, dome.getOrigin().y + 25);
+    dome.setPosition(xo,yo);
+    dome.setFillColor(sf::Color(40,40,40));
 
     // make barrel and power bar
     barrel = sf::RectangleShape(sf::Vector2f(5,45));

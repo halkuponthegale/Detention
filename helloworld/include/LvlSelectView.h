@@ -34,6 +34,7 @@ class LvlSelectView : public MiniView{
 
 		int cur_col;
 		int cur_row;
+		int cur_select;
 
 };
 

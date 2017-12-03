@@ -11,6 +11,7 @@ void LvlSelectView::Init(sf::RenderWindow *window){
 	down_press = 0;
 
 	cur_col = 1; cur_row = 1;
+	cur_select = 1;
 
 	// load font
 	font.loadFromFile("../include/Fonts/Beyblade Metal Fight Font.ttf");
@@ -56,8 +57,10 @@ void LvlSelectView::Update(sf::RenderWindow *window){
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right)){
 		if(right_press){ return; }
 
-		if(cur_col < 5){
+		if(cur_col < 5 && cur_select < top_lvl){
 			cur_col++;
+			cur_select = cur_col + 5 * (cur_row-1);
+
 		}
 
 		right_press = 1;
@@ -71,6 +74,8 @@ void LvlSelectView::Update(sf::RenderWindow *window){
 
 		if(cur_col > 1){
 			cur_col--;
+			cur_select = cur_col + 5 * (cur_row-1);
+
 		}
 
 		left_press = 1;
@@ -82,8 +87,10 @@ void LvlSelectView::Update(sf::RenderWindow *window){
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down)){
 		if(down_press){ return; }
 
-		if(cur_row == 1){
+		if(cur_row == 1 && cur_select < top_lvl - 4){
 			cur_row = 2;
+			cur_select = cur_col + 5 * (cur_row-1);
+
 		}
 		down_press = 1;
 	}
@@ -96,6 +103,8 @@ void LvlSelectView::Update(sf::RenderWindow *window){
 
 		if(cur_row == 2){
 			cur_row = 1;
+			cur_select = cur_col + 5 * (cur_row-1);
+
 		}
 		up_press = 1;
 	}
@@ -107,7 +116,6 @@ void LvlSelectView::Update(sf::RenderWindow *window){
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Return)){
 		if(intro_return){ return; }
 
-		int cur_select = cur_col + 5 * (cur_row-1);
 		game_view.setView(new PlayView(cur_select));
 
 	}
@@ -134,7 +142,7 @@ void LvlSelectView::Render(sf::RenderWindow *window){
 			lvls[i].text.setFillColor(sf::Color::White);
 		}
 
-		if(lvls[i].lvl == cur_col + 5 * (cur_row-1)){
+		if(lvls[i].lvl == cur_select){
 			lvls[i].text.setFillColor(sf::Color::Blue);
 		}
 

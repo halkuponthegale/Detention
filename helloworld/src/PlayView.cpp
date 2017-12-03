@@ -12,12 +12,12 @@ void PlayView::Init(sf::RenderWindow *window){
 	tmp2.setFont(font);
 	tmp3.setFont(font);
 
-	tmp.setCharacterSize(50);
+	tmp.setCharacterSize(20);
 	tmp2.setCharacterSize(30);
 	tmp3.setCharacterSize(30);
 
-	char tmptext[20];
-	sprintf(tmptext, "Playing Level %d", play_lvl);
+	char tmptext[10];
+	sprintf(tmptext, "Level %d", play_lvl);
 
 	tmp.setString(tmptext);
 	tmp2.setString("Press Return to go to finish (win level)");
@@ -31,7 +31,7 @@ void PlayView::Init(sf::RenderWindow *window){
 	tmp2.setOrigin(tmp2_bounds.width / 2, tmp2_bounds.height / 2);
 	tmp3.setOrigin(tmp3_bounds.width / 2, tmp3_bounds.height / 2);
 
-	tmp.setPosition(window -> getSize().x / 2, window -> getSize().y / 3);
+	tmp.setPosition(14 * window -> getSize().x / 15, window -> getSize().y / 20);
 	tmp2.setPosition(window -> getSize().x / 2, window -> getSize().y / 2);
 	tmp3.setPosition(window -> getSize().x / 2, window -> getSize().y / 2 + 30);
 
@@ -144,6 +144,9 @@ void PlayView::Update(sf::RenderWindow *window){
 }
 
 void PlayView::Render(sf::RenderWindow *window){
+
+	tmp.setFillColor(sf::Color::Black);
+
 	window -> draw(bgSprite);
 	window -> draw(tmp);
 	window -> draw(tmp2);
@@ -185,13 +188,16 @@ void PlayView::Render(sf::RenderWindow *window){
 		for(z = 0; z < launchers_list.size(); z++){
 			(*launchers_list[z]).machine_body.setPosition(SCALE * (*launchers_list[z]).getBody()->GetPosition().x, SCALE * (*launchers_list[z]).getBody()->GetPosition().y);
 			(*launchers_list[z]).machine_body.setRotation((*launchers_list[z]).getBody()->GetAngle() * 180/b2_pi);
+			(*launchers_list[z]).dome.setPosition(SCALE * (*launchers_list[z]).getBody()->GetPosition().x, SCALE * (*launchers_list[z]).getBody()->GetPosition().y);
 			(*launchers_list[z]).barrel.setPosition(SCALE * (*launchers_list[z]).getBody()->GetPosition().x, SCALE * (*launchers_list[z]).getBody()->GetPosition().y);
 			(*launchers_list[z]).barrel.setRotation(90+(-1*( 180.0/3.141592653589793 )*(*launchers_list[z]).getTheta()));
 			(*launchers_list[z]).powerBG.setPosition(SCALE * (*launchers_list[z]).getBody()->GetPosition().x, SCALE * (*launchers_list[z]).getBody()->GetPosition().y);
 			(*launchers_list[z]).power.setPosition(SCALE * (*launchers_list[z]).getBody()->GetPosition().x, SCALE * (*launchers_list[z]).getBody()->GetPosition().y);
-				(*launchers_list[z]).power.move(22.5,-25);
-				(*launchers_list[z]).powerBG.move(22.5,-25);
+			(*launchers_list[z]).power.move(22.5,-25);
+			(*launchers_list[z]).powerBG.move(22.5,-25)
+			;
 			window->draw((*launchers_list[z]).barrel);
+			window->draw((*launchers_list[z]).dome);
 			window->draw((*launchers_list[z]).machine_body);
 			window->draw((*launchers_list[z]).powerBG);
 			window->draw((*launchers_list[z]).power);

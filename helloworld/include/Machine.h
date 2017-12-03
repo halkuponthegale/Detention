@@ -7,8 +7,11 @@
 #include <iostream>
 class Machine{
 	public:
-		double launchVel;
 		sf::RectangleShape machine_body;
+		
+		// dome and launch velocity for launcher
+		sf::CircleShape dome;
+		double launchVel;
 
 		virtual void Update(){}
 
