@@ -4,11 +4,12 @@
 // #include "Actor.h"
 #include <SFML/Graphics.hpp>
 #include "Box.h"
+#include "Wall.h"
 #include <iostream>
 class Machine{
 	public:
 		sf::RectangleShape machine_body;
-		
+
 		// dome and launch velocity for launcher
 		sf::CircleShape dome;
 		double launchVel;
@@ -35,9 +36,11 @@ class Machine{
 		int facing; // 0 = left, 1 = right
 		int space;
 		int cur_box_idx;
+		int cur_wall_idx;
 
 		// builder vars
 		Box* boxlist[10];
+		Wall* walllist[20];
 		int carrybox;
 		Box* mybox;
 

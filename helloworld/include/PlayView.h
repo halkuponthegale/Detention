@@ -67,6 +67,15 @@ class PlayView : public MiniView{
 			for(i = 0; i < walls_list.size(); i++){
 				(*walls_list[i]).setWorld(world);
 			}
+
+			int b,z;
+			if(!builders_list.empty()){
+				for(b = 0; b < builders_list.size(); b++){
+					for(z = 0; z < walls_list.size(); z++){
+						(*builders_list[b]).add_wall(&(*walls_list[z]));
+					}
+				}
+			}
 		}
 
 
