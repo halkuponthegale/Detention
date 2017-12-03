@@ -29,21 +29,22 @@ int main(int argc, char** argv)
             if(Event.type == sf::Event::Closed)
             App.close();
         }
-        
+
 
 
         // clear screen and fill with black
         App.clear(sf::Color::Black);
-        
+
         // call Update and Render() on game_view
-        game_view.Update();
+        if(App.hasFocus())
+          game_view.Update();
         game_view.Render();
 
 
         // display
         App.display();
 
-    
+
     }
 
     // Done.

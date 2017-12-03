@@ -68,8 +68,8 @@ void Builder::Update(){
             }
         }
 
-        // if you're carrying a box and it's not the initial space press, set it down the way you're facing
-        if(carrybox && !space){
+        // if you're carrying a box, not jumping, and it's not the initial space press, set it down the way you're facing
+        if(carrybox && body->GetLinearVelocity().y == 0 && !space){
             // if facing left, place left
             if(facing == 0){
                 mybox->getBody()->SetTransform(b2Vec2((machine_body.getPosition().x - 60)/30.0, machine_body.getPosition().y/30.0),0);
@@ -133,7 +133,7 @@ void Builder::setWorld(b2World& World){
   FixtureDef2.filter.maskBits = ~0x0002;
   FixtureDef2.filter.categoryBits = ~0x0007;
   FixtureDef2.filter.groupIndex = -2;
-  
+
   body->CreateFixture(&FixtureDef2);
   body->SetFixedRotation(true);
 
