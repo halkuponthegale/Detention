@@ -61,7 +61,7 @@ void Player::Update(){
           if(mType==0)
             my_machine -> setColor(sf::Color::Red);
           else if(mType==1)
-            my_machine -> setColor(sf::Color::Yellow);
+            my_machine -> setColor(sf::Color(40,40,40));
           else if(mType==2)
             my_machine -> setColor(sf::Color::Magenta);
 
@@ -93,7 +93,7 @@ void Player::Update(){
             my_machine->launchVel = 0;
             in_machine = 0;
             mType=-1;
-            my_machine -> setColor(sf::Color::Yellow);
+            my_machine -> setColor(sf::Color(40,40,40));
             body->SetTransform(my_machine -> getBody()->GetPosition(),0);
             my_machine -> Update();
           }
