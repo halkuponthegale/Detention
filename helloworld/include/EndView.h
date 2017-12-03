@@ -23,9 +23,12 @@ class EndView : public MiniView{
 		int cur_select;
 		int finished_lvl;
 
+		int up_press, down_press;
+
 		sf::Text tmp;
 		sf::Text tmp2;
 		sf::Text tmp3;
+		sf::Text tmp4;
 
 
 };

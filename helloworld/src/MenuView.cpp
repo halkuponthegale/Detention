@@ -1,4 +1,5 @@
 #include "MenuView.h"
+#include "ControlsView.h"
 #include "LvlSelectView.h"
 
 void MenuView::Init(sf::RenderWindow *window){
@@ -21,7 +22,7 @@ void MenuView::Init(sf::RenderWindow *window){
 
 	title.setString("Detention");
 	play.setString("Play");
-	exit.setString("Exit");
+	exit.setString("Controls");
 
 	sf::FloatRect title_bounds = title.getLocalBounds();
 	sf::FloatRect play_bounds = play.getLocalBounds();
@@ -56,12 +57,16 @@ void MenuView::Update(sf::RenderWindow *window){
 			game_view.setView(new LvlSelectView());
 		}
 		else if(cur_select == 2){
-			// quit
-			window -> close();
+			// go to controls screen
+			game_view.setView(new ControlsView());
 		}
 	}
 	else{
 		intro_return = 0;
+	}
+
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)){
+		window -> close();
 	}
 
 }
