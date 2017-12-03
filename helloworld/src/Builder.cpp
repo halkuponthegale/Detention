@@ -3,14 +3,14 @@
 // constructor
 Builder::Builder(double xo, double yo){
 
+    // create machine body rectangle
     machine_body.setSize(sf::Vector2f(50,50));
-    machine_body.setPosition(0,0);
     machine_body.setOrigin(machine_body.getOrigin().x + 25, machine_body.getOrigin().y + 25);
+    machine_body.setPosition(xo, yo);
     machine_body.setFillColor(sf::Color::Red);
 
+    // initial x, y pos
     x = xo; y = yo;
-
-    machine_body.setPosition(xo, yo);
 
     cur_box_idx = 0;
     carrybox = 0;
@@ -18,97 +18,71 @@ Builder::Builder(double xo, double yo){
 
 // define how this machine can move (can set limitations)
 void Builder::Update(){
-    // move up
+    // W = jump
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::W) && body->GetLinearVelocity().y == 0) {
         if(machine_body.getPosition().y > 0) {
-            machine_body.move(0, -1);
-            this->launch(180,M_PI/2);
-
-            // if you have a box, move it as well
-            if(carrybox){
-              // mybox->getBody()->SetTransform(b2Vec2(machine_body.getPosition().x / 30.0, (machine_body.getPosition().y - 60)/30.0),0);
-              //  mybox -> move(0,-1);
-            }
+            jump();
         }
     }
-    // move left
+    // A = move left
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         if(machine_body.getPosition().x > 0) {
-          //  machine_body.move(-1, 0);
+          // update velocity
           b2Vec2 vel = body->GetLinearVelocity();
           vel.x = -5;
           body->SetLinearVelocity( vel );
 
+          // facing left
           facing = 0;
-
-            // if you have a box, move it as well
-            if(carrybox){
-              // mybox->getBody()->SetTransform(b2Vec2(machine_body.getPosition().x / 30.0, (machine_body.getPosition().y - 60)/30.0),0);
-              // mybox -> move(-1,0);
-            }
         }
     }
-    // move down
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-        if(machine_body.getPosition().y < 550) {  // check
-            machine_body.move(0, 1);
-
-             // if you have a box, move it as well
-           if(carrybox){
-
-                // mybox -> move(0,1);
-                // mybox->getBody()->SetTransform(b2Vec2(machine_body.getPosition().x / 30.0, (machine_body.getPosition().y - 60)/30.0),0);
-
-            }
-        }
-    }
-    // move right
+    // D = move right
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        if(machine_body.getPosition().x < 750) {  // check
-            // machine_body.move(1, 0);
+        if(machine_body.getPosition().x < 750) {
+            // update velocity
             b2Vec2 vel = body->GetLinearVelocity();
             vel.x = 5;
             body->SetLinearVelocity( vel );
-            facing = 1;
 
-             // if you have a box, move it as well
-           if(carrybox){
-                // mybox -> move(1,0);
-                // mybox->getBody()->SetTransform(b2Vec2(machine_body.getPosition().x / 30.0, (machine_body.getPosition().y - 60)/30.0),0);
-            }
+            // facing right
+            facing = 1;
         }
     }
 
+    // if you're carrying a box, move it too
     if(carrybox){
       mybox->getBody()->SetTransform(b2Vec2(machine_body.getPosition().x / 30.0, (machine_body.getPosition().y - 60)/30.0),0);
     }
 
+    // Space = pick up/set down Box
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
         int intersect = 0;
         int i;
 
+        // loop through boxes until find one that is touching and on same y level
         for(i = 0; i < cur_box_idx; i++){
-          //std:: cout << touching(boxlist[i]) << " ";
-          // std::cout << boxlist[i] -> getShape().getPosition().y << "\n";
-          // std::cout << machine_body.getPosition().y << "\n\n";
             if(intersects(boxlist[i]) &&  (boxlist[i] -> getBody()->GetPosition().y < (body ->GetPosition().y + 1))
                                       &&  (boxlist[i] -> getBody()->GetPosition().y > (body ->GetPosition().y - 1))){
                 intersect = 1;
                 break;
             }
         }
-        //std:: cout << "|";
+
         // if you're carrying a box and it's not the initial space press, set it down the way you're facing
         if(carrybox && !space){
-            if(facing == 0){ // if facing left
+            // if facing left, place left
+            if(facing == 0){
                 mybox->getBody()->SetTransform(b2Vec2((machine_body.getPosition().x - 60)/30.0, machine_body.getPosition().y/30.0),0);
                 mybox->getBody()->SetGravityScale(1);
             }
+            // if facing right, place right
             else{
                 mybox->getBody()->SetTransform(b2Vec2((machine_body.getPosition().x + 60)/30.0, machine_body.getPosition().y/30.0),0);
                 mybox->getBody()->SetGravityScale(1);
 
             }
+
+            // no longer carrying a box
             carrybox = 0;
         }
         // if you aren't carrying a box and you're intersecting one, pick it up
@@ -126,19 +100,21 @@ void Builder::Update(){
     }
 }
 
+void Builder::jump(){
+  machine_body.move(0, -1);
 
-void Builder::launch(double velocity, double theta){
-    b2Vec2 vel = body->GetLinearVelocity();
-    //if(inMachine == true){
-      double vx = cos(theta)* velocity;
-      double vy = sin(theta)* velocity;
-      double impx = (vel.x)*body->GetMass();
-      double impy = (vel.y)*body->GetMass();
-      //std::cout << vx <<"," << vy;
-      body->ApplyLinearImpulse( b2Vec2(vx, -vy), body->GetWorldCenter(), true );
-      //inMachine = false;
-    //}
+  double velocity = 180;
+  double theta = M_PI/2;
+
+  b2Vec2 vel = body->GetLinearVelocity();
+  double vx = cos(theta)* velocity;
+  double vy = sin(theta)* velocity;
+  double impx = (vel.x)*body->GetMass();
+  double impy = (vel.y)*body->GetMass();
+
+  body->ApplyLinearImpulse( b2Vec2(vx, -vy), body->GetWorldCenter(), true );
 }
+
 
 void Builder::setWorld(b2World& World){
   static const float SCALE = 30.f;
@@ -157,9 +133,8 @@ void Builder::setWorld(b2World& World){
   FixtureDef2.filter.maskBits = ~0x0002;
   FixtureDef2.filter.categoryBits = ~0x0007;
   FixtureDef2.filter.groupIndex = -2;
+  
   body->CreateFixture(&FixtureDef2);
   body->SetFixedRotation(true);
-  //builderBody->SetGravityScale(0);
 
-  //builder.setBody(*builderBody);
 }

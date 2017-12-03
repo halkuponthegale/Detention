@@ -54,16 +54,17 @@ void EndView::Update(sf::RenderWindow *window){
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Return)){
 		if(intro_return){ return; }
 
-		if(cur_select == 2){
-			// play screen
-			game_view.setView(new MenuView());
-		}
-		else if(cur_select == 1){
-			// back to lvl select
+
+		if(cur_select == 1){
+			// progress to next level (or final level again if finished final)
 		  if(finished_lvl < MAX_LVL)
 				game_view.setView(new PlayView(finished_lvl + 1));
 			else if(finished_lvl == MAX_LVL)
 				game_view.setView(new PlayView(finished_lvl));
+		}
+		else if(cur_select == 2){
+			// menu screen
+			game_view.setView(new MenuView());
 		}
 	}
 	else{

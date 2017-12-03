@@ -7,24 +7,25 @@
 
 class Builder : public Machine{
 	public:
+		// constructor
 		Builder(double xo, double yo);
-		void add_box(Box *b){boxlist[cur_box_idx] = b; cur_box_idx++;}
-		// void Update();
-		void setBody(b2Body& bod){
-      body = &bod;
-    }
-		void Update();
-		void launch(double velocity, double theta);
 
+		// process input
+		void Update();
+
+		// add box to box list
+		void add_box(Box *b){ boxlist[cur_box_idx] = b; cur_box_idx++; }
+		// reset velocity to 0 when getting out
+		void getOut(){ body -> SetLinearVelocity(b2Vec2(0,0)); }
+
+		// set physics body
+		void setBody(b2Body& bod){ body = &bod; }
+		// set physics world
 		void setWorld(b2World& World);
 
-		void getOut(){
-			body -> SetLinearVelocity(b2Vec2(0,0));
-		}
-
 	private:
-		//double x, y;
-
+		// jump ~1 block
+		void jump();
 };
 
 

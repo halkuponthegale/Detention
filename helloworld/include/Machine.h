@@ -7,36 +7,37 @@
 #include <iostream>
 class Machine{
 	public:
-		virtual void Update();
-		virtual double getTheta(){return 0;}
-		void setPosition(int x, int y);
-		sf::RectangleShape getShape() {return machine_body;}
-		bool intersects(Box* o){//return machine_body.getGlobalBounds().intersects(o -> getShape().getGlobalBounds());
-				return touching(o) < 52;//&& machine_body.getGlobalBounds().top == o -> getShape().getGlobalBounds().top;
-		}
-		float touching(Box* o){
-			return abs(machine_body.getGlobalBounds().left - o -> getShape().getGlobalBounds().left);
-		}
-		b2Body* getBody(){ return body; }
-		void setColor(sf::Color c){	machine_body.setFillColor(c); } // TEMPORARY
-
+		double launchVel;
 		sf::RectangleShape machine_body;
 
-		virtual void getOut(){};//{return;}
+		virtual void Update(){}
 
-		//void setWorld(b2World& World);
-double launchVel;
+		bool intersects(Box* o){ return touching(o) < 52; }
+		float touching(Box* o){ return abs(machine_body.getGlobalBounds().left - o -> getShape().getGlobalBounds().left); }
+
+		virtual void getOut(){};
+
+		virtual double getTheta(){return 0;}
+		sf::RectangleShape getShape() {return machine_body;}
+		b2Body* getBody(){ return body; }
+
+		void setPosition(int x, int y);
+		void setColor(sf::Color c){	machine_body.setFillColor(c); } // TEMPORARY
+
+
+
 	protected:
 		b2Body* body;
 
-
-		// tmp builder vars - later will be stored in Level
-		Box* boxlist[10];
-		int carrybox;
-		Box* mybox;
 		int facing; // 0 = left, 1 = right
 		int space;
 		int cur_box_idx;
+
+		// builder vars
+		Box* boxlist[10];
+		int carrybox;
+		Box* mybox;
+
 
 		double x, y;
 
