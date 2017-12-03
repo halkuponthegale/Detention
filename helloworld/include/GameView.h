@@ -24,7 +24,7 @@ class GameView{
 		void setView(MiniView *view){
 
 			// set view variable to new view
-			game_view = view; 
+			game_view = view;
 
 			// initialize new view
 			if(game_view != NULL){
@@ -56,7 +56,7 @@ class GameView{
 
 extern GameView game_view;
 extern int top_lvl;
-#define MAX_LVL 6
+#define MAX_LVL 10
 
 
 

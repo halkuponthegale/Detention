@@ -24,12 +24,16 @@ class LvlSelectView : public MiniView{
 		sf::Font font;
 
 		sf::Text header;
-		LEVEL_T lvls[6];
+		LEVEL_T lvls[10];
 
-		int cur_select;
 		int intro_return;
 		int right_press;
 		int left_press;
+		int up_press;
+		int down_press;
+
+		int cur_col;
+		int cur_row;
 
 };
 

@@ -16,7 +16,7 @@ void PlayView::Init(sf::RenderWindow *window){
 	tmp2.setCharacterSize(30);
 	tmp3.setCharacterSize(30);
 
-	char tmptext[16];
+	char tmptext[20];
 	sprintf(tmptext, "Playing Level %d", play_lvl);
 
 	tmp.setString(tmptext);

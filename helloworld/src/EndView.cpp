@@ -19,7 +19,7 @@ void EndView::Init(sf::RenderWindow *window){
 	tmp2.setCharacterSize(30);
 	tmp3.setCharacterSize(30);
 
-	char tmptext[20];
+	char tmptext[24];
 	sprintf(tmptext, "You completed level %d", finished_lvl);
 
 	tmp.setString(tmptext);
