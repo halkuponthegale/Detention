@@ -76,7 +76,6 @@ public:
       body->CreateFixture(&FixtureDef);
       body->SetFixedRotation(true);
 
-      // PlayerInstance.setBody(*pBody);
     }
 
 private:

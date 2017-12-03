@@ -123,8 +123,6 @@ void LvlSelectView::Update(sf::RenderWindow *window){
 }
 
 void LvlSelectView::Render(sf::RenderWindow *window){
-
-
 	window -> draw(header);
 
 	int i;

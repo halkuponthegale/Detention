@@ -40,7 +40,6 @@ void Launcher::Update(){
     // A = rotate barrel left
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         if(theta <= 5*(M_PI/6) ) {
-          //  machine_body.move(-1, 0);
           theta += M_PI/50;
 
 
@@ -77,7 +76,4 @@ void Launcher::Update(){
 
     body->CreateFixture(&FixtureDef3);
     body->SetFixedRotation(true);
-    //builderBody->SetGravityScale(0);
-
-  // 	launcher.setBody(*launcherBody);
  }

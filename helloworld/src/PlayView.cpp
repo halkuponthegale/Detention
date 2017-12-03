@@ -229,11 +229,6 @@ void PlayView::Render(sf::RenderWindow *window){
 				window->draw((*players_list[z]).playerbody);
 		}
 	}
-	//
-	// // draw player
-	// (*player).playerbody.setPosition(SCALE * (*player).getBody()->GetPosition().x, SCALE * (*player).getBody()->GetPosition().y);
-	// (*player).playerbody.setRotation((*player).getBody()->GetAngle() * 180/b2_pi);
-	// if(!(*player).inMachine())
-	// 	window->draw((*player).playerbody);
+
 
 }

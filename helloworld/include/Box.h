@@ -28,30 +28,23 @@ class Box : public Object{
 	    BodyDef2.type = b2_dynamicBody;
 			bod = World.CreateBody(&BodyDef2);
 			b2PolygonShape Shape2;
-			 Shape2.SetAsBox((50.0/2)/SCALE, (50.0/2)/SCALE);
-			 b2FixtureDef FixtureDef2;
-			 FixtureDef2.density = 1000000.f;
-			 FixtureDef2.friction = 1;
-			 FixtureDef2.shape = &Shape2;
-			 //FixtureDef2.filter.maskBits = ~0x0002;
-			 bod->CreateFixture(&FixtureDef2);
-			 bod->SetFixedRotation(true);
+			Shape2.SetAsBox((50.0/2)/SCALE, (50.0/2)/SCALE);
+			b2FixtureDef FixtureDef2;
+			FixtureDef2.density = 1000000.f;
+			FixtureDef2.friction = 1;
+			FixtureDef2.shape = &Shape2;
+			bod->CreateFixture(&FixtureDef2);
+			bod->SetFixedRotation(true);
 		}
 
-		void setPos(float x, float y){
-			box_body.setPosition(x, y);
-			//bod->SetTransform(b2Vec2(x,y),0);
-		}
+		void setPos(float x, float y){ box_body.setPosition(x, y); }
 
-		void move(int x, int y){
-				//bod->SetTransform(b2Vec2(box_body.getPosition().x+x,box_body.getPosition().y+y),0);
-				box_body.move(x,y); }
+		void move(int x, int y){ box_body.move(x,y);}
 
 		sf::RectangleShape getShape(){ return box_body;}
 
-		b2Body *getBody(){
-			return bod;
-		}
+		b2Body *getBody(){ return bod; }
+
 	private:
 		sf::RectangleShape box_body;
 		b2Body *bod;

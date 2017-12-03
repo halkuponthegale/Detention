@@ -129,8 +129,6 @@ class PlayView : public MiniView{
 		std::vector<std::unique_ptr<Wall>> const& walls_list;
 		std::vector<std::unique_ptr<Player>> const& players_list;
 		std::vector<std::unique_ptr<Exit>> const& exits_list;
-		// std::unique_ptr<Player> const& player;
-		// std::unique_ptr<Exit> const& exit_r;
 };
 
 

@@ -14,14 +14,8 @@ using namespace std;
 
 class Level{
 public:
-  // Level(std::vector<std::unique_ptr<Actor>> walls, std::vector<std::unique_ptr<Actor>> machines, std::vector<std::unique_ptr<Actor>> objects){
-  //   this->walls = walls;
-  //   this->machines = machines;
-  //   this->objects = objects;
-  // }
   Level(std::string file){
     //parse level from txt file
-
     ifstream inFile;
     inFile.open(file);
 
@@ -113,12 +107,8 @@ private:
   std::vector<std::unique_ptr<Wall>> walls;
   std::vector<std::unique_ptr<Player>> players;
   std::vector<std::unique_ptr<Exit>> exits;
-  // std::unique_ptr<Player> player;
-  // std::unique_ptr<Exit> exit_r;
 
-  // std::vector<std::unique_ptr<Actor>> walls;
-  std::vector<std::unique_ptr<Actor>> machines;
-  std::vector<std::unique_ptr<Actor>> objects;
+
 };
 
 
