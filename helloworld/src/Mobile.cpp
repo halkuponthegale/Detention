@@ -4,42 +4,75 @@
 
 Mobile::Mobile(double xo, double yo){
 
-    // create machine body
+    // Load mobile spritesheet from png file (in include folder)
+    if(!mobileTexture.loadFromFile("../include/sprites/Finalmobile.png",sf::IntRect(0, 0, 200, 100)))
+    {
+    }
+
     machine_body.setSize(sf::Vector2f(50,50));
     machine_body.setOrigin(machine_body.getOrigin().x + 25, machine_body.getOrigin().y + 25);
     machine_body.setPosition(xo, yo);
 
-    machine_body.setFillColor(sf::Color::Magenta);
+    mobileImage.setTexture(mobileTexture);
+
+    //mobileImage.setPosition(xo, yo);
 
     // set initial x and y
     x = xo; y = yo;
-}
+    source.x = 0;
+    source.y = 1;
 
+    mobileImage.setTextureRect(sf::IntRect(source.x*50, source.y*50, 50, 50));
+    mobileImage.setOrigin(mobileImage.getOrigin().x + 25, mobileImage.getOrigin().y + 25);
+    printf("here\n");
+
+    active = 0;
+}
 
 // define how this machine can move (can set limitations)
 void Mobile::Update(){
-    // A = move left
+    // A = LEFT
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-      if(machine_body.getPosition().x < 750) {
+      if(mobileImage.getPosition().x < 750) {
           b2Vec2 vel = body->GetLinearVelocity();
           vel.x = -5;
           body->SetLinearVelocity( vel );
+          source.x++;
       }
     }
 
-    // D = move right
+    // D = RIGHT
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-      if(machine_body.getPosition().x < 750) {
+      if(mobileImage.getPosition().x < 750) {
           b2Vec2 vel = body->GetLinearVelocity();
           vel.x = 5;
           body->SetLinearVelocity( vel );
+          source.x++;
     }
   }
 
   // set velocity to 0 if neither direction is pressed
   if(!sf::Keyboard::isKeyPressed(sf::Keyboard::A) && !sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
     body->SetLinearVelocity(b2Vec2(0,0));
+    source.x++;
   }
+
+  // sprite assignment
+  if (active){
+    source.y = 0;
+  }
+  else { //active == false
+    source.y = 1;
+  }
+
+  cout << "Mobile active? " << active <<"\n";
+
+  if (source.x * 50 >= mobileTexture.getSize().x){
+    source.x = 0;
+  }
+
+  mobileImage.setTextureRect(sf::IntRect(source.x*50, source.y*50, 50, 50));
+
 }
 
 void Mobile::setWorld(b2World& World){

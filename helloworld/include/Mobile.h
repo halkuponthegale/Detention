@@ -1,7 +1,20 @@
+#pragma once
 #include "Machine.h"
+#include <string>
+#include <fstream>
+
+using namespace std;
 
 class Mobile: public Machine{
 public:
+
+  // used for spritesheet
+  sf::Texture mobileTexture;
+  sf::Sprite mobileImage;
+  sf::Vector2i source;
+//  bool active = false;
+
+
   // constructor
   Mobile(double xo, double yo);
 
@@ -12,6 +25,11 @@ public:
   void getOut(){
     body->SetGravityScale(1);
     body->SetLinearVelocity(b2Vec2(0,1));
+  }
+
+  void isActive(int status){
+    active = status;
+    cout << "set active in mobile.h\n";
   }
 
   // update theta

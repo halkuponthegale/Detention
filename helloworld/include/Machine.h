@@ -6,9 +6,13 @@
 #include "Box.h"
 #include "Wall.h"
 #include <iostream>
+
 class Machine{
 	public:
 		sf::RectangleShape machine_body;
+
+		int active;
+
 
 		// dome and launch velocity for launcher
 		sf::CircleShape dome;
@@ -27,6 +31,9 @@ class Machine{
 
 		void setPosition(int x, int y);
 		void setColor(sf::Color c){	machine_body.setFillColor(c); } // TEMPORARY
+		virtual void isActive(int status){
+		} //only used in Mobile, where it is overridden
+
 
 
 
