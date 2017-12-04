@@ -40,7 +40,7 @@ void PlayView::Init(sf::RenderWindow *window){
 	window->setFramerateLimit(60);
 
 	// load background sprite
-	if(!Bkg.loadFromFile("../include/Textures/brick2.jpg"));
+	if(!Bkg.loadFromFile("../include/Textures/brick2.jpg")){;}
 	Bkg.setRepeated(true);
 	bgSprite.setTexture(Bkg);
 	bgSprite.setTextureRect(sf::IntRect(0,0,800,600));

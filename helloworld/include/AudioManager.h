@@ -8,13 +8,15 @@ class AudioManager{
 public:
 	static void play_launch(){
 		printf("playing launch\n");
-		// sf::SoundBuffer buffer;
 		if(!buffer.loadFromFile("../include/Sounds/woohoo.wav")){
 			printf("no file\n");
 		}
 
+
 		sound.setBuffer(buffer);
+		sound.setVolume(50);
 		sound.setPitch(1.4);
+
 		sound.play();
 	}
 
@@ -24,8 +26,16 @@ public:
 			printf("no file\n");
 		}
 
+
 		sound.setBuffer(buffer);
+		sound.setVolume(20);
+		sound.setPitch(0.8);
+		sound.setPlayingOffset(sf::milliseconds(500));
+
+		// sound.setPitch(0.8);
 		sound.play();
+		// sound.setVolume(1.2);
+		// sound.setPitch(1.2);
 	}
 };
 
