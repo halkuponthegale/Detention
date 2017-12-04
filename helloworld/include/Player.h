@@ -19,7 +19,7 @@ public:
     sf::Vector2i source;
 
 
-    Player(double xo, double yo); // Constructor
+    Player(double xo, double yo, std::string name); // Constructor
 
 
     // Moves the player up

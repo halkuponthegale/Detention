@@ -40,7 +40,7 @@ void PlayView::Init(sf::RenderWindow *window){
 	window->setFramerateLimit(60);
 
 	// load background sprite
-	if(!Bkg.loadFromFile("../include/Textures/brick.jpg"));
+	if(!Bkg.loadFromFile("../include/Textures/brick2.jpg"));
 	Bkg.setRepeated(true);
 	bgSprite.setTexture(Bkg);
 	bgSprite.setTextureRect(sf::IntRect(0,0,800,600));
@@ -93,11 +93,16 @@ void PlayView::Update(sf::RenderWindow *window){
 		window -> close();
 	}
 
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::R)){
+		game_view.setView(new PlayView(play_lvl));
+	}
+
 	// if last level, check if two player bodies are touching
 	// if so, end level
 	if(players_list.size() > 1){
 		if(!(players_list[0] -> inMachine()) && !(players_list[1] -> inMachine()) &&
-		   players_list[0] -> getShape().getGlobalBounds().intersects(players_list[1] -> getShape().getGlobalBounds()) ){
+		   (*players_list[0]).isAtExit((*exits_list[0]).getShape()) && (*players_list[1]).isAtExit((*exits_list[0]).getShape()) &&
+		 	 (*players_list[0]).getBody() -> GetLinearVelocity().y == 0 && (*players_list[1]).getBody() -> GetLinearVelocity().y == 0) {
 			if(play_lvl == top_lvl && top_lvl < MAX_LVL){
 				top_lvl++;
 			}
@@ -113,7 +118,7 @@ void PlayView::Update(sf::RenderWindow *window){
 				for(z = 0; z < players_list.size(); z++){
 					if(!(*players_list[z]).inMachine()){
 						// if player is at exit, leave
-						if(!exits_list.empty() && (*players_list[z]).isAtExit((*exits_list[0]).getShape())){
+						if(players_list.size() == 1 && !exits_list.empty() && (*players_list[z]).isAtExit((*exits_list[0]).getShape())){
 							if(play_lvl == top_lvl && top_lvl < MAX_LVL){
 								top_lvl++;
 							}

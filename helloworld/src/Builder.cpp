@@ -7,12 +7,12 @@ Builder::Builder(double xo, double yo){
     if(!builderTexture.loadFromFile("../include/sprites/builder.png",sf::IntRect(0, 0, 50, 150)))
     {
     }
-    
+
     // create machine body rectangle
     machine_body.setSize(sf::Vector2f(50,50));
     machine_body.setOrigin(machine_body.getOrigin().x + 25, machine_body.getOrigin().y + 25);
     machine_body.setPosition(xo, yo);
-    
+
     builderImage.setTexture(builderTexture);
 
     // initial x, y pos
@@ -23,7 +23,7 @@ Builder::Builder(double xo, double yo){
     cur_box_idx = 0;
     cur_wall_idx = 0;
     carrybox = 0;
-    
+
     builderImage.setTextureRect(sf::IntRect(1, source.y*50, 49, 50));
     builderImage.setOrigin(builderImage.getOrigin().x + 25, builderImage.getOrigin().y + 25);
 
@@ -71,7 +71,7 @@ void Builder::Update(){
 
     // if you're carrying a box, move it too
     if(carrybox){
-      mybox->getBody()->SetTransform(b2Vec2(machine_body.getPosition().x / 30.0, (machine_body.getPosition().y - 60)/30.0),0);
+      mybox->getBody()->SetTransform(b2Vec2(machine_body.getPosition().x / 30.0, (machine_body.getPosition().y - 51)/30.0),0);
     }
 
     // Space = pick up/set down Box
@@ -96,7 +96,7 @@ void Builder::Update(){
                 sf::RectangleShape test;
                 test.setSize(sf::Vector2f(50,50));
                 test.setOrigin(test.getOrigin().x + 25, test.getOrigin().y + 25);
-                test.setPosition(sf::Vector2f((machine_body.getPosition().x - 60), machine_body.getPosition().y - 5));
+                test.setPosition(sf::Vector2f((machine_body.getPosition().x - 51), machine_body.getPosition().y - 5));
                 // check out of bounds
                 if (test.getPosition().x < 0 ){
                       return;
@@ -111,7 +111,7 @@ void Builder::Update(){
                   if (test.getGlobalBounds().intersects(walllist[j] -> getShape().getGlobalBounds()))
                       return;
                 }
-                mybox->getBody()->SetTransform(b2Vec2((machine_body.getPosition().x - 60)/30.0, (2 + machine_body.getPosition().y)/30.0),0);
+                mybox->getBody()->SetTransform(b2Vec2((machine_body.getPosition().x - 51)/30.0, (2 + machine_body.getPosition().y)/30.0),0);
                 mybox->getBody()->SetGravityScale(1);
                 mybox->getBody()->SetLinearVelocity(b2Vec2(0,1));
             }
@@ -121,7 +121,7 @@ void Builder::Update(){
                 sf::RectangleShape test;
                 test.setSize(sf::Vector2f(50,50));
                 test.setOrigin(test.getOrigin().x + 25, test.getOrigin().y + 25);
-                test.setPosition(sf::Vector2f((machine_body.getPosition().x + 60), machine_body.getPosition().y - 5));
+                test.setPosition(sf::Vector2f((machine_body.getPosition().x + 51), machine_body.getPosition().y - 5));
                 // check out of bounds
                 if (test.getPosition().x > 800){
                       return;
@@ -136,7 +136,7 @@ void Builder::Update(){
                   if (test.getGlobalBounds().intersects(walllist[j] -> getShape().getGlobalBounds()))
                       return;
                 }
-                mybox->getBody()->SetTransform(b2Vec2((machine_body.getPosition().x + 60)/30.0, (2 + machine_body.getPosition().y)/30.0),0);
+                mybox->getBody()->SetTransform(b2Vec2((machine_body.getPosition().x + 51)/30.0, (2 + machine_body.getPosition().y)/30.0),0);
                 mybox->getBody()->SetGravityScale(1);
                 mybox->getBody()->SetLinearVelocity(b2Vec2(0,1));
             }
@@ -158,7 +158,7 @@ void Builder::Update(){
             }
 
             mybox = boxlist[i];
-            mybox->getBody()->SetTransform(b2Vec2(machine_body.getPosition().x / 30.0, (machine_body.getPosition().y - 60)/30.0),0);
+            mybox->getBody()->SetTransform(b2Vec2(machine_body.getPosition().x / 30.0, (machine_body.getPosition().y - 51)/30.0),0);
             mybox->getBody()->SetGravityScale(0);
             carrybox = 1;
         }
@@ -168,7 +168,7 @@ void Builder::Update(){
     else{
         space = 0;
     }
-    
+
       if (active){
       if(carrybox){
         source.y = 1;

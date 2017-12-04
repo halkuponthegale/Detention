@@ -30,6 +30,8 @@ public:
     double x,y;
     string type;
 
+    string player_name = "Cal";
+
     while (inFile >> x >> y >> type){
 
       cout << x << " " << y << " " << type << "\n";
@@ -51,7 +53,8 @@ public:
       }
 
       else if(type == "player"){
-        players.push_back(unique_ptr<Player>(new Player(x,y)));
+        players.push_back(unique_ptr<Player>(new Player(x,y, player_name)));
+        player_name = "Kevin";
       }
 
       else if(type == "wall"){
@@ -64,6 +67,8 @@ public:
       else if(type == "exit"){
         exits.push_back(unique_ptr<Exit>(new Exit(x, y)));
       }
+
+
     }
 
     inFile.close();

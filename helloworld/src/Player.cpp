@@ -4,11 +4,19 @@
 #include "iostream"
 
 // Constructor
-Player::Player(double xo, double yo) {
+Player::Player(double xo, double yo, std::string name) {
 
-    // Load player spritesheet from png file (in include folder)
-    if(!playerTexture.loadFromFile("../include/sprites/FinalCalSprite.png",sf::IntRect(0, 0, 100, 140)))
-    {
+    if(name == "Cal"){
+      // Load player spritesheet from png file (in include folder)
+      if(!playerTexture.loadFromFile("../include/sprites/FinalCalSprite.png",sf::IntRect(0, 0, 100, 140)))
+      {
+      }
+    }
+    else{
+      // Load player spritesheet from png file (in include folder)
+      if(!playerTexture.loadFromFile("../include/sprites/kevin.png",sf::IntRect(0, 0, 100, 140)))
+      {
+      }
     }
 
     playerImage.setTexture(playerTexture);
@@ -231,7 +239,7 @@ int Player::intersects(std::vector<Machine *> marr, std::vector<int> types){
     body->SetLinearVelocity(b2Vec2(0,0));
 
     // TEMPORARY
-    my_machine -> setColor(sf::Color::Green);
+    // my_machine -> setColor(sf::Color::Green);
 
   }
   else{
