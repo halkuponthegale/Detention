@@ -14,6 +14,7 @@ public:
 		}
 
 		sound.setBuffer(buffer);
+		sound.setPitch(1.4);
 		sound.play();
 	}
 
