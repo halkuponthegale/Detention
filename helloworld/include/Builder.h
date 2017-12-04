@@ -7,7 +7,7 @@
 
 class Builder : public Machine{
 	public:
-
+	
 		// used for spritesheet
 		sf::Texture builderTexture;
 		sf::Sprite builderImage;
@@ -24,14 +24,15 @@ class Builder : public Machine{
 		// reset velocity to 0 when getting out
 		void getOut(){ body -> SetLinearVelocity(b2Vec2(0,0)); }
 
+		void add_wall(Wall *w){walllist[cur_wall_idx] = w; cur_wall_idx++; }
+
 		// set physics body
 		void setBody(b2Body& bod){ body = &bod; }
 		// set physics world
 		void setWorld(b2World& World);
-
+	
 		void isActive(int status){
-			active = status;
-		}
+			active = status; }
 
 	private:
 		// jump ~1 block
