@@ -17,9 +17,9 @@ Launcher::Launcher(double xo, double yo){
     dome.setFillColor(sf::Color(40,40,40));
 
     // make barrel and power bar
-    barrel = sf::RectangleShape(sf::Vector2f(5,45));
+    barrel = sf::RectangleShape(sf::Vector2f(20,55));
     barrel.setPosition(350,200);
-    barrel.setOrigin(2.5,45);
+    barrel.setOrigin(10,55);
     barrel.setFillColor(sf::Color::Black);
     powerBG= sf::RectangleShape(sf::Vector2f(5,45));
     powerBG.setPosition(350,200);

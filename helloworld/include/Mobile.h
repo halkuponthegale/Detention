@@ -29,7 +29,7 @@ public:
 
   void isActive(int status){
     active = status;
-    cout << "set active in mobile.h\n";
+    // cout << "set active in mobile.h\n";
   }
 
   // update theta
