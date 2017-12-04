@@ -50,6 +50,11 @@ void Builder::Update(){
         }
     }
 
+    if(!sf::Keyboard::isKeyPressed(sf::Keyboard::A) && !sf::Keyboard::isKeyPressed(sf::Keyboard::D) &&
+        body->GetLinearVelocity().y == 0){
+        body->SetLinearVelocity(b2Vec2(0,0));
+    }
+
     // if you're carrying a box, move it too
     if(carrybox){
       mybox->getBody()->SetTransform(b2Vec2(machine_body.getPosition().x / 30.0, (machine_body.getPosition().y - 60)/30.0),0);
@@ -92,8 +97,9 @@ void Builder::Update(){
                   if (test.getGlobalBounds().intersects(walllist[j] -> getShape().getGlobalBounds()))
                       return;
                 }
-                mybox->getBody()->SetTransform(b2Vec2((machine_body.getPosition().x - 60)/30.0, machine_body.getPosition().y/30.0),0);
+                mybox->getBody()->SetTransform(b2Vec2((machine_body.getPosition().x - 60)/30.0, (2 + machine_body.getPosition().y)/30.0),0);
                 mybox->getBody()->SetGravityScale(1);
+                mybox->getBody()->SetLinearVelocity(b2Vec2(0,1));
             }
             // if facing right, place right
             else{
@@ -116,9 +122,9 @@ void Builder::Update(){
                   if (test.getGlobalBounds().intersects(walllist[j] -> getShape().getGlobalBounds()))
                       return;
                 }
-                mybox->getBody()->SetTransform(b2Vec2((machine_body.getPosition().x + 60)/30.0, machine_body.getPosition().y/30.0),0);
+                mybox->getBody()->SetTransform(b2Vec2((machine_body.getPosition().x + 60)/30.0, (2 + machine_body.getPosition().y)/30.0),0);
                 mybox->getBody()->SetGravityScale(1);
-
+                mybox->getBody()->SetLinearVelocity(b2Vec2(0,1));
             }
 
             // no longer carrying a box
