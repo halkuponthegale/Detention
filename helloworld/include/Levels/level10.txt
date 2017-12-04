@@ -1,9 +1,10 @@
 0 300 wall 2 300
 800 300 wall 2 300
 400 500 wall 800 10
-100 100 player
-300 100 player
-30 100 box
-150 100 box
-250 100 builder
-
+100 400 player
+770 400 box
+770 349 box
+719 400 builder
+510 420 wall 50 80
+719 400 player
+650 400 box
