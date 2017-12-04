@@ -15,7 +15,8 @@ Player::Player(double xo, double yo) {
 
     playerbody.setSize(sf::Vector2f(25,35)); //used in getShape, gives a rect the same dimensions as the player sprite
     //playerImage.setPosition(xo,yo);
-    playerImage.setOrigin(playerImage.getOrigin().x + 25, playerImage.getOrigin().y + 17.5);
+    playerImage.setOrigin(playerImage.getOrigin().x + 12, playerImage.getOrigin().y + 17.5);
+    playerImage.setTextureRect(sf::IntRect(source.x*25, source.y*35, 25, 35));
 
     x = xo; y = yo;
 
@@ -223,8 +224,9 @@ int Player::intersects(std::vector<Machine *> marr, std::vector<int> types){
       my_machine->getBody()->SetGravityScale(0);
       b2Vec2 pos = my_machine->getBody()->GetPosition();
       my_machine->getBody()->SetTransform(b2Vec2(pos.x,pos.y-2),my_machine->getBody()->GetAngle());
-      my_machine->isActive( 1 ); //used in Mobile.cpp for spritesheet animation
+
     }
+    my_machine->isActive( 1 ); //used in Mobile.cpp for spritesheet animation
 
     body->SetLinearVelocity(b2Vec2(0,0));
 
