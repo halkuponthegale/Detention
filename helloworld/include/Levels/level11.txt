@@ -1,0 +1,15 @@
+0 300 wall 2 300
+800 300 wall 2 300
+400 500 wall 800 10
+210 100 player
+650 100 box
+750 100 box
+700 100 player
+30 100 box
+30 151 box
+81 151 box
+160 100 builder
+150 380 wall 150 110
+380 135 wall 80 20
+400 85 mobile
+

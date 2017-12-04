@@ -18,6 +18,8 @@ class Builder : public Machine{
 		// reset velocity to 0 when getting out
 		void getOut(){ body -> SetLinearVelocity(b2Vec2(0,0)); }
 
+		void add_wall(Wall *w){walllist[cur_wall_idx] = w; cur_wall_idx++; }
+
 		// set physics body
 		void setBody(b2Body& bod){ body = &bod; }
 		// set physics world

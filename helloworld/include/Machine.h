@@ -4,13 +4,15 @@
 // #include "Actor.h"
 #include <SFML/Graphics.hpp>
 #include "Box.h"
+#include "Wall.h"
 #include <iostream>
 
-using namespace std;
 class Machine{
 	public:
 		sf::RectangleShape machine_body;
+
 		int active;
+
 
 		// dome and launch velocity for launcher
 		sf::CircleShape dome;
@@ -30,8 +32,6 @@ class Machine{
 		void setPosition(int x, int y);
 		void setColor(sf::Color c){	machine_body.setFillColor(c); } // TEMPORARY
 		virtual void isActive(int status){
-			//active = status;
-			//cout << "step into isActive in machine.h\n";
 		} //only used in Mobile, where it is overridden
 
 
@@ -43,9 +43,11 @@ class Machine{
 		int facing; // 0 = left, 1 = right
 		int space;
 		int cur_box_idx;
+		int cur_wall_idx;
 
 		// builder vars
 		Box* boxlist[10];
+		Wall* walllist[20];
 		int carrybox;
 		Box* mybox;
 

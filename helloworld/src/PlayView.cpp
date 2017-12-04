@@ -93,6 +93,12 @@ void PlayView::Update(sf::RenderWindow *window){
 		window -> close();
 	}
 
+
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::R)){
+		game_view.setView(new PlayView(play_lvl));
+		return;
+	}
+
 	// if last level, check if two player bodies are touching
 	// if so, end level
 	if(players_list.size() > 1){
