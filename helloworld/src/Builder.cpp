@@ -3,31 +3,18 @@
 // constructor
 Builder::Builder(double xo, double yo){
 
-  // Load mobile spritesheet from png file (in include folder)
-  if(!builderTexture.loadFromFile("../include/sprites/builder.png",sf::IntRect(0, 0, 50, 150)))
-  {
-  }
-
     // create machine body rectangle
     machine_body.setSize(sf::Vector2f(50,50));
     machine_body.setOrigin(machine_body.getOrigin().x + 25, machine_body.getOrigin().y + 25);
     machine_body.setPosition(xo, yo);
-
-    builderImage.setTexture(builderTexture);
+    machine_body.setFillColor(sf::Color::Red);
 
     // initial x, y pos
     x = xo; y = yo;
-    source.x = 0;
-    source.y = 0;
 
     cur_box_idx = 0;
+    cur_wall_idx = 0;
     carrybox = 0;
-
-    builderImage.setTextureRect(sf::IntRect(1, source.y*50, 49, 50));
-    builderImage.setOrigin(builderImage.getOrigin().x + 25, builderImage.getOrigin().y + 25);
-
-
-    active = 0;
 }
 
 // define how this machine can move (can set limitations)
@@ -91,9 +78,6 @@ void Builder::Update(){
         if(carrybox && body->GetLinearVelocity().y == 0 && !space){
             // if facing left, place left
             if(facing == 0){
-
-                mybox->getBody()->SetTransform(b2Vec2((machine_body.getPosition().x - 60)/30.0, machine_body.getPosition().y/30.0),0);
-
                 // test to see if potential collision, if so, don't place
                 sf::RectangleShape test;
                 test.setSize(sf::Vector2f(50,50));
@@ -114,15 +98,11 @@ void Builder::Update(){
                       return;
                 }
                 mybox->getBody()->SetTransform(b2Vec2((machine_body.getPosition().x - 60)/30.0, (2 + machine_body.getPosition().y)/30.0),0);
-
                 mybox->getBody()->SetGravityScale(1);
                 mybox->getBody()->SetLinearVelocity(b2Vec2(0,1));
             }
             // if facing right, place right
             else{
-
-                mybox->getBody()->SetTransform(b2Vec2((machine_body.getPosition().x + 60)/30.0, machine_body.getPosition().y/30.0),0);
-
                 // test to see if potential collision, if so, don't place
                 sf::RectangleShape test;
                 test.setSize(sf::Vector2f(50,50));
@@ -143,7 +123,6 @@ void Builder::Update(){
                       return;
                 }
                 mybox->getBody()->SetTransform(b2Vec2((machine_body.getPosition().x + 60)/30.0, (2 + machine_body.getPosition().y)/30.0),0);
-
                 mybox->getBody()->SetGravityScale(1);
                 mybox->getBody()->SetLinearVelocity(b2Vec2(0,1));
             }
@@ -152,7 +131,18 @@ void Builder::Update(){
             carrybox = 0;
         }
         // if you aren't carrying a box and you're intersecting one, pick it up
-        else if(intersect && !space){
+        else if(intersect && body->GetLinearVelocity().y == 0 && !space){
+            // test to see if box on top, if so, don't pick up
+            sf::RectangleShape test;
+            test.setSize(sf::Vector2f(50,50));
+            test.setOrigin(test.getOrigin().x + 25, test.getOrigin().y + 25);
+            test.setPosition(sf::Vector2f((boxlist[i] -> getShape().getPosition().x), boxlist[i] ->getShape().getPosition().y - 50));
+            // check box collisions
+            for(int j = 0; j < cur_box_idx; j++){
+              if (test.getGlobalBounds().intersects(boxlist[j] -> getShape().getGlobalBounds()))
+                  return;
+            }
+
             mybox = boxlist[i];
             mybox->getBody()->SetTransform(b2Vec2(machine_body.getPosition().x / 30.0, (machine_body.getPosition().y - 60)/30.0),0);
             mybox->getBody()->SetGravityScale(0);
@@ -164,23 +154,6 @@ void Builder::Update(){
     else{
         space = 0;
     }
-
-
-    if (active){
-      if(carrybox){
-        source.y = 1;
-      }
-      else{
-      source.y = 2;
-      }
-    }
-
-    else if (active == false) {
-      source.y = 0;
-    }
-
-    builderImage.setTextureRect(sf::IntRect(1, source.y*50, 49, 50));
-
 }
 
 void Builder::jump(){
