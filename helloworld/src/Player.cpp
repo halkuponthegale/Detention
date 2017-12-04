@@ -14,8 +14,9 @@ Player::Player(double xo, double yo) {
     playerImage.setTexture(playerTexture);
 
     playerbody.setSize(sf::Vector2f(25,35)); //used in getShape, gives a rect the same dimensions as the player sprite
-    //playerImage.setPosition(xo,yo);
-    playerImage.setOrigin(playerImage.getOrigin().x + 25, playerImage.getOrigin().y + 17.5);
+    //playerImage.setPosition(xo,yo);    
+    playerImage.setOrigin(playerImage.getOrigin().x + 12.5, playerImage.getOrigin().y + 17.5);
+    playerImage.setTextureRect(sf::IntRect(source.x*25, source.y*35, 25, 35));
 
     x = xo; y = yo;
 
