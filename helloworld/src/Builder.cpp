@@ -135,6 +135,7 @@ void Builder::Update(){
                 mybox->getBody()->SetTransform(b2Vec2((machine_body.getPosition().x - 51)/30.0, (2 + machine_body.getPosition().y)/30.0),0);
                 mybox->getBody()->SetGravityScale(1);
                 mybox->getBody()->SetLinearVelocity(b2Vec2(0,1));
+                AudioManager::play_builder_box();
             }
             // if facing right, place right
             else{
@@ -160,6 +161,7 @@ void Builder::Update(){
                 mybox->getBody()->SetTransform(b2Vec2((machine_body.getPosition().x + 51)/30.0, (2 + machine_body.getPosition().y)/30.0),0);
                 mybox->getBody()->SetGravityScale(1);
                 mybox->getBody()->SetLinearVelocity(b2Vec2(0,1));
+                AudioManager::play_builder_box();
             }
 
             // no longer carrying a box
@@ -182,6 +184,8 @@ void Builder::Update(){
             mybox->getBody()->SetTransform(b2Vec2(machine_body.getPosition().x / 30.0, (machine_body.getPosition().y - 51)/30.0),0);
             mybox->getBody()->SetGravityScale(0);
             carrybox = 1;
+            AudioManager::play_builder_box();
+
         }
         space = 1;
 

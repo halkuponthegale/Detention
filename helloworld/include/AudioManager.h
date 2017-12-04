@@ -16,6 +16,16 @@ public:
 		sound.setBuffer(buffer);
 		sound.play();
 	}
+
+	static void play_builder_box(){
+		printf("playing builder\n");
+		if(!buffer.loadFromFile("../include/Sounds/builder_box.wav")){
+			printf("no file\n");
+		}
+
+		sound.setBuffer(buffer);
+		sound.play();
+	}
 };
 
 

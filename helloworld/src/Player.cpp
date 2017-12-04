@@ -250,4 +250,6 @@ int Player::intersects(std::vector<Machine *> marr, std::vector<int> types){
   else{
     in_machine = 0;
   }
+
+  return 0;
 }
