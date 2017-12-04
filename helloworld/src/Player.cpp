@@ -119,6 +119,9 @@ void Player::Update(){
         }else{
           if(my_machine->launchVel!=0){
             launch(my_machine->launchVel,my_machine->getTheta());
+
+            AudioManager::play_launch();
+            
             my_machine->launchVel = 0;
             in_machine = 0;
             mType=-1;

@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include "Box.h"
 #include "Wall.h"
+#include "AudioManager.h"
 #include <iostream>
 
 class Machine{

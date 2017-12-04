@@ -2,6 +2,7 @@
 #define GAME_VIEW_H
 
 #include "MiniView.h"
+#include <SFML/Audio.hpp>
 
 /*
 	GameView handles what is displayed on the screen, handles transitions between
@@ -58,6 +59,9 @@ extern GameView game_view;
 extern int top_lvl;
 #define MAX_LVL 10
 
+extern sf::Sound sound;
+extern sf::Music music;
+extern sf::SoundBuffer buffer;
 
 
 

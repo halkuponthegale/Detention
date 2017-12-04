@@ -7,6 +7,7 @@
 #include "Mobile.h"
 #include "Box.h"
 #include "Wall.h"
+#include "AudioManager.h"
 
 class Player {
 
