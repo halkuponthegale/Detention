@@ -93,12 +93,6 @@ void PlayView::Update(sf::RenderWindow *window){
 		window -> close();
 	}
 
-
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::R)){
-		game_view.setView(new PlayView(play_lvl));
-		return;
-	}
-
 	// if last level, check if two player bodies are touching
 	// if so, end level
 	if(players_list.size() > 1){
@@ -216,7 +210,9 @@ void PlayView::Render(sf::RenderWindow *window){
 		for(z = 0; z < builders_list.size(); z++){
 			(*builders_list[z]).machine_body.setPosition(SCALE * (*builders_list[z]).getBody()->GetPosition().x, SCALE *  (*builders_list[z]).getBody()->GetPosition().y);
 			(*builders_list[z]).machine_body.setRotation( (*builders_list[z]).getBody()->GetAngle() * 180/b2_pi);
-			window->draw((*builders_list[z]).machine_body);
+			(*builders_list[z]).builderImage.setPosition(SCALE * (*builders_list[z]).getBody()->GetPosition().x, SCALE *  (*builders_list[z]).getBody()->GetPosition().y);
+			(*builders_list[z]).builderImage.setRotation( (*builders_list[z]).getBody()->GetAngle() * 180/b2_pi);
+			window->draw((*builders_list[z]).builderImage);
 		}
 	}
 
