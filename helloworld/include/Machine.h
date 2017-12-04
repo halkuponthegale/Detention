@@ -5,10 +5,13 @@
 #include <SFML/Graphics.hpp>
 #include "Box.h"
 #include <iostream>
+
+using namespace std;
 class Machine{
 	public:
 		sf::RectangleShape machine_body;
-		
+		int active;
+
 		// dome and launch velocity for launcher
 		sf::CircleShape dome;
 		double launchVel;
@@ -26,6 +29,11 @@ class Machine{
 
 		void setPosition(int x, int y);
 		void setColor(sf::Color c){	machine_body.setFillColor(c); } // TEMPORARY
+		virtual void isActive(int status){
+			//active = status;
+			//cout << "step into isActive in machine.h\n";
+		} //only used in Mobile, where it is overridden
+
 
 
 
