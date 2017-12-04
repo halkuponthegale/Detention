@@ -32,12 +32,14 @@ Player::Player(double xo, double yo, std::string name) {
     mType = -1;
     jumping = 0;
     facing = 1;
+
 }
 
 
 // makes player jump (< 1 block)
 void Player::player_up() {
     if(playerImage.getPosition().y > 0 && body -> GetLinearVelocity().y == 0) {
+
         this->launch(1.8,M_PI/2);
 
     }

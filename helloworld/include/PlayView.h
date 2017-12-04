@@ -63,6 +63,14 @@ class PlayView : public MiniView{
 			}
 		}
 
+
+		// set player(s) to world
+		if(!players_list.empty()){
+			for(i = 0; i < players_list.size(); i++){
+				(*players_list[i]).setWorld(world);
+			}
+		}
+
 		// set walls to world
 		if(!walls_list.empty()){
 			for(i = 0; i < walls_list.size(); i++){
@@ -79,13 +87,6 @@ class PlayView : public MiniView{
 			}
 		}
 
-
-		// set player(s) to world
-		if(!players_list.empty()){
-			for(i = 0; i < players_list.size(); i++){
-				(*players_list[i]).setWorld(world);
-			}
-		}
 
 		// set exit to world
 		if(!exits_list.empty()){

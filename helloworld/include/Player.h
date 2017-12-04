@@ -5,6 +5,9 @@
 #include "Box2D.h"
 #include "Machine.h"
 #include "Mobile.h"
+#include "Box.h"
+#include "Wall.h"
+
 class Player {
 
 public:
@@ -86,11 +89,14 @@ public:
 
     }
 
+
+
 private:
   b2Body* body;
   int jumping;
   int facing; // 0 = left, 1 = right
   double x, y;
+
 
 };
 #endif

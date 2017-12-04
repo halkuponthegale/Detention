@@ -231,7 +231,7 @@ void Builder::setWorld(b2World& World){
   body = World.CreateBody(&BodyDef2);
 
   b2PolygonShape Shape2;
-  Shape2.SetAsBox((50.f/2)/SCALE, (50.f/2)/SCALE);
+  Shape2.SetAsBox((50.f/2)/SCALE, (49.f/2)/SCALE);
   b2FixtureDef FixtureDef2;
   FixtureDef2.density = 10.f;
   FixtureDef2.friction = 1;
