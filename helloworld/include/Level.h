@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "Wall.h"
 #include "Exit.h"
+#include "Texture.h"
 
 using namespace std;
 
@@ -68,6 +69,13 @@ public:
         exits.push_back(unique_ptr<Exit>(new Exit(x, y)));
       }
 
+      else if(type == "texture"){
+        double half_w, half_h;
+        string file;
+
+        inFile >> half_w >> half_h >> file;
+        textures.push_back(unique_ptr<Texture>(new Texture(x, y, half_w, half_h, file)));
+      }
 
     }
 
@@ -104,6 +112,10 @@ public:
     return exits;
   }
 
+  std::vector<std::unique_ptr<Texture>> const& getTextures(){
+    return textures;
+  }
+
 private:
   std::vector<std::unique_ptr<Box>> boxes;
   std::vector<std::unique_ptr<Builder>> builders;
@@ -112,6 +124,7 @@ private:
   std::vector<std::unique_ptr<Wall>> walls;
   std::vector<std::unique_ptr<Player>> players;
   std::vector<std::unique_ptr<Exit>> exits;
+  std::vector<std::unique_ptr<Texture>> textures;
 
 
 };

@@ -9,3 +9,4 @@
 80 90 player
 550 300 wall 50 10
 600 400 exit
+200 300 texture 80 60 ../include/Textures/MobilePoster.jpg

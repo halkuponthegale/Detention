@@ -11,6 +11,7 @@
 #include "Level.h"
 #include "Wall.h"
 #include "Exit.h"
+#include "Texture.h"
 
 /*
 	PlayView handles level loading, drawing, and gameplay
@@ -25,7 +26,7 @@ class PlayView : public MiniView{
 							boxes_list(level.getBoxes()),builders_list(level.getBuilders()),
 							mobiles_list(level.getMobiles()), launchers_list(level.getLaunchers()),
 							walls_list(level.getWalls()),players_list(level.getPlayers()),
-							exits_list(level.getExits())
+							exits_list(level.getExits()), textures_list(level.getTextures())
 		{
 
 			play_lvl = lvl;
@@ -138,6 +139,7 @@ class PlayView : public MiniView{
 		std::vector<std::unique_ptr<Wall>> const& walls_list;
 		std::vector<std::unique_ptr<Player>> const& players_list;
 		std::vector<std::unique_ptr<Exit>> const& exits_list;
+		std::vector<std::unique_ptr<Texture>> const& textures_list;
 };
 
 

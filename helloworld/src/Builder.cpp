@@ -35,13 +35,34 @@ Builder::Builder(double xo, double yo){
 void Builder::Update(){
     // W = jump
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::W) && body->GetLinearVelocity().y == 0) {
-        if(machine_body.getPosition().y > 0) {
+        if(machine_body.getPosition().y > 0 ) {
+          // test to see if potential collision, if so, don't place
+          sf::RectangleShape test;
+          test.setSize(sf::Vector2f(50,50));
+          test.setOrigin(test.getOrigin().x + 25, test.getOrigin().y + 25);
+          test.setPosition(sf::Vector2f((machine_body.getPosition().x), machine_body.getPosition().y + 1));
+
+          int valid = 0;
+
+          // check box collisions
+          for(int j = 0; j < cur_box_idx; j++){
+            if (test.getGlobalBounds().intersects(boxlist[j] -> getShape().getGlobalBounds()))
+                valid = 1;
+          }
+          // check wall collisions
+          for(int j = 0; j < cur_wall_idx; j++){
+            if (test.getGlobalBounds().intersects(walllist[j] -> getShape().getGlobalBounds()))
+                valid = 1;
+          }
+
+          if(valid)
             jump();
         }
     }
     // A = move left
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-        if(machine_body.getPosition().x > 0) {
+       if(machine_body.getPosition().x > 0) {
+
           // update velocity
           b2Vec2 vel = body->GetLinearVelocity();
           vel.x = -5;
@@ -49,11 +70,11 @@ void Builder::Update(){
 
           // facing left
           facing = 0;
-        }
+       }
     }
     // D = move right
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        if(machine_body.getPosition().x < 750) {
+        if(machine_body.getPosition().x < 800) {
             // update velocity
             b2Vec2 vel = body->GetLinearVelocity();
             vel.x = 5;

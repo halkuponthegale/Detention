@@ -157,6 +157,13 @@ void PlayView::Render(sf::RenderWindow *window){
 	window -> draw(tmp2);
 	window -> draw(tmp3);
 
+	if(!textures_list.empty()){
+		int z;
+		for(z = 0; z < textures_list.size(); z++){
+			window->draw((*textures_list[z]).getShape());
+		}
+	}
+
 	// draw exit(s)
 	if(!exits_list.empty()){
 		int z;
