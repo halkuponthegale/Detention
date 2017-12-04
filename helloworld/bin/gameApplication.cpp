@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 #include "GameView.h"
 #include "MenuView.h"
@@ -7,11 +8,17 @@
 GameView game_view;
 int top_lvl;
 
+// global sound vars
+sf::SoundBuffer buffer;
+sf::Sound sound;
+sf::Music music;
+
 
 int main(int argc, char** argv)
 {
     // create main window
     sf::RenderWindow App(sf::VideoMode(800,600,32), "Detention", sf::Style::Close);
+
 
     // set "gameplay" window to main window to draw
     game_view.setWindow(&App);
