@@ -3,18 +3,32 @@
 // constructor
 Builder::Builder(double xo, double yo){
 
+    // Load mobile spritesheet from png file (in include folder)
+    if(!builderTexture.loadFromFile("../include/sprites/builder.png",sf::IntRect(0, 0, 50, 150)))
+    {
+    }
+    
     // create machine body rectangle
     machine_body.setSize(sf::Vector2f(50,50));
     machine_body.setOrigin(machine_body.getOrigin().x + 25, machine_body.getOrigin().y + 25);
     machine_body.setPosition(xo, yo);
-    machine_body.setFillColor(sf::Color::Red);
+    
+    builderImage.setTexture(builderTexture);
 
     // initial x, y pos
     x = xo; y = yo;
+    source.x = 0;
+    source.y = 0;
 
     cur_box_idx = 0;
     cur_wall_idx = 0;
     carrybox = 0;
+    
+    builderImage.setTextureRect(sf::IntRect(1, source.y*50, 49, 50));
+    builderImage.setOrigin(builderImage.getOrigin().x + 25, builderImage.getOrigin().y + 25);
+
+
+    active = 0;
 }
 
 // define how this machine can move (can set limitations)
@@ -154,6 +168,21 @@ void Builder::Update(){
     else{
         space = 0;
     }
+    
+      if (active){
+      if(carrybox){
+        source.y = 1;
+      }
+      else{
+      source.y = 2;
+      }
+    }
+
+    else if (active == false) {
+      source.y = 0;
+    }
+
+    builderImage.setTextureRect(sf::IntRect(1, source.y*50, 49, 50));
 }
 
 void Builder::jump(){
