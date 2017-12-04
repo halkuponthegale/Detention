@@ -5,7 +5,7 @@
 Mobile::Mobile(double xo, double yo){
 
     // Load mobile spritesheet from png file (in include folder)
-    if(!mobileTexture.loadFromFile("../include/sprites/Finalmobile.png",sf::IntRect(0, 0, 200, 100)))
+    if(!mobileTexture.loadFromFile("../include/sprites/mobile3.png",sf::IntRect(0, 0, 200, 100)))
     {
     }
 
