@@ -5,9 +5,17 @@
 
 // Constructor
 Player::Player(double xo, double yo) {
-    playerbody.setSize(sf::Vector2f(10,30));
-    playerbody.setOrigin(playerbody.getOrigin().x + 5, playerbody.getOrigin().y + 15);
-    playerbody.setPosition(xo,yo);
+
+    // Load player spritesheet from png file (in include folder)
+    if(!playerTexture.loadFromFile("../include/sprites/FinalCalSprite.png",sf::IntRect(0, 0, 100, 140)))
+    {
+    }
+
+    playerImage.setTexture(playerTexture);
+
+    playerbody.setSize(sf::Vector2f(25,35)); //used in getShape, gives a rect the same dimensions as the player sprite
+    //playerImage.setPosition(xo,yo);
+    playerImage.setOrigin(playerImage.getOrigin().x + 25, playerImage.getOrigin().y + 17.5);
 
     x = xo; y = yo;
 
@@ -20,7 +28,7 @@ Player::Player(double xo, double yo) {
 
 // makes player jump (< 1 block)
 void Player::player_up() {
-    if(playerbody.getPosition().y > 0 && body -> GetLinearVelocity().y == 0) {
+    if(playerImage.getPosition().y > 0 && body -> GetLinearVelocity().y == 0) {
         this->launch(1.8,M_PI/2);
 
     }
@@ -29,33 +37,43 @@ void Player::player_up() {
 
 // Moves the player left
 void Player::player_left() {
-    if(playerbody.getPosition().x > 0) {  // check
+    if(playerImage.getPosition().x > 0) {  // check
         b2Vec2 vel = body->GetLinearVelocity();
         vel.x = -5;
         body->SetLinearVelocity( vel );
+
+        source.y = Left;
+        source.x++;
     }
 }
 
 
 // Moves the player right, unless it's already at the right of the screen
 void Player::player_right() {
-    if(playerbody.getPosition().x < 800) {  // check
+    if(playerImage.getPosition().x < 800) {  // check
         //playerbody.move(.1, 0);  // check
         b2Vec2 vel = body->GetLinearVelocity();
         vel.x = 5;
         body->SetLinearVelocity( vel );
+
+        source.y = Right;
+        source.x++;
     }
 }
 void Player::Update(){
+
     // if player in machine, call update on that machine object (handle appropriate moves)
     if(in_machine){
       // builder = 0, launcher = 1, mobile = 2
+      my_machine->isActive(1);
       my_machine -> Update();
 
       // down (and box is not moving up or down) = get out of machine
       if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && my_machine -> getBody() -> GetLinearVelocity().y == 0){
 
           in_machine = 0;
+          my_machine->isActive(0);
+
 
           // TEMPORARY
           if(mType==0)
@@ -102,6 +120,7 @@ void Player::Update(){
     }
     // else if player not in machine, process input on player
     else{
+
         // If user presses WASD direction, move the player box
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
               if(!jumping){
@@ -122,6 +141,10 @@ void Player::Update(){
                 player_right();
         }
 
+        if (source.x * 25 >= playerTexture.getSize().x)
+            source.x = 0;
+        playerImage.setTextureRect(sf::IntRect(source.x*25, source.y*35, 25, 35));
+
     }
 
 }
@@ -141,7 +164,7 @@ void Player::launch(double velocity, double theta){
 
 // Puts paddle back to original position
 void Player::reset() {
-    playerbody.setPosition(700,300);
+    playerImage.setPosition(700,300);
 }
 // Accessor method for rectangle shape
 sf::RectangleShape Player::getShape(){
@@ -163,11 +186,11 @@ int Player::intersects(std::vector<Machine *> marr, std::vector<int> types){
     // account for dome shape on launcher
     int intersects_dome = 0;
     if(types[i] == 1){
-      intersects_dome = playerbody.getGlobalBounds().intersects(marr[i] -> dome.getGlobalBounds());
+      intersects_dome = playerImage.getGlobalBounds().intersects(marr[i] -> dome.getGlobalBounds());
     }
 
     // if player body intersects machine box
-    if(playerbody.getGlobalBounds().intersects(marr[i] -> getShape().getGlobalBounds()) || intersects_dome){
+    if(playerImage.getGlobalBounds().intersects(marr[i] -> getShape().getGlobalBounds()) || intersects_dome){
       // if machine is not currently falling (for mobile bug)
       if(marr[i] -> getBody() -> GetLinearVelocity().y != 0) { break; }
         //builder = 0, launcher = 1, mobile = 2;
@@ -192,6 +215,7 @@ int Player::intersects(std::vector<Machine *> marr, std::vector<int> types){
     in_machine = 1;
     my_machine = marr[desired];
 
+
     this->mType = types[desired];
 
     // if in mobile machine, update initial height
@@ -199,6 +223,7 @@ int Player::intersects(std::vector<Machine *> marr, std::vector<int> types){
       my_machine->getBody()->SetGravityScale(0);
       b2Vec2 pos = my_machine->getBody()->GetPosition();
       my_machine->getBody()->SetTransform(b2Vec2(pos.x,pos.y-2),my_machine->getBody()->GetAngle());
+      my_machine->isActive( 1 ); //used in Mobile.cpp for spritesheet animation
     }
 
     body->SetLinearVelocity(b2Vec2(0,0));
