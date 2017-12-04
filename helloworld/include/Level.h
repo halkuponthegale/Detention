@@ -59,9 +59,9 @@ public:
       }
 
       else if(type == "wall"){
-        double half_w, half_h;
-        inFile >> half_w >> half_h;
-        walls.push_back(unique_ptr<Wall>(new Wall(x, y, half_w, half_h)));
+        double half_w, half_h, fric;
+        inFile >> half_w >> half_h >> fric;
+        walls.push_back(unique_ptr<Wall>(new Wall(x, y, half_w, half_h, fric)));
 
       }
 
