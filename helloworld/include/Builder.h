@@ -7,6 +7,12 @@
 
 class Builder : public Machine{
 	public:
+	
+		// used for spritesheet
+		sf::Texture builderTexture;
+		sf::Sprite builderImage;
+		sf::Vector2i source;
+
 		// constructor
 		Builder(double xo, double yo);
 
@@ -24,6 +30,9 @@ class Builder : public Machine{
 		void setBody(b2Body& bod){ body = &bod; }
 		// set physics world
 		void setWorld(b2World& World);
+	
+		void isActive(int status){
+			active = status; }
 
 	private:
 		// jump ~1 block
