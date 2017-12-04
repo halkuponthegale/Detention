@@ -7,10 +7,17 @@
 class Exit{
 public:
   Exit(double cx, double cy){
+
+    // Load box texture from jpg file (in include folder)
+    if(!doortexture.loadFromFile("../include/Textures/door.png",sf::IntRect(0, 0, 220, 415)))
+    {
+    }
+
     bounds.setSize(sf::Vector2f(40, 80));
     bounds.setOrigin(bounds.getOrigin().x + 20, bounds.getOrigin().y + 40);
     bounds.setPosition(cx, cy);
-    bounds.setFillColor(sf::Color(139,69,19));
+    // bounds.setFillColor(sf::Color(139,69,19));
+    bounds.setTexture(&doortexture);
 
     x = cx; y = cy;
   }
@@ -48,6 +55,7 @@ public:
   }
 
   sf::RectangleShape bounds;
+  sf::Texture doortexture;
 
 private:
   b2Body *bod;

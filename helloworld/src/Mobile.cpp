@@ -5,7 +5,7 @@
 Mobile::Mobile(double xo, double yo){
 
     // Load mobile spritesheet from png file (in include folder)
-    if(!mobileTexture.loadFromFile("../include/sprites/Finalmobile.png",sf::IntRect(0, 0, 200, 100)))
+    if(!mobileTexture.loadFromFile("../include/sprites/mobile3.png",sf::IntRect(0, 0, 200, 100)))
     {
     }
 
@@ -24,7 +24,6 @@ Mobile::Mobile(double xo, double yo){
 
     mobileImage.setTextureRect(sf::IntRect(source.x*50, source.y*50, 50, 50));
     mobileImage.setOrigin(mobileImage.getOrigin().x + 25, mobileImage.getOrigin().y + 25);
-    printf("here\n");
 
     active = 0;
 }
@@ -64,8 +63,6 @@ void Mobile::Update(){
   else { //active == false
     source.y = 1;
   }
-
-  cout << "Mobile active? " << active <<"\n";
 
   if (source.x * 50 >= mobileTexture.getSize().x){
     source.x = 0;

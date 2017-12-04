@@ -7,10 +7,18 @@
 class Box : public Object{
 	public:
 		Box(double xo, double yo) : Object(0, 0, 50, 50, true){
+
+			// Load box texture from jpg file (in include folder)
+			if(!boxtexture.loadFromFile("../include/Textures/box.jpg",sf::IntRect(0, 0, 512, 512)))
+			{
+			}
+
 			box_body.setSize(sf::Vector2f(50,50));
 			box_body.setOrigin(box_body.getOrigin().x + 25, box_body.getOrigin().y+25 );
 			box_body.setPosition(0,0);
-			box_body.setFillColor(sf::Color::Blue);
+
+			box_body.setTexture(&boxtexture);
+
 
 			x = xo; y = yo;
 
@@ -44,6 +52,8 @@ class Box : public Object{
 		sf::RectangleShape getShape(){ return box_body;}
 
 		b2Body *getBody(){ return bod; }
+
+		sf::Texture boxtexture;
 
 	private:
 		sf::RectangleShape box_body;
