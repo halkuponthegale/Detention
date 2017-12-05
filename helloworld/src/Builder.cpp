@@ -1,5 +1,5 @@
 #include "Builder.h"
-
+#include "AudioManager.h"
 // constructor
 Builder::Builder(double xo, double yo){
 
@@ -98,17 +98,22 @@ void Builder::Update(){
                 test.setPosition(sf::Vector2f((machine_body.getPosition().x - 51), machine_body.getPosition().y - 5));
                 // check out of bounds
                 if (test.getPosition().x < 0 ){
+                  AudioManager::play_buzz();
                       return;
                 }
                 // check box collisions
                 for(int j = 0; j < cur_box_idx; j++){
-                  if (test.getGlobalBounds().intersects(boxlist[j] -> getShape().getGlobalBounds()))
+                  if (test.getGlobalBounds().intersects(boxlist[j] -> getShape().getGlobalBounds())){
+                      AudioManager::play_buzz();
                       return;
+                    }
                 }
                 // check wall collisions
                 for(int j = 0; j < cur_wall_idx; j++){
-                  if (test.getGlobalBounds().intersects(walllist[j] -> getShape().getGlobalBounds()))
+                  if (test.getGlobalBounds().intersects(walllist[j] -> getShape().getGlobalBounds())){
+                      AudioManager::play_buzz();
                       return;
+                    }
                 }
                 mybox->getBody()->SetTransform(b2Vec2((machine_body.getPosition().x - 51)/30.0, (2 + machine_body.getPosition().y)/30.0),0);
                 mybox->getBody()->SetGravityScale(1);
@@ -124,17 +129,23 @@ void Builder::Update(){
                 test.setPosition(sf::Vector2f((machine_body.getPosition().x + 51), machine_body.getPosition().y - 5));
                 // check out of bounds
                 if (test.getPosition().x > 800){
+                  AudioManager::play_buzz();
                       return;
                 }
                 // check box collisions
                 for(int j = 0; j < cur_box_idx; j++){
-                  if (test.getGlobalBounds().intersects(boxlist[j] -> getShape().getGlobalBounds()))
-                      return;
+                  if (test.getGlobalBounds().intersects(boxlist[j] -> getShape().getGlobalBounds())){
+                    AudioManager::play_buzz();
+                    return;
+                  }
+
                 }
                 // check wall collisions
                 for(int j = 0; j < cur_wall_idx; j++){
-                  if (test.getGlobalBounds().intersects(walllist[j] -> getShape().getGlobalBounds()))
+                  if (test.getGlobalBounds().intersects(walllist[j] -> getShape().getGlobalBounds())){
+                      AudioManager::play_buzz();
                       return;
+                  }
                 }
                 mybox->getBody()->SetTransform(b2Vec2((machine_body.getPosition().x + 51)/30.0, (2 + machine_body.getPosition().y)/30.0),0);
                 mybox->getBody()->SetGravityScale(1);
@@ -154,8 +165,10 @@ void Builder::Update(){
             test.setPosition(sf::Vector2f((boxlist[i] -> getShape().getPosition().x), boxlist[i] ->getShape().getPosition().y - 50));
             // check box collisions
             for(int j = 0; j < cur_box_idx; j++){
-              if (test.getGlobalBounds().intersects(boxlist[j] -> getShape().getGlobalBounds()))
+              if (test.getGlobalBounds().intersects(boxlist[j] -> getShape().getGlobalBounds())){
+                  AudioManager::play_buzz();
                   return;
+                }
             }
 
             mybox = boxlist[i];

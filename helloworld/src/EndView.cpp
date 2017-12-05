@@ -10,11 +10,22 @@ void EndView::Init(sf::RenderWindow *window){
 
 	intro_return = 1;
 	cur_select = 1;
-	if(finished_lvl == MAX_LVL)
+	if(finished_lvl == MAX_LVL){
 		cur_select = 2;
+		AudioManager::play_cheers();
+		pals.setSize(sf::Vector2f(326,255));
+		pals.setOrigin(pals.getOrigin().x + 326/2, pals.getOrigin().y + 255/2);
+		img.loadFromFile("../include/Textures/calandkevin.png");
+		pals.setTexture(&img);
+		pals.setPosition(sf::Vector2f(400, 250));
+
+	}else{
+		AudioManager::play_end();
+	}
+
 	up_press = 0; down_press = 0;
 
-	AudioManager::play_end();
+
 
 
 	// create tmp text
@@ -127,6 +138,8 @@ void EndView::Render(sf::RenderWindow *window){
 	window -> draw(tmp);
 	if(finished_lvl != MAX_LVL)
 		window -> draw(tmp2);
+	else
+		window -> draw(pals);
 	window -> draw(tmp3);
 	window -> draw(tmp4);
 
