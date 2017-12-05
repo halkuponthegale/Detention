@@ -19,6 +19,17 @@ public:
 		sound.setPitch(2);
 
 		sound.play();
+
+		if(!buffer.loadFromFile("../include/Sounds/cannon.wav")){
+			printf("no file\n");
+		}
+
+
+		sound.setBuffer(buffer);
+		sound.setVolume(80);
+		sound.setPitch(.8);
+
+		sound.play();
 	}
 
 // play sound for when
@@ -60,10 +71,22 @@ public:
 		}
 		sound.setBuffer(buffer);
 		sound.setPitch(1);
-		sound.setVolume(10);
+		sound.setVolume(20);
 		sound.play();
 
 	}
+
+	// play a buzzer sound when player tries to do something that's not possible (ex. pick up a box thats unmovable)
+		static void play_buzz(){
+			if(!buffer.loadFromFile("../include/Sounds/buzzer.wav")){
+				printf("no sound file\n");
+			}
+			sound.setBuffer(buffer);
+			sound.setPitch(1);
+			sound.setVolume(20);
+			sound.play();
+
+		}
 
 
 
