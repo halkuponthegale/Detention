@@ -8,4 +8,4 @@
 50 475 box
 100 475 box
 600 340 exit
-400 200 texture 80 60 ../include/Textures/BuilderPoster.jpg
+400 200 texture 100 80 ../include/Textures/BuilderPoster.png
