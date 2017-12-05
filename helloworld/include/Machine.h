@@ -21,7 +21,7 @@ class Machine{
 
 		virtual void Update(){}
 
-		bool intersects(Box* o){ return touching(o) < 52; }
+		bool intersects(Box* o){ return touching(o) < 55; }
 		float touching(Box* o){ return abs(machine_body.getGlobalBounds().left - o -> getShape().getGlobalBounds().left); }
 
 		virtual void getOut(){};
