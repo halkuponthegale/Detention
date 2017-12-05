@@ -10,7 +10,9 @@ int top_lvl;
 
 // global sound vars
 sf::SoundBuffer buffer;
+sf::SoundBuffer buffer2;
 sf::Sound sound;
+sf::Sound sound2;
 sf::Music music;
 
 
