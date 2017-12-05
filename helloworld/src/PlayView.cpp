@@ -149,6 +149,11 @@ void PlayView::Update(sf::RenderWindow *window){
 				if(mach->lastVelocity>0 &&mach->lastVelocity-mach->getBody()->GetLinearVelocity().y >=10 || mach->getBody()->GetPosition().y>(625/30.0))
 					game_view.setView(new PlayView(play_lvl));
 				mach->lastVelocity = mach->getBody()->GetLinearVelocity().y;
+			}else if((*players_list[z]).inMachine() && (*players_list[z]).mType == 2){
+				//in a builder
+				Mobile* mach = (Mobile*)((*players_list[z]).my_machine);
+				if(mach->getBody()->GetPosition().y>(625/30.0))
+					game_view.setView(new PlayView(play_lvl));
 			}
 
 		}
