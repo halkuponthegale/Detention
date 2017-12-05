@@ -1,12 +1,8 @@
 0 300 wall 2 300 0
 800 300 wall 2 300 0
-400 500 wall 800 10 1
-250 250 box
-40 300 box
-150 200 builder
-450 200 mobile
-350 200 launcher
-80 90 player
-550 300 wall 50 10 1
-600 400 exit
-200 300 texture 80 60 ../include/Textures/MobilePoster.jpg
+400 600 wall 800 100 1
+400 470 wall 50 30 1
+250 475 mobile
+80 484 player
+700 460 exit
+400 200 texture 80 60 ../include/Textures/MobilePoster.jpg

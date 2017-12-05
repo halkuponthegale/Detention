@@ -1,9 +1,11 @@
 0 300 wall 2 300 0
 800 300 wall 2 300 0
-400 500 wall 800 10 1
-200 100 player
-400 200 builder
-50 200 box
-50 100 box
-100 100 box
-600 400 exit
+400 600 wall 800 100 1
+600 400 wall 50 20 1
+200 484 player
+400 475 builder
+50 425 box
+50 475 box
+100 475 box
+600 340 exit
+400 200 texture 80 60 ../include/Textures/BuilderPoster.jpg
