@@ -1,7 +1,7 @@
 0 300 wall 2 300 0
 800 300 wall 2 400 0
 400 500 wall 800 10 1
-160 239 player
+160 209 player
 770 465 box
 770 414 box
 680 465 builder
@@ -15,11 +15,11 @@
 434 465 box
 267 465 box
 370 465 builder
-90 375 wall 100 120 1
-28 230 box
-124 218 builder
-315 170 wall 68 5 1
-380 50 wall 5 125 1
-330 140 mobile
-124 250 wall 20 7 1
+90 375 wall 100 150 1
+28 200 box
+124 188 builder
+315 140 wall 68 5 1
+380 20 wall 5 125 1
+330 110 mobile
+124 220 wall 20 7 1
 400 600 wall 400 98 1
