@@ -27,7 +27,7 @@ Builder::Builder(double xo, double yo){
     builderImage.setTextureRect(sf::IntRect(1, source.y*50, 49, 50));
     builderImage.setOrigin(builderImage.getOrigin().x + 25, builderImage.getOrigin().y + 25);
 
-
+lastVelocity=0;
     active = 0;
 }
 
