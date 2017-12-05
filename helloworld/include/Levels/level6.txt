@@ -11,7 +11,7 @@
 139 445 box
 87 445 box
 138 394 box
-30 454 player
+80 404 player
 30 445 builder
 790 140 wall 50 90 1
 400 10 wall 400 15 1
