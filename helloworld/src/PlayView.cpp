@@ -120,7 +120,7 @@ void PlayView::Update(sf::RenderWindow *window){
 			if(!players_list.empty()){
 				int z;
 				for(z = 0; z < players_list.size(); z++){
-					if(!(*players_list[z]).inMachine()){
+					if(!(*players_list[z]).inMachine() && (*players_list[z]).getBody()->GetLinearVelocity().y ==0){
 						// if player is at exit, leave
 						if(players_list.size() == 1 && !exits_list.empty() && (*players_list[z]).isAtExit((*exits_list[0]).getShape())){
 							if(play_lvl == top_lvl && top_lvl < MAX_LVL){
@@ -130,9 +130,9 @@ void PlayView::Update(sf::RenderWindow *window){
 							game_view.setView(new EndView(play_lvl));
 						}
 						// otherwise, check if in machine
-						else
+						else if((*players_list[z]).getBody()->GetLinearVelocity().y ==0){
 							 (*players_list[z]).intersects(vec,ty);
-
+						 }
 					}
 				}
 
