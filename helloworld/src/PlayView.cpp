@@ -140,6 +140,19 @@ void PlayView::Update(sf::RenderWindow *window){
 
 			}
   }
+	if(!players_list.empty()){
+		int z;
+		for(z = 0; z < players_list.size(); z++){
+			if((*players_list[z]).inMachine() && (*players_list[z]).mType == 0){
+				//in a builder
+				Builder* mach = (Builder*)((*players_list[z]).my_machine);
+				if(mach->lastVelocity>0 &&mach->lastVelocity-mach->getBody()->GetLinearVelocity().y >=10)
+					game_view.setView(new PlayView(play_lvl));
+				mach->lastVelocity = mach->getBody()->GetLinearVelocity().y;
+			}
+
+		}
+	}
 
 	if(!players_list.empty()){
 		int z;
@@ -259,15 +272,6 @@ void PlayView::Render(sf::RenderWindow *window){
 				window->draw((*players_list[z]).playerImage);
 		}
 	}
-	sf::Text atext;
-atext.setFont(font);
-atext.setCharacterSize(20);
-atext.setStyle(sf::Text::Bold);
-atext.setColor(sf::Color::Red);
-atext.setPosition(50,50);
-std::ostringstream ss;
-ss << (*players_list[0]).getBody()->GetLinearVelocity().y;
-atext.setString(ss.str());
-window->draw(atext);
+
 
 }
