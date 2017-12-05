@@ -87,11 +87,12 @@ public:
 
       body->CreateFixture(&FixtureDef);
       body->SetFixedRotation(true);
+      body->SetUserData( (void*)(int)200 );
 
     }
 
 
-
+    double lastVelocity;
 private:
   b2Body* body;
   int jumping;

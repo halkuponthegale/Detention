@@ -41,6 +41,7 @@ public:
 
     bod->CreateFixture(&FixtureDef2);
     bod->SetFixedRotation(true);
+    bod->SetUserData( (void*)(int)201 );
   }
 
 private:

@@ -3,6 +3,8 @@
 
 void PlayView::Init(sf::RenderWindow *window){
 	// load font
+
+
 	font.loadFromFile("../include/Fonts/Beyblade Metal Fight Font.ttf");
 
 	intro_return = 1;
@@ -71,10 +73,12 @@ void PlayView::Init(sf::RenderWindow *window){
 			ty.push_back(2);
 		}
 	}
+	//world.SetContactListener(this);
 
 }
 
 void PlayView::Update(sf::RenderWindow *window){
+	//adjustMobiles();
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Return)){
 		if(intro_return){ return; }
 
@@ -141,8 +145,12 @@ void PlayView::Update(sf::RenderWindow *window){
 		int z;
 		for(z = 0; z < players_list.size(); z++){
 			(*players_list[z]).Update();
+			if((*players_list[z]).lastVelocity>0 &&(*players_list[z]).lastVelocity-(*players_list[z]).getBody()->GetLinearVelocity().y >=10)
+				game_view.setView(new PlayView(play_lvl));
+			(*players_list[z]).lastVelocity = (*players_list[z]).getBody()->GetLinearVelocity().y;
 		}
 	}
+
 	world.Step(1/60.f, 8, 3);
 
 
@@ -251,6 +259,15 @@ void PlayView::Render(sf::RenderWindow *window){
 				window->draw((*players_list[z]).playerImage);
 		}
 	}
-
+	sf::Text atext;
+atext.setFont(font);
+atext.setCharacterSize(20);
+atext.setStyle(sf::Text::Bold);
+atext.setColor(sf::Color::Red);
+atext.setPosition(50,50);
+std::ostringstream ss;
+ss << (*players_list[0]).getBody()->GetLinearVelocity().y;
+atext.setString(ss.str());
+window->draw(atext);
 
 }
