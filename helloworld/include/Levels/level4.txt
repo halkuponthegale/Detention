@@ -10,3 +10,4 @@
 685 300 wall 5 170 1
 460 100 mobile
 70 179.5 launcher
+150 370 texture 150 130 ../include/Textures/dontdie.png
