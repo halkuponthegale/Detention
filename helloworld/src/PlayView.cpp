@@ -188,8 +188,7 @@ void PlayView::Render(sf::RenderWindow *window){
 	tmp2.setFillColor(sf::Color::Black);
 
 	window -> draw(bgSprite);
-	window -> draw(tmp);
-	window -> draw(tmp2);
+	// window -> draw(tmp);
 	// window -> draw(tmp3);
 
 	if(!textures_list.empty()){
@@ -287,6 +286,7 @@ void PlayView::Render(sf::RenderWindow *window){
 		}
 	}
 
+	window -> draw(tmp);
 	window -> draw(tmp2);
 
 
