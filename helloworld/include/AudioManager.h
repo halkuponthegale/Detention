@@ -83,19 +83,20 @@ public:
 			}
 			sound.setBuffer(buffer);
 			sound.setPitch(1);
-			sound.setVolume(20);
+			sound.setVolume(50);
 			sound.play();
 
 		}
 
 		// play a buzzer sound when player tries to do something that's not possible (ex. pick up a box thats unmovable)
 			static void play_cheers(){
+				music.stop();
 				if(!buffer.loadFromFile("../include/Sounds/cheers.wav")){
 					printf("no sound file\n");
 				}
 				sound.setBuffer(buffer);
 				sound.setPitch(1);
-				sound.setVolume(20);
+				sound.setVolume(50);
 				sound.play();
 
 			}

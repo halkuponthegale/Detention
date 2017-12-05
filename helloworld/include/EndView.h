@@ -30,6 +30,9 @@ class EndView : public MiniView{
 		sf::Text tmp3;
 		sf::Text tmp4;
 
+		sf::RectangleShape pals;
+		sf::Texture img;
+
 
 };
 
