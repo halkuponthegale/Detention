@@ -80,7 +80,7 @@ void EndView::Update(sf::RenderWindow *window){
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Return)){
 		if(intro_return){ return; }
 
-
+		printf("hey\n");
 		if(cur_select == 1){
 			// progress to next level (or final level again if finished final)
 		  if(finished_lvl < MAX_LVL)

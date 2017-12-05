@@ -32,6 +32,7 @@ Player::Player(double xo, double yo, std::string name) {
     mType = -1;
     jumping = 0;
     facing = 1;
+    lastVelocity=0;
 
 }
 
@@ -121,7 +122,7 @@ void Player::Update(){
             launch(my_machine->launchVel,my_machine->getTheta());
 
             AudioManager::play_launch();
-            
+
             my_machine->launchVel = 0;
             in_machine = 0;
             mType=-1;

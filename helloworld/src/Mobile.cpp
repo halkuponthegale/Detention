@@ -3,7 +3,8 @@
 #include "Mobile.h"
 
 Mobile::Mobile(double xo, double yo){
-
+cur_box_idx=0;
+cur_wall_idx=0;
     // Load mobile spritesheet from png file (in include folder)
     if(!mobileTexture.loadFromFile("../include/sprites/mobile3.png",sf::IntRect(0, 0, 200, 100)))
     {
@@ -28,8 +29,42 @@ Mobile::Mobile(double xo, double yo){
     active = 0;
 }
 
+void Mobile::adjustHeight(){
+  sf::RectangleShape test,test2;
+  test.setSize(sf::Vector2f(50,50));
+  test.setOrigin(test.getOrigin().x + 25, test.getOrigin().y + 25);
+  test.setPosition(sf::Vector2f((machine_body.getPosition().x), machine_body.getPosition().y + 60));
+  test2.setSize(sf::Vector2f(50,50));
+  test2.setOrigin(test2.getOrigin().x + 25, test2.getOrigin().y + 25);
+  test2.setPosition(sf::Vector2f((machine_body.getPosition().x), machine_body.getPosition().y + 64));
+  bool t1c=false;
+  bool t2c=false;
+
+  // check box collisions
+  for(int j = 0; j < cur_box_idx; j++){
+    if (test.getGlobalBounds().intersects(boxlist[j] -> getShape().getGlobalBounds()))
+        t1c=true;
+    if (test2.getGlobalBounds().intersects(boxlist[j] -> getShape().getGlobalBounds()))
+        t2c=true;
+  }
+  // check wall collisions
+  for(int j = 0; j < cur_wall_idx; j++){
+    if (test.getGlobalBounds().intersects(walllist[j] -> getShape().getGlobalBounds()))
+        t1c=true;
+    if (test2.getGlobalBounds().intersects(walllist[j] -> getShape().getGlobalBounds()))
+        t2c=true;
+  }
+  if(t1c){//move up
+body->SetLinearVelocity(b2Vec2(body->GetLinearVelocity().x,-2));
+  }else if(!t2c&&!t1c){//move down
+      body->SetLinearVelocity(b2Vec2(body->GetLinearVelocity().x,2));
+  }else{
+      body->SetLinearVelocity(b2Vec2(body->GetLinearVelocity().x,0));
+  }
+}
 // define how this machine can move (can set limitations)
 void Mobile::Update(){
+  adjustHeight();
     // A = LEFT
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
       if(mobileImage.getPosition().x < 750) {
@@ -52,7 +87,7 @@ void Mobile::Update(){
 
   // set velocity to 0 if neither direction is pressed
   if(!sf::Keyboard::isKeyPressed(sf::Keyboard::A) && !sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
-    body->SetLinearVelocity(b2Vec2(0,0));
+    body->SetLinearVelocity(b2Vec2(0,body->GetLinearVelocity().y));
     source.x++;
   }
 
