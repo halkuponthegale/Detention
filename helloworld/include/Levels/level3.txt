@@ -4,8 +4,12 @@
 700 484 player
 500 185 exit
 150 475 launcher
-500 335 wall 60 110 1
-440 355 wall 60 70 1
-380 390 wall 60 55 1
-350 415 wall 90 30 1
+500 335 wall 60 110 0
+501 335 wall 58 110 1
+440 355 wall 60 70 0
+441 355 wall 58 70 1
+380 390 wall 60 55 0
+381 390 wall 58 55 1
+350 415 wall 90 30 0
+351 415 wall 88 30 1
 185 200 texture 145 110 ../include/Textures/LauncherPoster.png
