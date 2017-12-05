@@ -1,6 +1,7 @@
 #include "EndView.h"
 #include "MenuView.h"
 #include "PlayView.h"
+#include "AudioManager.h"
 
 
 void EndView::Init(sf::RenderWindow *window){
@@ -12,6 +13,9 @@ void EndView::Init(sf::RenderWindow *window){
 	if(finished_lvl == MAX_LVL)
 		cur_select = 2;
 	up_press = 0; down_press = 0;
+
+	AudioManager::play_end();
+
 
 	// create tmp text
 	tmp.setFont(font);

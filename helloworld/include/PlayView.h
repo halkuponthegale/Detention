@@ -12,6 +12,7 @@
 #include "Wall.h"
 #include "Exit.h"
 #include "Texture.h"
+#include "AudioManager.h"
 
 /*
 	PlayView handles level loading, drawing, and gameplay
@@ -30,6 +31,8 @@ class PlayView : public MiniView, public b2ContactListener{
 		{
 
 			play_lvl = lvl;
+
+			AudioManager::play_level(lvl);
 
 			int i;
 			if(play_lvl==3)

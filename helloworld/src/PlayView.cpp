@@ -1,5 +1,6 @@
 #include "PlayView.h"
 #include "EndView.h"
+#include "AudioManager.h"
 
 void PlayView::Init(sf::RenderWindow *window){
 	// load font

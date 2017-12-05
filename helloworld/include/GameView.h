@@ -4,6 +4,7 @@
 #include "MiniView.h"
 #include <SFML/Audio.hpp>
 
+
 /*
 	GameView handles what is displayed on the screen, handles transitions between
 	different screens, each represented by a "MiniView". Serves as a wrapper
