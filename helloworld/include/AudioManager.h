@@ -15,8 +15,8 @@ public:
 
 
 		sound.setBuffer(buffer);
-		sound.setVolume(50);
-		sound.setPitch(2);
+		sound.setVolume(100);
+		sound.setPitch(1.4);
 
 		sound.play();
 
@@ -26,7 +26,7 @@ public:
 
 
 		sound.setBuffer(buffer);
-		sound.setVolume(80);
+		sound.setVolume(100);
 		sound.setPitch(.8);
 
 		sound.play();
@@ -41,7 +41,7 @@ public:
 
 
 		sound.setBuffer(buffer);
-		sound.setVolume(10);
+		sound.setVolume(30);
 		sound.setPitch(0.8);
 		sound.setPlayingOffset(sf::milliseconds(500));
 
@@ -59,6 +59,7 @@ public:
 		if(!music.openFromFile(lvlString.str())){
 			printf("no sound file\n");
 		}
+		music.setVolume(60);
 		music.setLoop(true);
 		music.play();
 	}

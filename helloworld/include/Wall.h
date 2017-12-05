@@ -12,7 +12,7 @@ public:
     wall.setSize(sf::Vector2f(w, h));
     wall.setOrigin(wall.getOrigin().x + hw, wall.getOrigin().y + hh);
     wall.setPosition(cx, cy);
-    wall.setFillColor(sf::Color::Black);
+    wall.setFillColor(sf::Color(110,110,110));
 
     friction = fric;
 
