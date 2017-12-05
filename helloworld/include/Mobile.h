@@ -20,7 +20,7 @@ public:
 
   // process input
   void Update();
-
+  void adjustHeight();
   // reinstate gravity and reset velocity to 0, but falling
   void getOut(){
     body->SetGravityScale(1);
@@ -39,7 +39,8 @@ public:
 
   // set physics body
   void setBody(b2Body& bod){ body = &bod; }
-
+  void add_box(Box *b){ boxlist[cur_box_idx] = b; cur_box_idx++; }
+  void add_wall(Wall *w){walllist[cur_wall_idx] = w; cur_wall_idx++; }
   // set body to physics world
   void setWorld(b2World& World);
 

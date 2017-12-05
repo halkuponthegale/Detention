@@ -43,6 +43,7 @@ class Box : public Object{
 			FixtureDef2.shape = &Shape2;
 			bod->CreateFixture(&FixtureDef2);
 			bod->SetFixedRotation(true);
+			bod->SetUserData( (void*)(int)201 );
 		}
 
 		void setPos(float x, float y){ box_body.setPosition(x, y); }
