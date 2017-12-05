@@ -207,7 +207,7 @@ int Player::intersects(std::vector<Machine *> marr, std::vector<int> types){
     // if player body intersects machine box
     if(playerImage.getGlobalBounds().intersects(marr[i] -> getShape().getGlobalBounds()) || intersects_dome){
       // if machine is not currently falling (for mobile bug)
-      if(marr[i] -> getBody() -> GetLinearVelocity().y != 0) { break; }
+      if(abs(marr[i] -> getBody() -> GetLinearVelocity().y) > 0.0001) { break; }
         //builder = 0, launcher = 1, mobile = 2;
         // priority system for entering: mobile, builder, launcher
         if(types[i] == 2){

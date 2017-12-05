@@ -16,5 +16,5 @@
 773 351 box
 723 300 box
 723 351 box
-723 250 builder
+723 249.5 builder
 240 250 wall 5 60 1
