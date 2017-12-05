@@ -67,7 +67,7 @@ void Mobile::Update(){
   adjustHeight();
     // A = LEFT
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-      if(mobileImage.getPosition().x < 750) {
+      if(mobileImage.getPosition().x < 800) {
           b2Vec2 vel = body->GetLinearVelocity();
           vel.x = -5;
           body->SetLinearVelocity( vel );
@@ -77,7 +77,7 @@ void Mobile::Update(){
 
     // D = RIGHT
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-      if(mobileImage.getPosition().x < 750) {
+      if(mobileImage.getPosition().x > 0) {
           b2Vec2 vel = body->GetLinearVelocity();
           vel.x = 5;
           body->SetLinearVelocity( vel );
