@@ -15,7 +15,7 @@ public:
 
 
 		sound.setBuffer(buffer);
-		sound.setVolume(50);
+		sound.setVolume(60);
 		sound.setPitch(2);
 
 		sound.play();
@@ -59,6 +59,10 @@ public:
 		if(!music.openFromFile(lvlString.str())){
 			printf("no sound file\n");
 		}
+		if(level == 3 || level == 4 || level == 6 || level == 7 || level == 9)
+			music.setVolume(20);
+		else
+			music.setVolume(50);
 		music.setLoop(true);
 		music.play();
 	}
@@ -83,7 +87,7 @@ public:
 			}
 			sound.setBuffer(buffer);
 			sound.setPitch(1);
-			sound.setVolume(50);
+			sound.setVolume(30);
 			sound.play();
 
 		}

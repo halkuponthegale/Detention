@@ -17,7 +17,7 @@ void EndView::Init(sf::RenderWindow *window){
 		pals.setOrigin(pals.getOrigin().x + 326/2, pals.getOrigin().y + 255/2);
 		img.loadFromFile("../include/Textures/calandkevin.png");
 		pals.setTexture(&img);
-		pals.setPosition(sf::Vector2f(400, 250));
+		pals.setPosition(sf::Vector2f(400, 480));
 
 	}else{
 		AudioManager::play_end();
@@ -39,10 +39,15 @@ void EndView::Init(sf::RenderWindow *window){
 	tmp3.setCharacterSize(30);
 	tmp4.setCharacterSize(30);
 
-	char tmptext[24];
-	sprintf(tmptext, "You completed level %d", finished_lvl);
+	if(finished_lvl != MAX_LVL){
+		char tmptext[24];
+		sprintf(tmptext, "You completed level %d", finished_lvl);
 
-	tmp.setString(tmptext);
+		tmp.setString(tmptext);
+	}
+	else{
+		tmp.setString("Success! Kevin is free!");
+	}
 	tmp2.setString("Continue");
 	tmp3.setString("Replay");
 	tmp4.setString("Main Menu");
@@ -59,8 +64,14 @@ void EndView::Init(sf::RenderWindow *window){
 
 	tmp.setPosition(window -> getSize().x / 2, window -> getSize().y / 3);
 	tmp2.setPosition(window -> getSize().x / 2, window -> getSize().y / 2);
-	tmp3.setPosition(window -> getSize().x / 2, window -> getSize().y / 2 + tmp2_bounds.height * 2);
-	tmp4.setPosition(window -> getSize().x / 2, window -> getSize().y / 2 + tmp2_bounds.height * 4);
+	if(finished_lvl != MAX_LVL){
+		tmp3.setPosition(window -> getSize().x / 2, window -> getSize().y / 2 + tmp2_bounds.height * 2);
+		tmp4.setPosition(window -> getSize().x / 2, window -> getSize().y / 2 + tmp2_bounds.height * 4);
+	}
+	else{
+		tmp3.setPosition(window -> getSize().x / 2, window -> getSize().y / 2);
+		tmp4.setPosition(window -> getSize().x / 2, window -> getSize().y / 2 + tmp2_bounds.height * 2);
+	}
 
 
 }

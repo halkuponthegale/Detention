@@ -16,14 +16,14 @@ void PlayView::Init(sf::RenderWindow *window){
 	tmp3.setFont(font);
 
 	tmp.setCharacterSize(20);
-	tmp2.setCharacterSize(30);
+	tmp2.setCharacterSize(25);
 	tmp3.setCharacterSize(30);
 
 	char tmptext[10];
 	sprintf(tmptext, "Level %d", play_lvl);
 
 	tmp.setString(tmptext);
-	tmp2.setString("Press Return to go to finish (win level)");
+	tmp2.setString("(R)eset level");
 	tmp3.setString("Press Escape to quit game");
 
 	sf::FloatRect tmp_bounds = tmp.getLocalBounds();
@@ -35,8 +35,8 @@ void PlayView::Init(sf::RenderWindow *window){
 	tmp3.setOrigin(tmp3_bounds.width / 2, tmp3_bounds.height / 2);
 
 	tmp.setPosition(14 * window -> getSize().x / 15, window -> getSize().y / 20);
-	tmp2.setPosition(window -> getSize().x / 2, window -> getSize().y / 2);
-	tmp3.setPosition(window -> getSize().x / 2, window -> getSize().y / 2 + 30);
+	tmp2.setPosition(window -> getSize().x - 100, window -> getSize().y - 30);
+	tmp3.setPosition(window -> getSize().x / 2, window -> getSize().y / 2 + 35);
 
 
 	// Construct a world object, which will hold and simulate the rigid bodies.
@@ -147,7 +147,7 @@ void PlayView::Update(sf::RenderWindow *window){
 			if((*players_list[z]).inMachine() && (*players_list[z]).mType == 0){
 				//in a builder
 				Builder* mach = (Builder*)((*players_list[z]).my_machine);
-				if(mach->lastVelocity>0 &&mach->lastVelocity-mach->getBody()->GetLinearVelocity().y >=10 || mach->getBody()->GetPosition().y>(625/30.0)){
+				if((mach->lastVelocity>0 && mach->lastVelocity-mach->getBody()->GetLinearVelocity().y >=10) || mach->getBody()->GetPosition().y>(625/30.0)){
 					game_view.setView(new PlayView(play_lvl));
 					AudioManager::play_buzz();
 				}
@@ -185,11 +185,12 @@ void PlayView::Update(sf::RenderWindow *window){
 void PlayView::Render(sf::RenderWindow *window){
 
 	tmp.setFillColor(sf::Color::Black);
+	tmp2.setFillColor(sf::Color::Black);
 
 	window -> draw(bgSprite);
 	window -> draw(tmp);
 	window -> draw(tmp2);
-	window -> draw(tmp3);
+	// window -> draw(tmp3);
 
 	if(!textures_list.empty()){
 		int z;
@@ -285,6 +286,8 @@ void PlayView::Render(sf::RenderWindow *window){
 				window->draw((*players_list[z]).playerImage);
 		}
 	}
+
+	window -> draw(tmp2);
 
 
 }

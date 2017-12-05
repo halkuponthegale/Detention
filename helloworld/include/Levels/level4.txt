@@ -1,13 +1,15 @@
-0 300 wall 2 400 0
+0 300 wall 2 500 0
 800 300 wall 2 400 0
 400 600 wall 800 100 1
 600 484.5 player
 740 425 wall 60 80 1
 740 304.5 exit
 350 474.5 launcher
-75 225 wall 75 20 1
-415 230 wall 80 105 1
-685 300 wall 5 170 1
+75 226 wall 75 20 0
+75 206 wall 74 1 1
+415 231 wall 80 105 0
+415 125 wall 79 1 1
+685 300 wall 5 170 0
 460 100 mobile
 70 179.5 launcher
 150 370 texture 150 130 ../include/Textures/dontdie.png
