@@ -5,4 +5,5 @@
 250 475 mobile
 80 484 player
 700 460 exit
-400 200 texture 120 100 ../include/Textures/MobilePoster.png
+200 200 texture 120 100 ../include/Textures/MobilePoster.png
+600 200 texture 120 100 ../include/Textures/Mobile2Poster.png
