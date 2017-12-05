@@ -15,21 +15,21 @@ public:
 
 
 		sound.setBuffer(buffer);
-		sound.setVolume(100);
-		sound.setPitch(1.4);
+		sound.setVolume(50);
+		sound.setPitch(2);
 
 		sound.play();
 
-		if(!buffer.loadFromFile("../include/Sounds/cannon.wav")){
+		if(!buffer2.loadFromFile("../include/Sounds/cannon.wav")){
 			printf("no file\n");
 		}
 
 
-		sound.setBuffer(buffer);
-		sound.setVolume(100);
-		sound.setPitch(.8);
+		sound2.setBuffer(buffer2);
+		sound2.setVolume(80);
+		sound2.setPitch(.8);
 
-		sound.play();
+		sound2.play();
 	}
 
 // play sound for when
@@ -41,7 +41,7 @@ public:
 
 
 		sound.setBuffer(buffer);
-		sound.setVolume(30);
+		sound.setVolume(10);
 		sound.setPitch(0.8);
 		sound.setPlayingOffset(sf::milliseconds(500));
 
@@ -59,7 +59,6 @@ public:
 		if(!music.openFromFile(lvlString.str())){
 			printf("no sound file\n");
 		}
-		music.setVolume(60);
 		music.setLoop(true);
 		music.play();
 	}
@@ -88,6 +87,18 @@ public:
 			sound.play();
 
 		}
+
+		// play a buzzer sound when player tries to do something that's not possible (ex. pick up a box thats unmovable)
+			static void play_cheers(){
+				if(!buffer.loadFromFile("../include/Sounds/cheers.wav")){
+					printf("no sound file\n");
+				}
+				sound.setBuffer(buffer);
+				sound.setPitch(1);
+				sound.setVolume(20);
+				sound.play();
+
+			}
 
 
 

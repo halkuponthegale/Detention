@@ -61,8 +61,10 @@ extern int top_lvl;
 #define MAX_LVL 10
 
 extern sf::Sound sound;
+extern sf::Sound sound2;
 extern sf::Music music;
 extern sf::SoundBuffer buffer;
+extern sf::SoundBuffer buffer2;
 
 
 
