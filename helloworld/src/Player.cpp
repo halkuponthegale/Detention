@@ -237,7 +237,6 @@ int Player::intersects(std::vector<Machine *> marr, std::vector<int> types){
     if(mType==2){
       my_machine->getBody()->SetGravityScale(0);
       b2Vec2 pos = my_machine->getBody()->GetPosition();
-      my_machine->getBody()->SetTransform(b2Vec2(pos.x,pos.y-2),my_machine->getBody()->GetAngle());
 
     }
     my_machine->isActive( 1 ); //used in Mobile.cpp for spritesheet animation
