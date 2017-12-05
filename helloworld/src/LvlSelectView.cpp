@@ -29,7 +29,7 @@ void LvlSelectView::Init(sf::RenderWindow *window){
 		LEVEL_T tmp;
 		tmp.text.setFont(font);
 		tmp.text.setCharacterSize(60);
-		char level[1];
+		char level[2];
 		sprintf(level, "%d", i+1);
 		tmp.text.setString(level);
 
