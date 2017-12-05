@@ -7,9 +7,9 @@
 680 465 builder
 510 420 wall 50 80 1
 719 473 player
-770 130 exit
-760 175 wall 40 5 1
-720 130 wall 5 50 1
+770 140 exit
+760 185 wall 40 5 1
+720 145 wall 5 45 1
 510 315 launcher
 215 465 box
 434 465 box

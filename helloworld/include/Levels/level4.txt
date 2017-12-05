@@ -1,13 +1,13 @@
 0 300 wall 2 400 0
 800 300 wall 2 400 0
 400 600 wall 800 100 1
-50 189 player
+600 484.5 player
 740 425 wall 60 80 1
-740 305 exit
-450 375 wall 80 20 1
-250 475 launcher
+740 304.5 exit
+435 370 wall 112 10 1
+350 474.5 launcher
 75 225 wall 75 20 1
-465 230 wall 110 20 1
+465 230 wall 115 20 1
 685 300 wall 5 170 1
-460 185 launcher
+460 184.5 launcher
 110 180 mobile
