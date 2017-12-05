@@ -1,23 +1,23 @@
 0 300 wall 2 300 0
 800 300 wall 2 400 0
 400 500 wall 800 10 1
-150 100 player
-770 400 box
-770 349 box
-680 400 builder
+160 239 player
+770 465 box
+770 414 box
+680 465 builder
 510 420 wall 50 80 1
-719 400 player
-770 125 exit
+719 473 player
+770 130 exit
 760 175 wall 40 5 1
 720 130 wall 5 50 1
-510 300 launcher
-215 350 box
-433 350 box
-267 350 box
-370 400 builder
+510 315 launcher
+215 465 box
+434 465 box
+267 465 box
+370 465 builder
 90 375 wall 100 120 1
-28 225 box
-124 225 builder
+28 230 box
+124 218 builder
 315 170 wall 68 5 1
 380 50 wall 5 125 1
 330 140 mobile
