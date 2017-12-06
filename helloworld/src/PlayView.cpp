@@ -1,6 +1,7 @@
 #include "PlayView.h"
 #include "EndView.h"
 #include "AudioManager.h"
+#include "gameLogic.h"
 #include <sys/time.h> // for clock_gettime()
 void PlayView::Init(sf::RenderWindow *window){
 	// load font
@@ -79,107 +80,9 @@ void PlayView::Init(sf::RenderWindow *window){
 }
 
 void PlayView::Update(sf::RenderWindow *window){
-	//adjustMobiles();
-
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Return)){
-		if(intro_return){ return; }
-
-		// increase top level if completed level is top level
-		if(play_lvl == top_lvl && top_lvl < MAX_LVL){
-			top_lvl++;
-		}
-
-		game_view.setView(new EndView(play_lvl));
-	}
-	else{
-		intro_return = 0;
-	}
-
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)){
-		window -> close();
-	}
-
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::R)){
-		game_view.setView(new PlayView(play_lvl));
-	}
-
-	// if last level, check if two player bodies are touching
-	// if so, end level
-	if(players_list.size() > 1){
-		if(!(players_list[0] -> inMachine()) && !(players_list[1] -> inMachine()) &&
-		   (*players_list[0]).isAtExit((*exits_list[0]).getShape()) && (*players_list[1]).isAtExit((*exits_list[0]).getShape()) &&
-		 	 (*players_list[0]).getBody() -> GetLinearVelocity().y == 0 && (*players_list[1]).getBody() -> GetLinearVelocity().y == 0) {
-			if(play_lvl == top_lvl && top_lvl < MAX_LVL){
-				top_lvl++;
-			}
-
-			game_view.setView(new EndView(play_lvl));
-		}
-	}
-
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-			//builder = 0, launcher = 1, mobile = 2;
-			if(!players_list.empty()){
-				int z;
-				for(z = 0; z < players_list.size(); z++){
-					if(!(*players_list[z]).inMachine() && (*players_list[z]).getBody()->GetLinearVelocity().y ==0){
-						// if player is at exit, leave
-						if(players_list.size() == 1 && !exits_list.empty() && (*players_list[z]).isAtExit((*exits_list[0]).getShape())){
-							if(play_lvl == top_lvl && top_lvl < MAX_LVL){
-								top_lvl++;
-							}
-
-							game_view.setView(new EndView(play_lvl));
-						}
-						// otherwise, check if in machine
-						else if((*players_list[z]).getBody()->GetLinearVelocity().y ==0){
-							 (*players_list[z]).intersects(vec,ty);
-						 }
-					}
-				}
-
-
-
-			}
-  }
-	if(!players_list.empty()){
-		int z;
-		for(z = 0; z < players_list.size(); z++){
-			if((*players_list[z]).inMachine() && (*players_list[z]).mType == 0){
-				//in a builder
-				Builder* mach = (Builder*)((*players_list[z]).my_machine);
-				if((mach->lastVelocity>0 && mach->lastVelocity-mach->getBody()->GetLinearVelocity().y >=10) || mach->getBody()->GetPosition().y>(625/30.0)){
-					game_view.setView(new PlayView(play_lvl));
-					AudioManager::play_buzz();
-				}
-				mach->lastVelocity = mach->getBody()->GetLinearVelocity().y;
-			}else if((*players_list[z]).inMachine() && (*players_list[z]).mType == 2){
-				//in a builder
-				Mobile* mach = (Mobile*)((*players_list[z]).my_machine);
-				if(mach->getBody()->GetPosition().y>(625/30.0)){
-					game_view.setView(new PlayView(play_lvl));
-					AudioManager::play_buzz();
-				}
-			}
-
-		}
-	}
-
-	if(!players_list.empty()){
-		int z;
-		for(z = 0; z < players_list.size(); z++){
-			(*players_list[z]).Update();
-
-			if(((*players_list[z]).lastVelocity>0 &&(*players_list[z]).lastVelocity-(*players_list[z]).getBody()->GetLinearVelocity().y >=10)||(*players_list[z]).getBody()->GetPosition().y > (625/30.0)){
-				game_view.setView(new PlayView(play_lvl));
-				AudioManager::play_buzz();
-			}
-			(*players_list[z]).lastVelocity = (*players_list[z]).getBody()->GetLinearVelocity().y;
-		}
-	}
-	world.Step(1/60.f, 8, 3);
-
-
+		if(GameLogic::update(boxes_list, builders_list, mobiles_list, launchers_list, walls_list, players_list, exits_list, play_lvl, top_lvl, &game_view, &ty, &vec, intro_return)==-1)
+			window->close();
+		world.Step(1/60.f, 8, 3);
 }
 
 void PlayView::Render(sf::RenderWindow *window){
