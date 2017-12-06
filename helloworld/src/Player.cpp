@@ -80,7 +80,8 @@ void Player::player_right() {
 }
 
 
-// Update method - calls movement methods on player (if alone) or on machine (if player in machine)
+// Update method - Handles input
+// Calls movement methods on player (if alone) or on machine (if player in machine)
 // Machine codes: builder = 0, launcher = 1, mobile = 2
 void Player::Update(){
 
