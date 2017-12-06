@@ -7,6 +7,7 @@
 Prerequisites:
 - CMAKE (www.cmake.org)
 - SFML 2.4.2 (www.sfml-dev.org)
+- About 420MB of memory space
 
 Make a subdirectory 'Release'. In command line, navigate to 'Release' and type 'cmake ..' to generate a makefile.  If SFML is not installed in standard location, you will need to set the LIB and INCLUDE environment variables. For example if SFML is installed in ~/SFML, then you can adjust the environment variables (assuming linux and a BASH-shell) by:
 
@@ -36,6 +37,6 @@ If SFML is installed, and the environment variables are correctly set, then runn
 -- Generating done
 -- Build files have been written to: /home/f85/username/Detention/Release
 
-Now that the Makefile has been succesfully generated, you can compile with 'make'. This will produce a 'Detention' executable that will open a blue window.
+Now that the Makefile has been succesfully generated, you can compile with 'make'. This will produce a 'Detention' executable.
 
-Type './Detention' to launch the executable.
+Type './Detention' to launch the executable. Enjoy!
