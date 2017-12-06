@@ -1,5 +1,5 @@
----------------------------- DETENTION ----------------------------
-by Logan Flurry, Kyle Saltzberg, Ani Minnick, Holly Carpenter
+------------------------------------------------ DETENTION ------------------------------------------------
+                       by Logan Flurry, Kyle Saltzberg, Ani Minnick, Holly Carpenter
 
 
 **TO COMPILE**
