@@ -1,7 +1,7 @@
 #include "PlayView.h"
 #include "EndView.h"
 #include "AudioManager.h"
-
+#include <sys/time.h> // for clock_gettime()
 void PlayView::Init(sf::RenderWindow *window){
 	// load font
 
@@ -80,6 +80,7 @@ void PlayView::Init(sf::RenderWindow *window){
 
 void PlayView::Update(sf::RenderWindow *window){
 	//adjustMobiles();
+
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Return)){
 		if(intro_return){ return; }
 
@@ -176,7 +177,6 @@ void PlayView::Update(sf::RenderWindow *window){
 			(*players_list[z]).lastVelocity = (*players_list[z]).getBody()->GetLinearVelocity().y;
 		}
 	}
-
 	world.Step(1/60.f, 8, 3);
 
 

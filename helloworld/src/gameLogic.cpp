@@ -1,6 +1,4 @@
-// Game logic includes:
-// Game state and Data structures
-// Physics
-// Events
-// Process Manager
-// Command Interpreter
+#include "gameLogic.h"
+void GameLogic::update(){
+
+}
