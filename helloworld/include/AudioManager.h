@@ -8,7 +8,7 @@
 class AudioManager{
 public:
 	static void play_launch(){
-		printf("playing launch\n");
+		//printf("playing launch\n");
 		if(!buffer.loadFromFile("../include/Sounds/woohoo.wav")){
 			printf("no file\n");
 		}
@@ -34,7 +34,7 @@ public:
 
 // play sound for when
 	static void play_builder_box(){
-		printf("playing builder\n");
+		//printf("playing builder\n");
 		if(!buffer.loadFromFile("../include/Sounds/builder_box.wav")){
 			printf("no sound file\n");
 		}
