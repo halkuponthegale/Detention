@@ -12,18 +12,6 @@ GameView * game_view,
 std::vector<int> *ty,
 std::vector<Machine*> *vec,
 int &intro_return){
-  	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Return)){
-      if(intro_return){ return 0; }
-  if(play_lvl == top_lvl && top_lvl < MAX_LVL){
-    top_lvl++;
-  }
-
-  game_view->setView(new EndView(play_lvl));
-  return 0;
-}
-else{
-  intro_return = 0;
-}
 
 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)){
   return -1;
