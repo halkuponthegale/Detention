@@ -17,20 +17,17 @@ public:
     sf::RectangleShape playerbody;
 
     // used for spritesheet
+    // playerTexture will be the full 100x140p sprite sheet, playerImage will be the current 25x35p sprite
     sf::Texture playerTexture;
     sf::Sprite playerImage;
-    enum Directions { Down, Left, Right, Up };
-    sf::Vector2i source;
+    enum Directions { Down, Left, Right, Up }; // Enumerates direction, used to determine where from sprite sheet to begin dawing
+    sf::Vector2i source; // Keeps track of coordincates in sprite sheet --> draw the proper 25x35p sprite
 
 
     Player(double xo, double yo, std::string name); // Constructor
 
-
-    // Moves the player up
+    // Makes the player jump (limited to < 1 block)
     void player_up();
-
-    // Moves the player down
-    void player_down();
 
     // Moves the player left
     void player_left();
@@ -38,31 +35,32 @@ public:
     // Moves the player right
     void player_right();
 
+    // Handles keyboard input
+    void Update();
+
     void launch(double velocity, double theta);
-    // Puts player back in original position
-    //oid reset();
-    void setBody(b2Body& bod){
-      body = &bod;
-    }
-    void Update(); // handles input
-
-    b2Body* getBody(){
-      return body;
-    }
-
-    int intersects(std::vector<Machine *> marr, std::vector<int> types);
-
-    // Puts player back in original position
-    void reset();
-
+    
     // Accessor method
     sf::RectangleShape getShape();
-
-    // return if player in machine or not
+    
+    // returns whether player is in machine
     int inMachine();
     Machine *my_machine;
     int mType;
     int in_machine;
+    
+    int intersects(std::vector<Machine *> marr, std::vector<int> types);
+
+    
+//////////////////////////////////////////////////////
+   
+    void setBody(b2Body& bod){
+      body = &bod;
+    }
+
+    b2Body* getBody(){
+      return body;
+    }
 
     int isAtExit(sf::RectangleShape door){
       return playerImage.getGlobalBounds().intersects(door.getGlobalBounds());
