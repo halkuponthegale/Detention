@@ -2,6 +2,8 @@
 #include <SFML/Graphics.hpp>
 #include "Mobile.h"
 
+
+// Sets mobile machine 
 Mobile::Mobile(double xo, double yo){
 cur_box_idx=0;
 cur_wall_idx=0;
@@ -62,10 +64,12 @@ body->SetLinearVelocity(b2Vec2(body->GetLinearVelocity().x,-2));
       body->SetLinearVelocity(b2Vec2(body->GetLinearVelocity().x,0));
   }
 }
+
+
 // define how this machine can move (can set limitations)
 void Mobile::Update(){
   adjustHeight();
-    // A = LEFT
+    // A = move LEFT
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
       if(mobileImage.getPosition().x < 800) {
           b2Vec2 vel = body->GetLinearVelocity();
@@ -75,7 +79,7 @@ void Mobile::Update(){
       }
     }
 
-    // D = RIGHT
+    // D = move RIGHT
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
       if(mobileImage.getPosition().x > 0) {
           b2Vec2 vel = body->GetLinearVelocity();
@@ -91,21 +95,22 @@ void Mobile::Update(){
     source.x++;
   }
 
-  // sprite assignment
+  // Sprite assignment
+  // If mobile is active, draw from the top row of the sprite sheet (y coord 0), otherwise bottom row (y coord 1)
   if (active){
     source.y = 0;
   }
   else { //active == false
     source.y = 1;
   }
-
+  // If at the right end of the sprite sheet, start over at the left edge
   if (source.x * 50 >= mobileTexture.getSize().x){
     source.x = 0;
   }
-
+  // Set appropriate sprite to the image that will be drawn
   mobileImage.setTextureRect(sf::IntRect(source.x*50, source.y*50, 50, 50));
-
 }
+
 
 void Mobile::setWorld(b2World& World){
   static const float SCALE = 30.f;
