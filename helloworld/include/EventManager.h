@@ -1,3 +1,4 @@
+#pragma once
 #include <map>
 typedef void(*evCallback)(void);
 class EventManager {

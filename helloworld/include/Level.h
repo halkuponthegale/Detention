@@ -25,7 +25,7 @@ public:
       exit(1);
     }
 
-    cout << "\n" << file << "\n";
+    //cout << "\n" << file << "\n";
 
     // read in x coord, y coord, object
     double x,y;
@@ -35,7 +35,7 @@ public:
 
     while (inFile >> x >> y >> type){
 
-      cout << x << " " << y << " " << type << "\n";
+      //cout << x << " " << y << " " << type << "\n";
 
       if(type == "box"){
         boxes.push_back(unique_ptr<Box>(new Box(x, y)));

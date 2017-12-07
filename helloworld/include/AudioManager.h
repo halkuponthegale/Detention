@@ -13,6 +13,7 @@ class AudioManager{
 public:
 	// play cannon and 'wahoo' sound
 	static void play_launch(){
+
 		if(!buffer.loadFromFile("../include/Sounds/woohoo.wav")){
 			printf("no file\n");
 		}
@@ -38,6 +39,7 @@ public:
 
 	// play sound for picking up/placing down boxes with builder
 	static void play_builder_box(){
+
 		if(!buffer.loadFromFile("../include/Sounds/builder_box.wav")){
 			printf("no sound file\n");
 		}

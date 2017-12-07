@@ -15,7 +15,7 @@ class Builder : public Machine{
 
 		// constructor
 		Builder(double xo, double yo);
-
+		~Builder(){};
 		// process input
 		void Update();
 

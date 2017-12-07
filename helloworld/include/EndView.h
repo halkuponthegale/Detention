@@ -15,7 +15,12 @@ class EndView : public MiniView{
 		void Init(sf::RenderWindow *window);
 		void Update(sf::RenderWindow *window);
 		void Render(sf::RenderWindow *window);
-
+		~EndView(){
+			tmp.setString("");
+			tmp2.setString("");
+			tmp3.setString("");
+			tmp4.setString("");
+		};
 	private:
 		sf::Font font;
 

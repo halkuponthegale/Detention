@@ -35,7 +35,12 @@ class Machine{
 		virtual void isActive(int status){
 		} //only used in Mobile, where it is overridden
 
-
+		~Machine(){
+			body->GetWorld()->DestroyBody( body );
+			//delete[] boxlist;
+			//delete[] walllist;
+			//delete mybox;
+		}
 
 
 	protected:

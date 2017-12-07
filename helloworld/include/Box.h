@@ -4,7 +4,9 @@
 #include "Object.h"
 #include "Box2D.h"
 
+
 // Box class sets box texture, sets it to the world, and updates its position/location
+
 
 class Box : public Object{
 public:
@@ -30,7 +32,10 @@ public:
 
 	}
 
-	
+	~Box(){
+			bod->GetWorld()->DestroyBody( bod );
+	}
+  
 	void setWorld(b2World& World){
 		static const double SCALE = 30.f;
 

@@ -1,3 +1,5 @@
+#ifndef FILE_H
+#define FILE_H
 #include <map>
 #include <fstream>
 #include <sstream>
@@ -30,3 +32,4 @@ public:
 	}
 
 };
+#endif

@@ -8,6 +8,7 @@ public:
     this->w=w;
     this->h=h;
   }
+  ~Actor(){}
   double getX(){
     return x;
   }

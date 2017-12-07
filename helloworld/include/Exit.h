@@ -21,7 +21,9 @@ public:
 
     x = cx; y = cy;
   }
-
+~Exit(){
+  bod->GetWorld()->DestroyBody( bod );
+}
   sf::RectangleShape getShape(){
     return bounds;
   }

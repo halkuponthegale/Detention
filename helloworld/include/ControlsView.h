@@ -13,7 +13,13 @@ class ControlsView : public MiniView{
 		void Init(sf::RenderWindow *window);
 		void Update(sf::RenderWindow *window);
 		void Render(sf::RenderWindow *window);
-
+		~ControlsView(){
+			header.setString("");
+			wasd.setString("");
+			updown.setString("");
+			space.setString("");
+			goback.setString("");
+		}
 	private:
 		sf::Font font;
 

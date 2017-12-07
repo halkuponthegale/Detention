@@ -1,3 +1,4 @@
+#pragma once
 #include "Machine.h"
 
 class Launcher: public Machine{
