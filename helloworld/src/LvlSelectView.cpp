@@ -44,16 +44,16 @@ void LvlSelectView::Init(sf::RenderWindow *window){
 			tmp.text.setPosition(window -> getSize().x / 8 - 10 + 150 * (i-5),
 							3 * (window -> getSize().y) / 4);
 		}
-
 		tmp.lvl = i + 1;
-
 		lvls[i] = tmp;
 	}
-
 }
 
+
+// Take keyboard input
 void LvlSelectView::Update(sf::RenderWindow *window){
 
+	// Left, Right, Up, and Down navigate the menu
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right)){
 		if(right_press){ return; }
 
@@ -130,6 +130,8 @@ void LvlSelectView::Update(sf::RenderWindow *window){
 
 }
 
+
+// Set the text color to white, then set selected option to blue. Draw the menu to the screen
 void LvlSelectView::Render(sf::RenderWindow *window){
 	window -> draw(header);
 
