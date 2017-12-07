@@ -26,6 +26,8 @@ class GameView{
 		void setView(MiniView *view){
 
 			// set view variable to new view
+			if(game_view != NULL)
+				delete game_view;
 			game_view = view;
 
 			// initialize new view

@@ -13,6 +13,7 @@
 
 class MiniView{
 	public:
+		virtual ~MiniView(){};
 		virtual void Init(sf::RenderWindow *window){ }
 		virtual void Update(sf::RenderWindow *window){ }
 		virtual void Render(sf::RenderWindow *window){ }

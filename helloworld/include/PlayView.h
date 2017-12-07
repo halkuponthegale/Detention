@@ -128,7 +128,11 @@ class PlayView : public MiniView{
 		void Init(sf::RenderWindow *window);
 		void Update(sf::RenderWindow *window);
 		void Render(sf::RenderWindow *window);
-
+		~PlayView(){
+				tmp.setString("");
+				tmp2.setString("");
+				tmp3.setString("");
+		}
 	private:
 		sf::Font font;
 

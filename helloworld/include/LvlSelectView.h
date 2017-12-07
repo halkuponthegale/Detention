@@ -19,7 +19,12 @@ class LvlSelectView : public MiniView{
 		void Init(sf::RenderWindow *window);
 		void Update(sf::RenderWindow *window);
 		void Render(sf::RenderWindow *window);
-
+~LvlSelectView(){
+	header.setString("");
+	for(int i = 0; i < 10; i++){
+		lvls[i].text.setString("");
+	}
+}
 	private:
 		sf::Font font;
 

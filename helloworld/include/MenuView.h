@@ -13,7 +13,11 @@ class MenuView : public MiniView{
 		void Init(sf::RenderWindow *window);
 		void Update(sf::RenderWindow *window);
 		void Render(sf::RenderWindow *window);
-
+		~MenuView(){
+			title.setString("");
+			play.setString("");
+			exit.setString("");
+		}
 	private:
 		sf::Font font;
 

@@ -26,7 +26,9 @@ class Box : public Object{
 
 
 		}
-
+		~Box(){
+			bod->GetWorld()->DestroyBody( bod );
+		}
 		void setWorld(b2World& World){
 
 			static const double SCALE = 30.f;
