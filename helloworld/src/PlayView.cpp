@@ -3,15 +3,17 @@
 #include "AudioManager.h"
 #include "gameLogic.h"
 #include <sys/time.h> // for clock_gettime()
+
+// Play view handles views during level play
+
 void PlayView::Init(sf::RenderWindow *window){
+	
 	// load font
-
-
 	font.loadFromFile("../include/Fonts/Beyblade Metal Fight Font.ttf");
 
 	intro_return = 1;
 
-	// create tmp text
+	// create text (font, color, position, origin, bounds) for level info
 	tmp.setFont(font);
 	tmp2.setFont(font);
 	tmp3.setFont(font);
@@ -75,9 +77,8 @@ void PlayView::Init(sf::RenderWindow *window){
 			ty.push_back(2);
 		}
 	}
-	//world.SetContactListener(this);
-
 }
+
 
 void PlayView::Update(sf::RenderWindow *window){
 		int status = GameLogic::update(boxes_list, builders_list, mobiles_list, launchers_list, walls_list, players_list, exits_list, play_lvl, top_lvl, &game_view, &ty, &vec, intro_return);
@@ -87,14 +88,14 @@ void PlayView::Update(sf::RenderWindow *window){
 			world.Step(1/60.f, 8, 3);
 }
 
+
+// Draw level (text, exits, walls, boxes, machines, and players)
 void PlayView::Render(sf::RenderWindow *window){
 
 	tmp.setFillColor(sf::Color::Black);
 	tmp2.setFillColor(sf::Color::Black);
 
 	window -> draw(bgSprite);
-	// window -> draw(tmp);
-	// window -> draw(tmp3);
 
 	if(!textures_list.empty()){
 		int z;
@@ -133,7 +134,7 @@ void PlayView::Render(sf::RenderWindow *window){
 	}
 
 
-  // draw launchers
+  	// draw launchers
 	if(!launchers_list.empty()){
 		int z;
 		for(z = 0; z < launchers_list.size(); z++){
@@ -180,7 +181,7 @@ void PlayView::Render(sf::RenderWindow *window){
 	}
 
 
-	// draw plauers
+	// draw players
 	if(!players_list.empty()){
 		int z;
 		for(z = 0; z < players_list.size(); z++){
