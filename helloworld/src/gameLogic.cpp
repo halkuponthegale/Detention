@@ -19,6 +19,7 @@ int &intro_return){
   }
 
   game_view->setView(new EndView(play_lvl));
+  return 0;
 }
 else{
   intro_return = 0;
@@ -30,6 +31,7 @@ if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)){
 
 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::R)){
   game_view->setView(new PlayView(play_lvl));
+  return 0;
 }
 
 // if last level, check if two player bodies are touching
@@ -43,6 +45,7 @@ if(players_list.size() > 1){
     }
 
     game_view->setView(new EndView(play_lvl));
+    return 0;
   }
 }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
@@ -58,6 +61,7 @@ if(players_list.size() > 1){
 							}
 
 							game_view->setView(new EndView(play_lvl));
+              return 0;
 						}
 						// otherwise, check if in machine
 						else if((*players_list[z]).getBody()->GetLinearVelocity().y ==0){
@@ -79,6 +83,7 @@ if(players_list.size() > 1){
 				if((mach->lastVelocity>0 && mach->lastVelocity-mach->getBody()->GetLinearVelocity().y >=10) || mach->getBody()->GetPosition().y>(625/30.0)){
 					game_view->setView(new PlayView(play_lvl));
 					AudioManager::play_buzz();
+          return 0;
 				}
 				mach->lastVelocity = mach->getBody()->GetLinearVelocity().y;
 			}else if((*players_list[z]).inMachine() && (*players_list[z]).mType == 2){
@@ -87,6 +92,7 @@ if(players_list.size() > 1){
 				if(mach->getBody()->GetPosition().y>(625/30.0)){
 					game_view->setView(new PlayView(play_lvl));
 					AudioManager::play_buzz();
+          return 0;
 				}
 			}
 
@@ -101,6 +107,7 @@ if(players_list.size() > 1){
 			if(((*players_list[z]).lastVelocity>0 &&(*players_list[z]).lastVelocity-(*players_list[z]).getBody()->GetLinearVelocity().y >=10)||(*players_list[z]).getBody()->GetPosition().y > (625/30.0)){
 				game_view->setView(new PlayView(play_lvl));
 				AudioManager::play_buzz();
+        return 0;
 			}
 			(*players_list[z]).lastVelocity = (*players_list[z]).getBody()->GetLinearVelocity().y;
 		}

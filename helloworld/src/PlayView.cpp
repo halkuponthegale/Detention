@@ -80,9 +80,11 @@ void PlayView::Init(sf::RenderWindow *window){
 }
 
 void PlayView::Update(sf::RenderWindow *window){
-		if(GameLogic::update(boxes_list, builders_list, mobiles_list, launchers_list, walls_list, players_list, exits_list, play_lvl, top_lvl, &game_view, &ty, &vec, intro_return)==-1)
+		int status = GameLogic::update(boxes_list, builders_list, mobiles_list, launchers_list, walls_list, players_list, exits_list, play_lvl, top_lvl, &game_view, &ty, &vec, intro_return);
+		if(status==-1)
 			window->close();
-		world.Step(1/60.f, 8, 3);
+		else if(status ==1)
+			world.Step(1/60.f, 8, 3);
 }
 
 void PlayView::Render(sf::RenderWindow *window){
