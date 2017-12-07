@@ -3,11 +3,14 @@
 #include "PlayView.h"
 #include "AudioManager.h"
 
+// EndView draws a relevant message, plays an affirming noise, and draws an interactive menu
 
 void EndView::Init(sf::RenderWindow *window){
+	
 	// load font
 	font.loadFromFile("../include/Fonts/Beyblade Metal Fight Font.ttf");
 
+	// if the completed level is the final level, play a special cheers noise and load the character image
 	intro_return = 1;
 	cur_select = 1;
 	if(finished_lvl == MAX_LVL){
@@ -19,7 +22,7 @@ void EndView::Init(sf::RenderWindow *window){
 		pals.setTexture(&img);
 		pals.setPosition(sf::Vector2f(400, 480));
 
-	}else{
+	}else{ //if the completed level is 1-9, play regular end nosie
 		AudioManager::play_end();
 	}
 
@@ -28,7 +31,7 @@ void EndView::Init(sf::RenderWindow *window){
 
 
 
-	// create tmp text
+	// create tmp text for end messages
 	tmp.setFont(font);
 	tmp2.setFont(font);
 	tmp3.setFont(font);
@@ -39,29 +42,35 @@ void EndView::Init(sf::RenderWindow *window){
 	tmp3.setCharacterSize(30);
 	tmp4.setCharacterSize(30);
 
+	// if not the final level, set relevant message
 	if(finished_lvl != MAX_LVL){
 		char tmptext[24];
 		sprintf(tmptext, "You completed level %d", finished_lvl);
 
 		tmp.setString(tmptext);
 	}
-	else{
+	else{ // if final level, set relevant message
 		tmp.setString("Success! Kevin is free!");
 	}
+	
+	// Set menu strings
 	tmp2.setString("Continue");
 	tmp3.setString("Replay");
 	tmp4.setString("Main Menu");
 
+	// Set bounds
 	sf::FloatRect tmp_bounds = tmp.getLocalBounds();
 	sf::FloatRect tmp2_bounds = tmp2.getLocalBounds();
 	sf::FloatRect tmp3_bounds = tmp3.getLocalBounds();
 	sf::FloatRect tmp4_bounds = tmp4.getLocalBounds();
 
+	// Set origins of text
 	tmp.setOrigin(tmp_bounds.width / 2, tmp_bounds.height / 2);
 	tmp2.setOrigin(tmp2_bounds.width / 2, tmp2_bounds.height / 2);
 	tmp3.setOrigin(tmp3_bounds.width / 2, tmp3_bounds.height / 2);
 	tmp4.setOrigin(tmp4_bounds.width / 2, tmp4_bounds.height / 2);
 
+	// Set positions of text
 	tmp.setPosition(window -> getSize().x / 2, window -> getSize().y / 3);
 	tmp2.setPosition(window -> getSize().x / 2, window -> getSize().y / 2);
 	if(finished_lvl != MAX_LVL){
@@ -77,8 +86,10 @@ void EndView::Init(sf::RenderWindow *window){
 }
 
 
+// take input from keyboard for interactive menu
 void EndView::Update(sf::RenderWindow *window){
 
+	// Down and Up navigate the menu
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down)){
 		if(down_press){return;}
 
@@ -103,6 +114,7 @@ void EndView::Update(sf::RenderWindow *window){
 		up_press = 0;
 	}
 
+	// Return/enter steps into the selected menu option
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Return)){
 		if(intro_return){ return; }
 
@@ -128,9 +140,11 @@ void EndView::Update(sf::RenderWindow *window){
 
 }
 
+
+// Draws all text and images
 void EndView::Render(sf::RenderWindow *window){
 
-
+	// Set color of all texts white, then set color of the "selected" text blue to indicate selection
 	tmp2.setFillColor(sf::Color::White);
 	tmp3.setFillColor(sf::Color::White);
 	tmp4.setFillColor(sf::Color::White);
@@ -145,7 +159,11 @@ void EndView::Render(sf::RenderWindow *window){
 		tmp4.setFillColor(sf::Color::Blue);
 	}
 
+	// Draw the text to the screen
 	window -> draw(tmp);
+	
+	// If the completed level is the final level, draw the final message and image
+	// Otherwise draw the regular text
 	if(finished_lvl != MAX_LVL)
 		window -> draw(tmp2);
 	else
