@@ -1,5 +1,6 @@
 #include "Builder.h"
 #include "AudioManager.h"
+
 // constructor
 Builder::Builder(double xo, double yo){
 
@@ -24,6 +25,7 @@ Builder::Builder(double xo, double yo){
     cur_wall_idx = 0;
     carrybox = 0;
 
+    // Set current sprite
     builderImage.setTextureRect(sf::IntRect(1, source.y*50, 49, 50));
     builderImage.setOrigin(builderImage.getOrigin().x + 25, builderImage.getOrigin().y + 25);
 
@@ -87,7 +89,7 @@ void Builder::Update(){
             }
         }
 
-        // if you're carrying a box, not jumping, and it's not the initial space press, set it down the way you're facing
+        // if you're carrying a box, not jumping, and it's not the initial space press, set it down in the direction you're facing
         if(carrybox && body->GetLinearVelocity().y == 0 && !space){
             // if facing left, place left
             if(facing == 0){
@@ -185,21 +187,24 @@ void Builder::Update(){
         space = 0;
     }
 
+    
+     // Set variables for spritesheet
+     // If active and carrying a box, choose sprite with arms up
       if (active){
       if(carrybox){
         source.y = 1;
       }
-      else{
+      else{ // If active and no box, choose sprite with player inside
       source.y = 2;
       }
     }
-
-    else if (active == false) {
+    else if (active == false) { // If inactive, choose sprite with empty machine
       source.y = 0;
     }
-
+    // Set correct sprite to be drawn
     builderImage.setTextureRect(sf::IntRect(1, source.y*50, 49, 50));
 }
+
 
 void Builder::jump(){
   machine_body.move(0, -1);
